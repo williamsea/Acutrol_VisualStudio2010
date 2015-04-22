@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title3 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title6 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.label1 = new System.Windows.Forms.Label();
             this.ShowAxis = new System.Windows.Forms.Timer(this.components);
             this.textReadPos = new System.Windows.Forms.TextBox();
@@ -154,6 +154,10 @@
             this.button_return_realtime = new System.Windows.Forms.Button();
             this.button_display_file = new System.Windows.Forms.Button();
             this.button_select_file = new System.Windows.Forms.Button();
+            this.textBox_show_coil = new System.Windows.Forms.TextBox();
+            this.button_start_coil = new System.Windows.Forms.Button();
+            this.button_stop_coil = new System.Windows.Forms.Button();
+            this.acquisitionDataGrid = new System.Windows.Forms.DataGrid();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -162,6 +166,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pos_chart)).BeginInit();
             this.panel7.SuspendLayout();
             this.panel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.acquisitionDataGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -229,6 +234,7 @@
             // 
             // panel1
             // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel1.Controls.Add(this.label38);
             this.panel1.Controls.Add(this.label37);
             this.panel1.Controls.Add(this.label36);
@@ -283,6 +289,7 @@
             // 
             // panel2
             // 
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel2.Controls.Add(this.label43);
             this.panel2.Controls.Add(this.ExecuteCommendButton);
             this.panel2.Controls.Add(this.label44);
@@ -406,6 +413,7 @@
             // 
             // panel3
             // 
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel3.Controls.Add(this.label48);
             this.panel3.Controls.Add(this.label47);
             this.panel3.Controls.Add(this.label46);
@@ -546,6 +554,7 @@
             // 
             // panel4
             // 
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel4.Controls.Add(this.label56);
             this.panel4.Controls.Add(this.label55);
             this.panel4.Controls.Add(this.label54);
@@ -830,6 +839,7 @@
             // 
             // panel5
             // 
+            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel5.Controls.Add(this.button_showLimits);
             this.panel5.Controls.Add(this.button_default_windows);
             this.panel5.Controls.Add(this.comboBox_window6);
@@ -845,7 +855,7 @@
             this.panel5.Controls.Add(this.label22);
             this.panel5.Controls.Add(this.label20);
             this.panel5.Controls.Add(this.label21);
-            this.panel5.Location = new System.Drawing.Point(711, 529);
+            this.panel5.Location = new System.Drawing.Point(1044, 135);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(317, 196);
             this.panel5.TabIndex = 12;
@@ -1030,31 +1040,31 @@
             // 
             // pos_chart
             // 
-            chartArea3.AxisX.MajorGrid.Enabled = false;
-            chartArea3.AxisX2.MajorGrid.Interval = 30D;
-            chartArea3.AxisY.Interval = 60D;
-            chartArea3.AxisY.MajorGrid.Interval = 60D;
-            chartArea3.AxisY.Maximum = 180D;
-            chartArea3.AxisY.Minimum = -180D;
-            chartArea3.CursorX.IsUserEnabled = true;
-            chartArea3.CursorX.IsUserSelectionEnabled = true;
-            chartArea3.Name = "ChartArea1";
-            this.pos_chart.ChartAreas.Add(chartArea3);
+            chartArea6.AxisX.MajorGrid.Enabled = false;
+            chartArea6.AxisX2.MajorGrid.Interval = 30D;
+            chartArea6.AxisY.Interval = 60D;
+            chartArea6.AxisY.MajorGrid.Interval = 60D;
+            chartArea6.AxisY.Maximum = 180D;
+            chartArea6.AxisY.Minimum = -180D;
+            chartArea6.CursorX.IsUserEnabled = true;
+            chartArea6.CursorX.IsUserSelectionEnabled = true;
+            chartArea6.Name = "ChartArea1";
+            this.pos_chart.ChartAreas.Add(chartArea6);
             this.pos_chart.Location = new System.Drawing.Point(48, 343);
             this.pos_chart.Name = "pos_chart";
             this.pos_chart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Berry;
-            series3.BorderWidth = 3;
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series3.IsXValueIndexed = true;
-            series3.Name = "PosVal";
-            this.pos_chart.Series.Add(series3);
+            series6.BorderWidth = 3;
+            series6.ChartArea = "ChartArea1";
+            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series6.IsXValueIndexed = true;
+            series6.Name = "PosVal";
+            this.pos_chart.Series.Add(series6);
             this.pos_chart.Size = new System.Drawing.Size(990, 179);
             this.pos_chart.TabIndex = 27;
             this.pos_chart.Text = "pos_chart";
-            title3.Name = "Title1";
-            title3.Text = "Position";
-            this.pos_chart.Titles.Add(title3);
+            title6.Name = "Title1";
+            title6.Text = "Position";
+            this.pos_chart.Titles.Add(title6);
             // 
             // button_interlock_close
             // 
@@ -1068,7 +1078,7 @@
             // 
             // buttonSinuSeqExecute
             // 
-            this.buttonSinuSeqExecute.Location = new System.Drawing.Point(275, 173);
+            this.buttonSinuSeqExecute.Location = new System.Drawing.Point(192, 173);
             this.buttonSinuSeqExecute.Name = "buttonSinuSeqExecute";
             this.buttonSinuSeqExecute.Size = new System.Drawing.Size(67, 23);
             this.buttonSinuSeqExecute.TabIndex = 26;
@@ -1097,6 +1107,7 @@
             // 
             // panel7
             // 
+            this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel7.Controls.Add(this.label64);
             this.panel7.Controls.Add(this.textBoxSeqCycle3);
             this.panel7.Controls.Add(this.textBoxSeqMag3);
@@ -1116,9 +1127,9 @@
             this.panel7.Controls.Add(this.label58);
             this.panel7.Controls.Add(this.textBox_cycle_counter);
             this.panel7.Controls.Add(this.buttonSinuSeqExecute);
-            this.panel7.Location = new System.Drawing.Point(48, 529);
+            this.panel7.Location = new System.Drawing.Point(58, 745);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(352, 199);
+            this.panel7.Size = new System.Drawing.Size(286, 199);
             this.panel7.TabIndex = 17;
             // 
             // label64
@@ -1294,15 +1305,16 @@
             // 
             // panel6
             // 
+            this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel6.Controls.Add(this.button_return_realtime);
             this.panel6.Controls.Add(this.button_display_file);
             this.panel6.Controls.Add(this.button_select_file);
             this.panel6.Controls.Add(this.label27);
             this.panel6.Controls.Add(this.label28);
             this.panel6.Controls.Add(this.textBoxReadingDirectory);
-            this.panel6.Location = new System.Drawing.Point(409, 529);
+            this.panel6.Location = new System.Drawing.Point(711, 745);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(290, 144);
+            this.panel6.Size = new System.Drawing.Size(290, 104);
             this.panel6.TabIndex = 10;
             // 
             // button_return_realtime
@@ -1335,11 +1347,55 @@
             this.button_select_file.UseVisualStyleBackColor = true;
             this.button_select_file.Click += new System.EventHandler(this.button_select_file_Click);
             // 
+            // textBox_show_coil
+            // 
+            this.textBox_show_coil.Location = new System.Drawing.Point(371, 784);
+            this.textBox_show_coil.Name = "textBox_show_coil";
+            this.textBox_show_coil.Size = new System.Drawing.Size(269, 20);
+            this.textBox_show_coil.TabIndex = 48;
+            // 
+            // button_start_coil
+            // 
+            this.button_start_coil.Location = new System.Drawing.Point(414, 745);
+            this.button_start_coil.Name = "button_start_coil";
+            this.button_start_coil.Size = new System.Drawing.Size(67, 23);
+            this.button_start_coil.TabIndex = 48;
+            this.button_start_coil.Text = "Start";
+            this.button_start_coil.UseVisualStyleBackColor = true;
+            this.button_start_coil.Click += new System.EventHandler(this.button_start_Click);
+            // 
+            // button_stop_coil
+            // 
+            this.button_stop_coil.Location = new System.Drawing.Point(531, 745);
+            this.button_stop_coil.Name = "button_stop_coil";
+            this.button_stop_coil.Size = new System.Drawing.Size(67, 23);
+            this.button_stop_coil.TabIndex = 49;
+            this.button_stop_coil.Text = "Stop";
+            this.button_stop_coil.UseVisualStyleBackColor = true;
+            this.button_stop_coil.Click += new System.EventHandler(this.button_stop_coil_Click);
+            // 
+            // acquisitionDataGrid
+            // 
+            this.acquisitionDataGrid.AllowSorting = false;
+            this.acquisitionDataGrid.DataMember = "";
+            this.acquisitionDataGrid.HeaderForeColor = System.Drawing.SystemColors.ControlText;
+            this.acquisitionDataGrid.Location = new System.Drawing.Point(45, 523);
+            this.acquisitionDataGrid.Name = "acquisitionDataGrid";
+            this.acquisitionDataGrid.ParentRowsVisible = false;
+            this.acquisitionDataGrid.ReadOnly = true;
+            this.acquisitionDataGrid.Size = new System.Drawing.Size(993, 216);
+            this.acquisitionDataGrid.TabIndex = 51;
+            this.acquisitionDataGrid.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1106, 808);
+            this.ClientSize = new System.Drawing.Size(1378, 1013);
+            this.Controls.Add(this.acquisitionDataGrid);
+            this.Controls.Add(this.button_stop_coil);
+            this.Controls.Add(this.button_start_coil);
+            this.Controls.Add(this.textBox_show_coil);
             this.Controls.Add(this.panel7);
             this.Controls.Add(this.button_interlock_close);
             this.Controls.Add(this.pos_chart);
@@ -1376,6 +1432,7 @@
             this.panel7.PerformLayout();
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.acquisitionDataGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1505,6 +1562,10 @@
         private System.Windows.Forms.Button button_select_file;
         private System.Windows.Forms.Button button_display_file;
         private System.Windows.Forms.Button button_return_realtime;
+        private System.Windows.Forms.TextBox textBox_show_coil;
+        private System.Windows.Forms.Button button_start_coil;
+        private System.Windows.Forms.Button button_stop_coil;
+        private System.Windows.Forms.DataGrid acquisitionDataGrid;
     }
 }
 

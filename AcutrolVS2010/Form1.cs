@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -9,7 +10,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using NationalInstruments.VisaNS;
 using System.IO;
-
+using NationalInstruments.DAQmx;
+using NationalInstruments;
 namespace AcutrolVS2010
 {
     /*
@@ -18,8 +20,9 @@ namespace AcutrolVS2010
      * 1.Channel 1 is the only channel in use. So the default channel is channel 1.
      * 
      * TODO: 
+     * 0.plot eye coil information, record into .txt and read file
      * 1.debug ECP87 remote touch commend: not working correctly. But when using loc mode touch screen, it's working correct
-     * 2.text or sth else data store and review (display), where is the eye coil feedback signal?
+     * 2.text or sth else data store and review (display)
      * 3.setup abs limits (1140,1141) and ROT/LIN.
      */
 
@@ -94,6 +97,17 @@ namespace AcutrolVS2010
         StreamWriter streamWriter;
         Boolean RecordCtr = false;
 
+        //parameters for reading signals from coil from BNC-2090
+        private AnalogMultiChannelReader analogInReader;
+        private NationalInstruments.DAQmx.Task myTask; //given full reference to avoid confusion with system.threading.task
+        private NationalInstruments.DAQmx.Task runningTask;
+        private AsyncCallback analogCallback;
+        private AnalogWaveform<double>[] data;//need add "using NationalInstruments"
+        private DataColumn[] dataColumn = null;
+        private DataTable dataTable = null;
+        int samplesPerChannel = 100;//reduced to 100 to make the display more smooth (1000); finish 100 samples then callback
+        int timingRate = 1000;//otherwise too fast, ADC conversion attempts before previous conversion was completed (10000); actual sampling rate
+
         public Form1()
         {
             InitializeComponent();
@@ -147,6 +161,9 @@ namespace AcutrolVS2010
             //mbSession.Write(":c:o " + OvarRateModeVeloLim + " , " + RateModeVelocityLimit + " \n");
             //mbSession.Write(":c:o " + OvarRateModeAccLim + " , " + RateModeAccelLimit + " \n");
 
+            //For coil data display and recording
+            button_stop_coil.Enabled = false;
+            dataTable = new DataTable();
         }
 
         private void initComboBoxWindows(ComboBox targetComboBox)
@@ -895,6 +912,155 @@ namespace AcutrolVS2010
         private void Form1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        //start recording coil signals
+        private void button_start_Click(object sender, EventArgs e)
+        {
+            
+            if (runningTask == null)
+            {
+                try
+                {
+                    button_start_coil.Enabled = false;
+                    button_stop_coil.Enabled = true;
+
+                    //create a new task
+                    myTask = new NationalInstruments.DAQmx.Task();
+
+                    //create a virtual channel
+                    myTask.AIChannels.CreateVoltageChannel("Dev2/ai0:15", "", AITerminalConfiguration.Rse, -10, 10, AIVoltageUnits.Volts);//easier way:  ai0:n (0:15 in total)
+
+                    //configure the timing parameters
+                    myTask.Timing.ConfigureSampleClock("", timingRate, SampleClockActiveEdge.Rising, SampleQuantityMode.ContinuousSamples, samplesPerChannel);
+
+                    //verify the Task
+                    myTask.Control(TaskAction.Verify);
+
+                    //prepare the table for data
+                    InitializeDataTable(myTask.AIChannels, ref dataTable);
+                    acquisitionDataGrid.DataSource = dataTable;//show dataTable on DataGridView
+
+                    runningTask = myTask;
+                    analogInReader = new AnalogMultiChannelReader(myTask.Stream);
+                    analogCallback = new AsyncCallback(AnalogInCallback);
+
+                    //use SynchronizeCallbacks to specify that the object marshals callbacks across threads appropriately
+                    analogInReader.SynchronizeCallbacks = true;
+                    analogInReader.BeginReadWaveform(samplesPerChannel, analogCallback, myTask);
+
+                }
+
+                catch(DaqException exception)
+                {
+                    //display errors
+                    MessageBox.Show(exception.Message);
+                    runningTask = null;
+                    myTask.Dispose();
+                    button_stop_coil.Enabled = false;
+                    button_start_coil.Enabled = true;
+                }
+
+            }
+        }
+
+        ////Clean up any resources being used
+        //protected override void DisposeTask(bool disposing)
+        //{
+        //    if (disposing)
+        //    {
+        //        components.Dispose();
+        //    }
+        //    if (myTask != null)
+        //    {
+        //        runningTask = null;
+        //        myTask.Dispose();
+        //    }
+        //    base.Dispose(disposing);
+        //}
+
+        private void AnalogInCallback(IAsyncResult ar)
+        {
+            try
+            {
+                if (runningTask != null && runningTask == ar.AsyncState)
+                {
+                    // Read the available data from the channels 
+                    data = analogInReader.EndReadWaveform(ar); //get raw data from analogInReader
+
+                    //debug //TODO
+                    double[,] newdata = new double[10,10];
+                    newdata = analogInReader.ReadMultiSample(10);
+
+                    // Plot your data here
+                    dataToDataTable(data, ref dataTable); //put raw data into DataTable
+
+                    analogInReader.BeginMemoryOptimizedReadWaveform(samplesPerChannel,
+                        analogCallback, myTask, data);
+                }
+            }
+            catch (DaqException exception)
+            {
+                // Display Errors
+                MessageBox.Show(exception.Message);
+                runningTask = null;
+                myTask.Dispose();
+                button_stop_coil.Enabled = false;
+                button_start_coil.Enabled = true;
+            }
+        }
+
+        private void button_stop_coil_Click(object sender, EventArgs e)
+        {
+            if (runningTask != null)
+            {
+                // Dispose of the task
+                runningTask = null;
+                myTask.Dispose();
+                button_stop_coil.Enabled = false;
+                button_start_coil.Enabled = true;
+            }
+        }
+
+        private void dataToDataTable(AnalogWaveform<double>[] sourceArray, ref DataTable dataTable)//sourceArray = data (raw)
+        {
+            // Iterate over channels
+            int currentLineIndex = 0;//columnIndex
+            foreach (AnalogWaveform<double> waveform in sourceArray)
+            {
+                for (int sample = 0; sample < waveform.Samples.Count; ++sample)//sample is rowindex
+                {
+                    if (sample == 10)
+                        break;
+
+                    dataTable.Rows[sample][currentLineIndex] = waveform.Samples[sample].Value;
+                }
+                currentLineIndex++;
+            }
+        }
+
+        public void InitializeDataTable(AIChannelCollection channelCollection, ref DataTable data)
+        {
+            int numOfChannels = channelCollection.Count;
+            data.Rows.Clear();
+            data.Columns.Clear();
+            dataColumn = new DataColumn[numOfChannels];
+            int numOfRows = 10;
+
+            for (int currentChannelIndex = 0; currentChannelIndex < numOfChannels; currentChannelIndex++)
+            {
+                dataColumn[currentChannelIndex] = new DataColumn();
+                dataColumn[currentChannelIndex].DataType = typeof(double);
+                dataColumn[currentChannelIndex].ColumnName = channelCollection[currentChannelIndex].PhysicalName;
+            }
+
+            data.Columns.AddRange(dataColumn);
+
+            for (int currentDataIndex = 0; currentDataIndex < numOfRows; currentDataIndex++)
+            {
+                object[] rowArr = new object[numOfChannels];
+                data.Rows.Add(rowArr);
+            }
         }
     }
 }

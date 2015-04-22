@@ -10,3 +10,15 @@ C:\Documents and Settings\Administrator\Desktop\AcutrolVS2010\AcutrolVS2010\obj\
 C:\Documents and Settings\Administrator\Desktop\AcutrolVS2010\AcutrolVS2010\obj\x86\Debug\GenerateResource.write.1.tlog
 C:\Documents and Settings\Administrator\Desktop\AcutrolVS2010\AcutrolVS2010\obj\x86\Debug\AcutrolVS2010.exe
 C:\Documents and Settings\Administrator\Desktop\AcutrolVS2010\AcutrolVS2010\obj\x86\Debug\AcutrolVS2010.pdb
+C:\Documents and Settings\Administrator\Desktop\Acutrol_VS2010\AcutrolVS2010\bin\Debug\AcutrolVS2010.exe.config
+C:\Documents and Settings\Administrator\Desktop\Acutrol_VS2010\AcutrolVS2010\obj\x86\Debug\AcutrolVS2010.exe
+C:\Documents and Settings\Administrator\Desktop\Acutrol_VS2010\AcutrolVS2010\obj\x86\Debug\AcutrolVS2010.pdb
+C:\Documents and Settings\Administrator\Desktop\Acutrol_VS2010\AcutrolVS2010\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Administrator\Desktop\Acutrol_VS2010\AcutrolVS2010\obj\x86\Debug\AcutrolVS2010.Form1.resources
+C:\Documents and Settings\Administrator\Desktop\Acutrol_VS2010\AcutrolVS2010\obj\x86\Debug\AcutrolVS2010.Properties.Resources.resources
+C:\Documents and Settings\Administrator\Desktop\Acutrol_VS2010\AcutrolVS2010\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Documents and Settings\Administrator\Desktop\Acutrol_VS2010\AcutrolVS2010\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Documents and Settings\Administrator\Desktop\Acutrol_VS2010\AcutrolVS2010\bin\Debug\AcutrolVS2010.exe
+C:\Documents and Settings\Administrator\Desktop\Acutrol_VS2010\AcutrolVS2010\bin\Debug\AcutrolVS2010.pdb
+C:\Documents and Settings\Administrator\Desktop\Acutrol_VS2010\AcutrolVS2010\bin\Debug\NationalInstruments.VisaNS.dll
+C:\Documents and Settings\Administrator\Desktop\Acutrol_VS2010\AcutrolVS2010\bin\Debug\NationalInstruments.VisaNS.xml
