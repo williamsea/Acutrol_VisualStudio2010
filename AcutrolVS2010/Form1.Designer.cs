@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title6 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.label1 = new System.Windows.Forms.Label();
             this.ShowAxis = new System.Windows.Forms.Timer(this.components);
             this.textReadPos = new System.Windows.Forms.TextBox();
@@ -158,6 +158,13 @@
             this.button_start_coil = new System.Windows.Forms.Button();
             this.button_stop_coil = new System.Windows.Forms.Button();
             this.acquisitionDataGrid = new System.Windows.Forms.DataGrid();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.label29 = new System.Windows.Forms.Label();
+            this.label30 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -167,6 +174,7 @@
             this.panel7.SuspendLayout();
             this.panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.acquisitionDataGrid)).BeginInit();
+            this.panel8.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -1040,31 +1048,31 @@
             // 
             // pos_chart
             // 
-            chartArea6.AxisX.MajorGrid.Enabled = false;
-            chartArea6.AxisX2.MajorGrid.Interval = 30D;
-            chartArea6.AxisY.Interval = 60D;
-            chartArea6.AxisY.MajorGrid.Interval = 60D;
-            chartArea6.AxisY.Maximum = 180D;
-            chartArea6.AxisY.Minimum = -180D;
-            chartArea6.CursorX.IsUserEnabled = true;
-            chartArea6.CursorX.IsUserSelectionEnabled = true;
-            chartArea6.Name = "ChartArea1";
-            this.pos_chart.ChartAreas.Add(chartArea6);
+            chartArea1.AxisX.MajorGrid.Enabled = false;
+            chartArea1.AxisX2.MajorGrid.Interval = 30D;
+            chartArea1.AxisY.Interval = 60D;
+            chartArea1.AxisY.MajorGrid.Interval = 60D;
+            chartArea1.AxisY.Maximum = 180D;
+            chartArea1.AxisY.Minimum = -180D;
+            chartArea1.CursorX.IsUserEnabled = true;
+            chartArea1.CursorX.IsUserSelectionEnabled = true;
+            chartArea1.Name = "ChartArea1";
+            this.pos_chart.ChartAreas.Add(chartArea1);
             this.pos_chart.Location = new System.Drawing.Point(48, 343);
             this.pos_chart.Name = "pos_chart";
             this.pos_chart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Berry;
-            series6.BorderWidth = 3;
-            series6.ChartArea = "ChartArea1";
-            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series6.IsXValueIndexed = true;
-            series6.Name = "PosVal";
-            this.pos_chart.Series.Add(series6);
+            series1.BorderWidth = 3;
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series1.IsXValueIndexed = true;
+            series1.Name = "PosVal";
+            this.pos_chart.Series.Add(series1);
             this.pos_chart.Size = new System.Drawing.Size(990, 179);
             this.pos_chart.TabIndex = 27;
             this.pos_chart.Text = "pos_chart";
-            title6.Name = "Title1";
-            title6.Text = "Position";
-            this.pos_chart.Titles.Add(title6);
+            title1.Name = "Title1";
+            title1.Text = "Position";
+            this.pos_chart.Titles.Add(title1);
             // 
             // button_interlock_close
             // 
@@ -1299,9 +1307,9 @@
             this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label27.Location = new System.Drawing.Point(13, 8);
             this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(171, 13);
+            this.label27.Size = new System.Drawing.Size(266, 13);
             this.label27.TabIndex = 9;
-            this.label27.Text = "Read Recorded Waveforms: ";
+            this.label27.Text = "Read Recorded Chair Movement Waveforms: ";
             // 
             // panel6
             // 
@@ -1312,7 +1320,7 @@
             this.panel6.Controls.Add(this.label27);
             this.panel6.Controls.Add(this.label28);
             this.panel6.Controls.Add(this.textBoxReadingDirectory);
-            this.panel6.Location = new System.Drawing.Point(711, 745);
+            this.panel6.Location = new System.Drawing.Point(1044, 418);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(290, 104);
             this.panel6.TabIndex = 10;
@@ -1387,11 +1395,79 @@
             this.acquisitionDataGrid.TabIndex = 51;
             this.acquisitionDataGrid.TabStop = false;
             // 
+            // panel8
+            // 
+            this.panel8.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel8.Controls.Add(this.button1);
+            this.panel8.Controls.Add(this.button2);
+            this.panel8.Controls.Add(this.button3);
+            this.panel8.Controls.Add(this.label29);
+            this.panel8.Controls.Add(this.label30);
+            this.panel8.Controls.Add(this.textBox1);
+            this.panel8.Location = new System.Drawing.Point(1052, 635);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(290, 104);
+            this.panel8.TabIndex = 48;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(187, 71);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(100, 23);
+            this.button1.TabIndex = 47;
+            this.button1.Text = "Return Real Time";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(64, 71);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(67, 23);
+            this.button2.TabIndex = 46;
+            this.button2.Text = "Display";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(210, 29);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(67, 23);
+            this.button3.TabIndex = 45;
+            this.button3.Text = "Select File";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label29.Location = new System.Drawing.Point(13, 8);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(258, 13);
+            this.label29.TabIndex = 9;
+            this.label29.Text = "Read Recorded Coil Movement Waveforms: ";
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(15, 34);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(55, 13);
+            this.label30.TabIndex = 2;
+            this.label30.Text = "Directory: ";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(18, 52);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(269, 20);
+            this.textBox1.TabIndex = 3;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1378, 1013);
+            this.Controls.Add(this.panel8);
             this.Controls.Add(this.acquisitionDataGrid);
             this.Controls.Add(this.button_stop_coil);
             this.Controls.Add(this.button_start_coil);
@@ -1433,6 +1509,8 @@
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.acquisitionDataGrid)).EndInit();
+            this.panel8.ResumeLayout(false);
+            this.panel8.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1566,6 +1644,13 @@
         private System.Windows.Forms.Button button_start_coil;
         private System.Windows.Forms.Button button_stop_coil;
         private System.Windows.Forms.DataGrid acquisitionDataGrid;
+        private System.Windows.Forms.Panel panel8;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 

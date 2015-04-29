@@ -23,7 +23,9 @@ namespace AcutrolVS2010
      * 0.plot eye coil information, record into .txt and read file
      * 1.debug ECP87 remote touch commend: not working correctly. But when using loc mode touch screen, it's working correct
      * 2.text or sth else data store and review (display)
-     * 3.setup abs limits (1140,1141) and ROT/LIN.
+     * 
+     * Additional:
+     * 1.setup abs limits (1140,1141) and ROT/LIN.
      */
 
     public partial class Form1 : Form
@@ -90,19 +92,28 @@ namespace AcutrolVS2010
         int counter = 0; //counter used to store data array
         int DispLength = 300; //30s
 
-        //parameters for document saving and reading
-        string savingPath = "C:\\Users\\VNEL\\Desktop\\Results";
+        //parameters for document saving and reading (Chair Movements)
+        string savingPath = "C:\\Documents and Settings\\Administrator\\Desktop\\Chair_Results";
         string readingPath;
         FileStream fileStream;
         StreamWriter streamWriter;
         Boolean RecordCtr = false;
+        //parameters for document saving and reading (Coil Movements)
+        string coilSavingPath = "C:\\Documents and Settings\\Administrator\\Desktop\\Coil_Results";
+        string coilReadingPath;
+        FileStream coilFileStream;
+        StreamWriter fileStreamWriter;
+        StreamReader fileStreamReader;
+        Boolean CoilRecordCtr = false;
+        ArrayList savedCoilData;
 
         //parameters for reading signals from coil from BNC-2090
         private AnalogMultiChannelReader analogInReader;
         private NationalInstruments.DAQmx.Task myTask; //given full reference to avoid confusion with system.threading.task
         private NationalInstruments.DAQmx.Task runningTask;
         private AsyncCallback analogCallback;
-        private AnalogWaveform<double>[] data;//need add "using NationalInstruments"
+        //private AnalogWaveform<double>[] data;//need add "using NationalInstruments"
+        private double[,] data;
         private DataColumn[] dataColumn = null;
         private DataTable dataTable = null;
         int samplesPerChannel = 100;//reduced to 100 to make the display more smooth (1000); finish 100 samples then callback
@@ -925,6 +936,9 @@ namespace AcutrolVS2010
                     button_start_coil.Enabled = false;
                     button_stop_coil.Enabled = true;
 
+                    //open a new .txt file for coil data recording
+                    CreateDataFile();
+
                     //create a new task
                     myTask = new NationalInstruments.DAQmx.Task();
 
@@ -937,9 +951,25 @@ namespace AcutrolVS2010
                     //verify the Task
                     myTask.Control(TaskAction.Verify);
 
+                    //prepare file for data
+                    String[] channelNames = new String[myTask.AIChannels.Count];
+                    int i = 0;
+                    foreach (AIChannel a in myTask.AIChannels) 
+                    {
+                        channelNames[i++] = a.PhysicalName;
+                    }
+
                     //prepare the table for data
-                    InitializeDataTable(myTask.AIChannels, ref dataTable);
+                    InitializeDataTable(channelNames, ref dataTable);
                     acquisitionDataGrid.DataSource = dataTable;//show dataTable on DataGridView
+
+                    //Add the channel names and any other information to the file
+                    PrepareFileForData();
+                    savedCoilData = new ArrayList();
+                    for (i = 0; i < myTask.AIChannels.Count; i++)
+                    {
+                        savedCoilData.Add(new ArrayList());
+                    }
 
                     runningTask = myTask;
                     analogInReader = new AnalogMultiChannelReader(myTask.Stream);
@@ -947,8 +977,7 @@ namespace AcutrolVS2010
 
                     //use SynchronizeCallbacks to specify that the object marshals callbacks across threads appropriately
                     analogInReader.SynchronizeCallbacks = true;
-                    analogInReader.BeginReadWaveform(samplesPerChannel, analogCallback, myTask);
-
+                    analogInReader.BeginReadMultiSample(samplesPerChannel, analogCallback, myTask);
                 }
 
                 catch(DaqException exception)
@@ -964,6 +993,38 @@ namespace AcutrolVS2010
             }
         }
 
+        private void CreateDataFile()
+        {
+            try
+            {
+                if (!Directory.Exists(coilSavingPath))
+                {
+                    Directory.CreateDirectory(coilSavingPath);
+                }
+                string coil_path = coilSavingPath + "\\" + DateTime.Now.ToString("dd-MM-yyyy_hh-mm-ss") + ".txt";
+                coilFileStream = new FileStream(coil_path, System.IO.FileMode.Create);
+                fileStreamWriter = new StreamWriter(coilFileStream);
+                CoilRecordCtr = true;//start recording coil position into txt
+            }
+            catch(System.IO.IOException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        //Used by text files to write the channel name
+        private void PrepareFileForData()
+        {
+            //prepare file for data: write the channel names
+            int numChannels = myTask.AIChannels.Count;
+
+            for (int i = 0; i < numChannels; i++)
+            {
+                fileStreamWriter.Write(myTask.AIChannels[i].PhysicalName);
+                fileStreamWriter.Write("\t");
+            }
+            fileStreamWriter.WriteLine();
+        }
         ////Clean up any resources being used
         //protected override void DisposeTask(bool disposing)
         //{
@@ -985,18 +1046,17 @@ namespace AcutrolVS2010
             {
                 if (runningTask != null && runningTask == ar.AsyncState)
                 {
-                    // Read the available data from the channels 
-                    data = analogInReader.EndReadWaveform(ar); //get raw data from analogInReader
+                    //Read the available data from the channels
+                    data = analogInReader.EndReadMultiSample(ar);//get raw data from analogInReader
 
-                    //debug //TODO
-                    double[,] newdata = new double[10,10];
-                    newdata = analogInReader.ReadMultiSample(10);
+                    //Plot your data here
+                    //Displays data in grid and writes to file
+                    DisplayData(data, ref dataTable);
 
-                    // Plot your data here
-                    dataToDataTable(data, ref dataTable); //put raw data into DataTable
+                    LogData(data);
 
-                    analogInReader.BeginMemoryOptimizedReadWaveform(samplesPerChannel,
-                        analogCallback, myTask, data);
+                    analogInReader.BeginReadMultiSample(samplesPerChannel,
+                        analogCallback, myTask);
                 }
             }
             catch (DaqException exception)
@@ -1010,10 +1070,64 @@ namespace AcutrolVS2010
             }
         }
 
+        private void DisplayData(double[,] sourceArray, ref DataTable dataTable)
+        {
+            //Display the first 10 points of the Read/Write in the DataGrid
+            try
+            {
+                int channelCount = sourceArray.GetLength(0);
+                int dataCount;
+
+                if (sourceArray.GetLength(1) < 10)
+                    dataCount = sourceArray.GetLength(1);
+                else
+                    dataCount = 10;
+
+                //write to DataTable
+                for (int i = 0; i < dataCount; i++)
+                {
+                    for (int j = 0; j < channelCount; j++)
+                    {
+                        // Writes data to data table
+                        dataTable.Rows[i][j] = sourceArray.GetValue(j, i);
+                    }
+                }
+                //// Plot your data here
+                //dataToDataTable(data, ref dataTable); //put raw data into DataTable
+            }
+
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString());
+                runningTask = null;
+                myTask.Dispose();
+                button_stop_coil.Enabled = false;
+                button_start_coil.Enabled = true;
+            }
+        }
+
+        private void LogData(double[,] data)
+        {
+            int channelCount = data.GetLength(0);
+            int dataCount = data.GetLength(1);
+
+            for (int i = 0; i < channelCount; i++)
+            {
+                ArrayList l = savedCoilData[i] as ArrayList;
+                for (int j = 0; j < dataCount; j++)
+                {
+                    l.Add(data[i, j]);
+                }
+            }
+        }
+
         private void button_stop_coil_Click(object sender, EventArgs e)
         {
             if (runningTask != null)
             {
+                //dispose of the task
+                CloseFile();
+
                 // Dispose of the task
                 runningTask = null;
                 myTask.Dispose();
@@ -1022,26 +1136,59 @@ namespace AcutrolVS2010
             }
         }
 
-        private void dataToDataTable(AnalogWaveform<double>[] sourceArray, ref DataTable dataTable)//sourceArray = data (raw)
+        private void CloseFile()
         {
-            // Iterate over channels
-            int currentLineIndex = 0;//columnIndex
-            foreach (AnalogWaveform<double> waveform in sourceArray)
-            {
-                for (int sample = 0; sample < waveform.Samples.Count; ++sample)//sample is rowindex
-                {
-                    if (sample == 10)
-                        break;
+            int channelCount = savedCoilData.Count;
+            int dataCount = (savedCoilData[0] as ArrayList).Count;
 
-                    dataTable.Rows[sample][currentLineIndex] = waveform.Samples[sample].Value;
+            try
+            {
+                fileStreamWriter.WriteLine(dataCount.ToString());
+
+                for (int i = 0; i < dataCount; i++)
+                {
+                    for (int j = 0; j < channelCount; j++)
+                    {
+                        // Writes data to file
+                        ArrayList l = savedCoilData[j] as ArrayList;
+                        double dataValue = (double)l[i];
+                        fileStreamWriter.Write(dataValue.ToString("e2"));
+                        fileStreamWriter.Write("\t"); //seperate the data for each channel
+                    }
+                    fileStreamWriter.WriteLine(); //new line of data (start next scan)
                 }
-                currentLineIndex++;
+                fileStreamWriter.Close();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.TargetSite.ToString());
+                runningTask = null;
+                myTask.Dispose();
+                button_stop_coil.Enabled = false;
+                button_start_coil.Enabled = true;
             }
         }
 
-        public void InitializeDataTable(AIChannelCollection channelCollection, ref DataTable data)
+        //private void dataToDataTable(AnalogWaveform<double>[] sourceArray, ref DataTable dataTable)//sourceArray = data (raw)
+        //{
+        //    // Iterate over channels
+        //    int currentLineIndex = 0;//columnIndex
+        //    foreach (AnalogWaveform<double> waveform in sourceArray)
+        //    {
+        //        for (int sample = 0; sample < waveform.Samples.Count; ++sample)//sample is rowindex
+        //        {
+        //            if (sample == 10)
+        //                break;
+
+        //            dataTable.Rows[sample][currentLineIndex] = waveform.Samples[sample].Value;
+        //        }
+        //        currentLineIndex++;
+        //    }
+        //}
+
+        public void InitializeDataTable(String[] channelNames, ref DataTable data)
         {
-            int numOfChannels = channelCollection.Count;
+            int numOfChannels = channelNames.GetLength(0);
             data.Rows.Clear();
             data.Columns.Clear();
             dataColumn = new DataColumn[numOfChannels];
@@ -1051,7 +1198,7 @@ namespace AcutrolVS2010
             {
                 dataColumn[currentChannelIndex] = new DataColumn();
                 dataColumn[currentChannelIndex].DataType = typeof(double);
-                dataColumn[currentChannelIndex].ColumnName = channelCollection[currentChannelIndex].PhysicalName;
+                dataColumn[currentChannelIndex].ColumnName = channelNames[currentChannelIndex];
             }
 
             data.Columns.AddRange(dataColumn);
