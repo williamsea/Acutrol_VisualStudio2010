@@ -32,6 +32,18 @@
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title3 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.label1 = new System.Windows.Forms.Label();
             this.ShowAxis = new System.Windows.Forms.Timer(this.components);
             this.textReadPos = new System.Windows.Forms.TextBox();
@@ -154,17 +166,21 @@
             this.button_return_realtime = new System.Windows.Forms.Button();
             this.button_display_file = new System.Windows.Forms.Button();
             this.button_select_file = new System.Windows.Forms.Button();
-            this.textBox_show_coil = new System.Windows.Forms.TextBox();
-            this.button_start_coil = new System.Windows.Forms.Button();
-            this.button_stop_coil = new System.Windows.Forms.Button();
             this.acquisitionDataGrid = new System.Windows.Forms.DataGrid();
             this.panel8 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.button_stop_coil_record = new System.Windows.Forms.Button();
+            this.button_start_coil_record = new System.Windows.Forms.Button();
+            this.label31 = new System.Windows.Forms.Label();
+            this.button_return_coil_realtime = new System.Windows.Forms.Button();
+            this.button_display_coil_file = new System.Windows.Forms.Button();
+            this.button_select_coil_file = new System.Windows.Forms.Button();
             this.label29 = new System.Windows.Forms.Label();
             this.label30 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBoxReadingCoilDirectory = new System.Windows.Forms.TextBox();
+            this.button_ECP4 = new System.Windows.Forms.Button();
+            this.coil_chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.coil_chart_A4 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.DisplayCoil = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -175,6 +191,8 @@
             this.panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.acquisitionDataGrid)).BeginInit();
             this.panel8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.coil_chart)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.coil_chart_A4)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -234,7 +252,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Edwardian Script ITC", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(227, 56);
+            this.label4.Location = new System.Drawing.Point(229, -5);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(349, 76);
             this.label4.TabIndex = 9;
@@ -253,9 +271,9 @@
             this.panel1.Controls.Add(this.textReadPos);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.textReadRate);
-            this.panel1.Location = new System.Drawing.Point(59, 223);
+            this.panel1.Location = new System.Drawing.Point(59, 163);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(218, 101);
+            this.panel1.Size = new System.Drawing.Size(217, 112);
             this.panel1.TabIndex = 10;
             // 
             // label38
@@ -309,7 +327,7 @@
             this.panel2.Controls.Add(this.textBoxSetPos);
             this.panel2.Controls.Add(this.label9);
             this.panel2.Controls.Add(this.textBoxSetRate);
-            this.panel2.Location = new System.Drawing.Point(705, 135);
+            this.panel2.Location = new System.Drawing.Point(705, 73);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(167, 203);
             this.panel2.TabIndex = 11;
@@ -411,7 +429,7 @@
             // 
             // ReturnLocalButton
             // 
-            this.ReturnLocalButton.Location = new System.Drawing.Point(640, 72);
+            this.ReturnLocalButton.Location = new System.Drawing.Point(640, 13);
             this.ReturnLocalButton.Name = "ReturnLocalButton";
             this.ReturnLocalButton.Size = new System.Drawing.Size(75, 41);
             this.ReturnLocalButton.TabIndex = 12;
@@ -433,7 +451,7 @@
             this.panel3.Controls.Add(this.textBoxSetMagn);
             this.panel3.Controls.Add(this.label13);
             this.panel3.Controls.Add(this.textBoxSetFreq);
-            this.panel3.Location = new System.Drawing.Point(878, 135);
+            this.panel3.Location = new System.Drawing.Point(878, 73);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(160, 203);
             this.panel3.TabIndex = 13;
@@ -536,7 +554,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(58, 100);
+            this.label14.Location = new System.Drawing.Point(58, 53);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(81, 13);
             this.label14.TabIndex = 10;
@@ -545,7 +563,7 @@
             // comboBoxSelectMode
             // 
             this.comboBoxSelectMode.FormattingEnabled = true;
-            this.comboBoxSelectMode.Location = new System.Drawing.Point(58, 151);
+            this.comboBoxSelectMode.Location = new System.Drawing.Point(58, 89);
             this.comboBoxSelectMode.Name = "comboBoxSelectMode";
             this.comboBoxSelectMode.Size = new System.Drawing.Size(164, 21);
             this.comboBoxSelectMode.TabIndex = 14;
@@ -554,7 +572,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(56, 135);
+            this.label15.Location = new System.Drawing.Point(56, 73);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(70, 13);
             this.label15.TabIndex = 15;
@@ -590,7 +608,7 @@
             this.panel4.Controls.Add(this.textBoxLimitPosL);
             this.panel4.Controls.Add(this.label19);
             this.panel4.Controls.Add(this.textBoxLimitRate);
-            this.panel4.Location = new System.Drawing.Point(303, 135);
+            this.panel4.Location = new System.Drawing.Point(303, 73);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(396, 203);
             this.panel4.TabIndex = 12;
@@ -720,7 +738,7 @@
             // 
             // edit_default_button
             // 
-            this.edit_default_button.Location = new System.Drawing.Point(337, 13);
+            this.edit_default_button.Location = new System.Drawing.Point(322, 105);
             this.edit_default_button.Name = "edit_default_button";
             this.edit_default_button.Size = new System.Drawing.Size(56, 52);
             this.edit_default_button.TabIndex = 15;
@@ -837,7 +855,7 @@
             // 
             // RemoteMode
             // 
-            this.RemoteMode.Location = new System.Drawing.Point(730, 72);
+            this.RemoteMode.Location = new System.Drawing.Point(730, 13);
             this.RemoteMode.Name = "RemoteMode";
             this.RemoteMode.Size = new System.Drawing.Size(75, 41);
             this.RemoteMode.TabIndex = 16;
@@ -863,9 +881,9 @@
             this.panel5.Controls.Add(this.label22);
             this.panel5.Controls.Add(this.label20);
             this.panel5.Controls.Add(this.label21);
-            this.panel5.Location = new System.Drawing.Point(1044, 135);
+            this.panel5.Location = new System.Drawing.Point(1044, 73);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(317, 196);
+            this.panel5.Size = new System.Drawing.Size(317, 203);
             this.panel5.TabIndex = 12;
             // 
             // button_showLimits
@@ -1008,7 +1026,7 @@
             // 
             // button_interlock_open
             // 
-            this.button_interlock_open.Location = new System.Drawing.Point(894, 72);
+            this.button_interlock_open.Location = new System.Drawing.Point(894, 13);
             this.button_interlock_open.Name = "button_interlock_open";
             this.button_interlock_open.Size = new System.Drawing.Size(70, 41);
             this.button_interlock_open.TabIndex = 23;
@@ -1018,7 +1036,7 @@
             // 
             // button_interlock_reset
             // 
-            this.button_interlock_reset.Location = new System.Drawing.Point(979, 72);
+            this.button_interlock_reset.Location = new System.Drawing.Point(979, 13);
             this.button_interlock_reset.Name = "button_interlock_reset";
             this.button_interlock_reset.Size = new System.Drawing.Size(59, 41);
             this.button_interlock_reset.TabIndex = 24;
@@ -1028,7 +1046,7 @@
             // 
             // button_ECP
             // 
-            this.button_ECP.Location = new System.Drawing.Point(61, 178);
+            this.button_ECP.Location = new System.Drawing.Point(58, 134);
             this.button_ECP.Name = "button_ECP";
             this.button_ECP.Size = new System.Drawing.Size(100, 23);
             this.button_ECP.TabIndex = 25;
@@ -1038,7 +1056,7 @@
             // 
             // button_cut_analog_input
             // 
-            this.button_cut_analog_input.Location = new System.Drawing.Point(171, 178);
+            this.button_cut_analog_input.Location = new System.Drawing.Point(171, 116);
             this.button_cut_analog_input.Name = "button_cut_analog_input";
             this.button_cut_analog_input.Size = new System.Drawing.Size(96, 23);
             this.button_cut_analog_input.TabIndex = 26;
@@ -1058,25 +1076,26 @@
             chartArea1.CursorX.IsUserSelectionEnabled = true;
             chartArea1.Name = "ChartArea1";
             this.pos_chart.ChartAreas.Add(chartArea1);
-            this.pos_chart.Location = new System.Drawing.Point(48, 343);
+            this.pos_chart.Location = new System.Drawing.Point(58, 282);
             this.pos_chart.Name = "pos_chart";
             this.pos_chart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Berry;
             series1.BorderWidth = 3;
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
             series1.IsXValueIndexed = true;
+            series1.Legend = "Legend1";
             series1.Name = "PosVal";
             this.pos_chart.Series.Add(series1);
             this.pos_chart.Size = new System.Drawing.Size(990, 179);
             this.pos_chart.TabIndex = 27;
             this.pos_chart.Text = "pos_chart";
             title1.Name = "Title1";
-            title1.Text = "Position";
+            title1.Text = "Chair Position";
             this.pos_chart.Titles.Add(title1);
             // 
             // button_interlock_close
             // 
-            this.button_interlock_close.Location = new System.Drawing.Point(815, 72);
+            this.button_interlock_close.Location = new System.Drawing.Point(815, 13);
             this.button_interlock_close.Name = "button_interlock_close";
             this.button_interlock_close.Size = new System.Drawing.Size(68, 41);
             this.button_interlock_close.TabIndex = 28;
@@ -1135,9 +1154,9 @@
             this.panel7.Controls.Add(this.label58);
             this.panel7.Controls.Add(this.textBox_cycle_counter);
             this.panel7.Controls.Add(this.buttonSinuSeqExecute);
-            this.panel7.Location = new System.Drawing.Point(58, 745);
+            this.panel7.Location = new System.Drawing.Point(1057, 406);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(286, 199);
+            this.panel7.Size = new System.Drawing.Size(290, 216);
             this.panel7.TabIndex = 17;
             // 
             // label64
@@ -1320,7 +1339,7 @@
             this.panel6.Controls.Add(this.label27);
             this.panel6.Controls.Add(this.label28);
             this.panel6.Controls.Add(this.textBoxReadingDirectory);
-            this.panel6.Location = new System.Drawing.Point(1044, 418);
+            this.panel6.Location = new System.Drawing.Point(1057, 282);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(290, 104);
             this.panel6.TabIndex = 10;
@@ -1355,39 +1374,12 @@
             this.button_select_file.UseVisualStyleBackColor = true;
             this.button_select_file.Click += new System.EventHandler(this.button_select_file_Click);
             // 
-            // textBox_show_coil
-            // 
-            this.textBox_show_coil.Location = new System.Drawing.Point(371, 784);
-            this.textBox_show_coil.Name = "textBox_show_coil";
-            this.textBox_show_coil.Size = new System.Drawing.Size(269, 20);
-            this.textBox_show_coil.TabIndex = 48;
-            // 
-            // button_start_coil
-            // 
-            this.button_start_coil.Location = new System.Drawing.Point(414, 745);
-            this.button_start_coil.Name = "button_start_coil";
-            this.button_start_coil.Size = new System.Drawing.Size(67, 23);
-            this.button_start_coil.TabIndex = 48;
-            this.button_start_coil.Text = "Start";
-            this.button_start_coil.UseVisualStyleBackColor = true;
-            this.button_start_coil.Click += new System.EventHandler(this.button_start_Click);
-            // 
-            // button_stop_coil
-            // 
-            this.button_stop_coil.Location = new System.Drawing.Point(531, 745);
-            this.button_stop_coil.Name = "button_stop_coil";
-            this.button_stop_coil.Size = new System.Drawing.Size(67, 23);
-            this.button_stop_coil.TabIndex = 49;
-            this.button_stop_coil.Text = "Stop";
-            this.button_stop_coil.UseVisualStyleBackColor = true;
-            this.button_stop_coil.Click += new System.EventHandler(this.button_stop_coil_Click);
-            // 
             // acquisitionDataGrid
             // 
             this.acquisitionDataGrid.AllowSorting = false;
             this.acquisitionDataGrid.DataMember = "";
             this.acquisitionDataGrid.HeaderForeColor = System.Drawing.SystemColors.ControlText;
-            this.acquisitionDataGrid.Location = new System.Drawing.Point(45, 523);
+            this.acquisitionDataGrid.Location = new System.Drawing.Point(58, 828);
             this.acquisitionDataGrid.Name = "acquisitionDataGrid";
             this.acquisitionDataGrid.ParentRowsVisible = false;
             this.acquisitionDataGrid.ReadOnly = true;
@@ -1398,43 +1390,78 @@
             // panel8
             // 
             this.panel8.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel8.Controls.Add(this.button1);
-            this.panel8.Controls.Add(this.button2);
-            this.panel8.Controls.Add(this.button3);
+            this.panel8.Controls.Add(this.button_stop_coil_record);
+            this.panel8.Controls.Add(this.button_start_coil_record);
+            this.panel8.Controls.Add(this.label31);
+            this.panel8.Controls.Add(this.button_return_coil_realtime);
+            this.panel8.Controls.Add(this.button_display_coil_file);
+            this.panel8.Controls.Add(this.button_select_coil_file);
             this.panel8.Controls.Add(this.label29);
             this.panel8.Controls.Add(this.label30);
-            this.panel8.Controls.Add(this.textBox1);
-            this.panel8.Location = new System.Drawing.Point(1052, 635);
+            this.panel8.Controls.Add(this.textBoxReadingCoilDirectory);
+            this.panel8.Location = new System.Drawing.Point(1057, 628);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(290, 104);
+            this.panel8.Size = new System.Drawing.Size(290, 165);
             this.panel8.TabIndex = 48;
             // 
-            // button1
+            // button_stop_coil_record
             // 
-            this.button1.Location = new System.Drawing.Point(187, 71);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 23);
-            this.button1.TabIndex = 47;
-            this.button1.Text = "Return Real Time";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button_stop_coil_record.Location = new System.Drawing.Point(118, 131);
+            this.button_stop_coil_record.Name = "button_stop_coil_record";
+            this.button_stop_coil_record.Size = new System.Drawing.Size(67, 23);
+            this.button_stop_coil_record.TabIndex = 52;
+            this.button_stop_coil_record.Text = "Stop";
+            this.button_stop_coil_record.UseVisualStyleBackColor = true;
+            this.button_stop_coil_record.Click += new System.EventHandler(this.button_stop_coil_record_Click);
             // 
-            // button2
+            // button_start_coil_record
             // 
-            this.button2.Location = new System.Drawing.Point(64, 71);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(67, 23);
-            this.button2.TabIndex = 46;
-            this.button2.Text = "Display";
-            this.button2.UseVisualStyleBackColor = true;
+            this.button_start_coil_record.Location = new System.Drawing.Point(18, 131);
+            this.button_start_coil_record.Name = "button_start_coil_record";
+            this.button_start_coil_record.Size = new System.Drawing.Size(67, 23);
+            this.button_start_coil_record.TabIndex = 51;
+            this.button_start_coil_record.Text = "Start";
+            this.button_start_coil_record.UseVisualStyleBackColor = true;
+            this.button_start_coil_record.Click += new System.EventHandler(this.button_start_coil_record_Click);
             // 
-            // button3
+            // label31
             // 
-            this.button3.Location = new System.Drawing.Point(210, 29);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(67, 23);
-            this.button3.TabIndex = 45;
-            this.button3.Text = "Select File";
-            this.button3.UseVisualStyleBackColor = true;
+            this.label31.AutoSize = true;
+            this.label31.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label31.Location = new System.Drawing.Point(15, 106);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(193, 13);
+            this.label31.TabIndex = 50;
+            this.label31.Text = "Manually Record Coil Movement:";
+            // 
+            // button_return_coil_realtime
+            // 
+            this.button_return_coil_realtime.Location = new System.Drawing.Point(187, 71);
+            this.button_return_coil_realtime.Name = "button_return_coil_realtime";
+            this.button_return_coil_realtime.Size = new System.Drawing.Size(100, 23);
+            this.button_return_coil_realtime.TabIndex = 47;
+            this.button_return_coil_realtime.Text = "Return Real Time";
+            this.button_return_coil_realtime.UseVisualStyleBackColor = true;
+            // 
+            // button_display_coil_file
+            // 
+            this.button_display_coil_file.Location = new System.Drawing.Point(64, 71);
+            this.button_display_coil_file.Name = "button_display_coil_file";
+            this.button_display_coil_file.Size = new System.Drawing.Size(67, 23);
+            this.button_display_coil_file.TabIndex = 46;
+            this.button_display_coil_file.Text = "Display";
+            this.button_display_coil_file.UseVisualStyleBackColor = true;
+            this.button_display_coil_file.Click += new System.EventHandler(this.button_display_coil_file_Click);
+            // 
+            // button_select_coil_file
+            // 
+            this.button_select_coil_file.Location = new System.Drawing.Point(210, 29);
+            this.button_select_coil_file.Name = "button_select_coil_file";
+            this.button_select_coil_file.Size = new System.Drawing.Size(67, 23);
+            this.button_select_coil_file.TabIndex = 45;
+            this.button_select_coil_file.Text = "Select File";
+            this.button_select_coil_file.UseVisualStyleBackColor = true;
+            this.button_select_coil_file.Click += new System.EventHandler(this.button_select_coil_file_Click);
             // 
             // label29
             // 
@@ -1455,23 +1482,116 @@
             this.label30.TabIndex = 2;
             this.label30.Text = "Directory: ";
             // 
-            // textBox1
+            // textBoxReadingCoilDirectory
             // 
-            this.textBox1.Location = new System.Drawing.Point(18, 52);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(269, 20);
-            this.textBox1.TabIndex = 3;
+            this.textBoxReadingCoilDirectory.Location = new System.Drawing.Point(18, 52);
+            this.textBoxReadingCoilDirectory.Name = "textBoxReadingCoilDirectory";
+            this.textBoxReadingCoilDirectory.Size = new System.Drawing.Size(269, 20);
+            this.textBoxReadingCoilDirectory.TabIndex = 3;
+            // 
+            // button_ECP4
+            // 
+            this.button_ECP4.Location = new System.Drawing.Point(58, 111);
+            this.button_ECP4.Name = "button_ECP4";
+            this.button_ECP4.Size = new System.Drawing.Size(100, 23);
+            this.button_ECP4.TabIndex = 52;
+            this.button_ECP4.Text = "ECP 4";
+            this.button_ECP4.UseVisualStyleBackColor = true;
+            this.button_ECP4.Click += new System.EventHandler(this.button_ECP4_Click);
+            // 
+            // coil_chart
+            // 
+            chartArea2.AxisX.MajorGrid.Enabled = false;
+            chartArea2.AxisX2.MajorGrid.Interval = 30D;
+            chartArea2.AxisY.MajorGrid.Interval = 0D;
+            chartArea2.CursorX.IsUserEnabled = true;
+            chartArea2.CursorX.IsUserSelectionEnabled = true;
+            chartArea2.Name = "ChartArea1";
+            this.coil_chart.ChartAreas.Add(chartArea2);
+            legend1.Name = "Legend1";
+            this.coil_chart.Legends.Add(legend1);
+            this.coil_chart.Location = new System.Drawing.Point(58, 464);
+            this.coil_chart.Name = "coil_chart";
+            this.coil_chart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Pastel;
+            series2.BorderWidth = 3;
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series2.Legend = "Legend1";
+            series2.Name = "A3XChannel8";
+            series3.BorderWidth = 3;
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series3.Legend = "Legend1";
+            series3.Name = "A3YChannel9";
+            series4.BorderWidth = 3;
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series4.Legend = "Legend1";
+            series4.Name = "A3ZChannel10";
+            this.coil_chart.Series.Add(series2);
+            this.coil_chart.Series.Add(series3);
+            this.coil_chart.Series.Add(series4);
+            this.coil_chart.Size = new System.Drawing.Size(990, 179);
+            this.coil_chart.TabIndex = 53;
+            this.coil_chart.Text = "coil_chart";
+            title2.Name = "Title1";
+            title2.Text = "Coil Positions A3";
+            this.coil_chart.Titles.Add(title2);
+            // 
+            // coil_chart_A4
+            // 
+            chartArea3.AxisX.MajorGrid.Enabled = false;
+            chartArea3.AxisX.Minimum = 0D;
+            chartArea3.AxisX2.MajorGrid.Interval = 30D;
+            chartArea3.AxisY.MajorGrid.Interval = 0D;
+            chartArea3.CursorX.IsUserEnabled = true;
+            chartArea3.CursorX.IsUserSelectionEnabled = true;
+            chartArea3.Name = "ChartArea1";
+            this.coil_chart_A4.ChartAreas.Add(chartArea3);
+            legend2.Name = "Legend1";
+            this.coil_chart_A4.Legends.Add(legend2);
+            this.coil_chart_A4.Location = new System.Drawing.Point(58, 647);
+            this.coil_chart_A4.Name = "coil_chart_A4";
+            this.coil_chart_A4.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Pastel;
+            series5.BorderWidth = 3;
+            series5.ChartArea = "ChartArea1";
+            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series5.Legend = "Legend1";
+            series5.Name = "A4XChannel11";
+            series6.BorderWidth = 3;
+            series6.ChartArea = "ChartArea1";
+            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series6.Legend = "Legend1";
+            series6.Name = "A4YChannel12";
+            series7.BorderWidth = 3;
+            series7.ChartArea = "ChartArea1";
+            series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series7.Legend = "Legend1";
+            series7.Name = "A4ZChannel13";
+            this.coil_chart_A4.Series.Add(series5);
+            this.coil_chart_A4.Series.Add(series6);
+            this.coil_chart_A4.Series.Add(series7);
+            this.coil_chart_A4.Size = new System.Drawing.Size(990, 179);
+            this.coil_chart_A4.TabIndex = 54;
+            this.coil_chart_A4.Text = "coil_chart_A4";
+            title3.Name = "Title1";
+            title3.Text = "Coil Positions A4";
+            this.coil_chart_A4.Titles.Add(title3);
+            // 
+            // DisplayCoil
+            // 
+            this.DisplayCoil.Tick += new System.EventHandler(this.DisplayCoil_Tick);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1378, 1013);
+            this.ClientSize = new System.Drawing.Size(1378, 1065);
+            this.Controls.Add(this.coil_chart_A4);
+            this.Controls.Add(this.coil_chart);
+            this.Controls.Add(this.button_ECP4);
             this.Controls.Add(this.panel8);
             this.Controls.Add(this.acquisitionDataGrid);
-            this.Controls.Add(this.button_stop_coil);
-            this.Controls.Add(this.button_start_coil);
-            this.Controls.Add(this.textBox_show_coil);
             this.Controls.Add(this.panel7);
             this.Controls.Add(this.button_interlock_close);
             this.Controls.Add(this.pos_chart);
@@ -1511,6 +1631,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.acquisitionDataGrid)).EndInit();
             this.panel8.ResumeLayout(false);
             this.panel8.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.coil_chart)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.coil_chart_A4)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1640,17 +1762,21 @@
         private System.Windows.Forms.Button button_select_file;
         private System.Windows.Forms.Button button_display_file;
         private System.Windows.Forms.Button button_return_realtime;
-        private System.Windows.Forms.TextBox textBox_show_coil;
-        private System.Windows.Forms.Button button_start_coil;
-        private System.Windows.Forms.Button button_stop_coil;
         private System.Windows.Forms.DataGrid acquisitionDataGrid;
         private System.Windows.Forms.Panel panel8;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button_return_coil_realtime;
+        private System.Windows.Forms.Button button_display_coil_file;
+        private System.Windows.Forms.Button button_select_coil_file;
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.Label label30;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBoxReadingCoilDirectory;
+        private System.Windows.Forms.Button button_ECP4;
+        private System.Windows.Forms.DataVisualization.Charting.Chart coil_chart;
+        private System.Windows.Forms.DataVisualization.Charting.Chart coil_chart_A4;
+        private System.Windows.Forms.Button button_stop_coil_record;
+        private System.Windows.Forms.Button button_start_coil_record;
+        private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.Timer DisplayCoil;
     }
 }
 

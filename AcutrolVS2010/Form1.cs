@@ -20,9 +20,13 @@ namespace AcutrolVS2010
      * 1.Channel 1 is the only channel in use. So the default channel is channel 1.
      * 
      * TODO: 
-     * 0.plot eye coil information, record into .txt and read file
+     * 0.plot eye coil information in graph
      * 1.debug ECP87 remote touch commend: not working correctly. But when using loc mode touch screen, it's working correct
-     * 2.text or sth else data store and review (display)
+     * 2.real time graph with line header
+     * 
+     * DEBUG LIST:
+     * 1. ECP87
+     * 2. Counter
      * 
      * Additional:
      * 1.setup abs limits (1140,1141) and ROT/LIN.
@@ -48,7 +52,7 @@ namespace AcutrolVS2010
         double[] TargetFreq = new double[3] { 0, 0, 0 };
         System.Timers.Timer sysTimer;
         int seqCount = 0; //count the sequence to be executed
-        double zeroTrigger = 0.01;
+        double zeroTrigger = 0.1;//0.01;
 
         //Machine representation codes
         String Position = "P";
@@ -91,6 +95,9 @@ namespace AcutrolVS2010
         int disp = 0; //counter used for display data
         int counter = 0; //counter used to store data array
         int DispLength = 300; //30s
+        double[,] coilValArray = new double[16, 100000];
+        bool showCoilWaveform = false;
+        int coilValueCounter = 0; //counter used to store coil data list, every time there are 100 more set (16 channels) of data get stored
 
         //parameters for document saving and reading (Chair Movements)
         string savingPath = "C:\\Documents and Settings\\Administrator\\Desktop\\Chair_Results";
@@ -106,6 +113,7 @@ namespace AcutrolVS2010
         StreamReader fileStreamReader;
         Boolean CoilRecordCtr = false;
         ArrayList savedCoilData;
+        int DisplayedRowNum=100;
 
         //parameters for reading signals from coil from BNC-2090
         private AnalogMultiChannelReader analogInReader;
@@ -173,7 +181,6 @@ namespace AcutrolVS2010
             //mbSession.Write(":c:o " + OvarRateModeAccLim + " , " + RateModeAccelLimit + " \n");
 
             //For coil data display and recording
-            button_stop_coil.Enabled = false;
             dataTable = new DataTable();
         }
 
@@ -305,6 +312,7 @@ namespace AcutrolVS2010
         //display position in waveform format
         private void DisplayData()
         {
+            //Displaying Chair Movement Data
             this.pos_chart.Series["PosVal"].Points.Clear();
 
             if (counter >= DispLength)
@@ -321,6 +329,71 @@ namespace AcutrolVS2010
                     this.pos_chart.Series["PosVal"].Points.AddXY((disp / 10).ToString(), PosValArray[disp]);
                 }
             }
+        }
+
+        private void DisplayCoilWaveform()
+        {
+            //Displaying Eye Coil Data
+            this.coil_chart.Series["A3XChannel8"].Points.Clear();
+            this.coil_chart.Series["A3YChannel9"].Points.Clear();
+            this.coil_chart.Series["A3ZChannel10"].Points.Clear();
+            this.coil_chart_A4.Series["A4XChannel11"].Points.Clear();
+            this.coil_chart_A4.Series["A4YChannel12"].Points.Clear();
+            this.coil_chart_A4.Series["A4ZChannel13"].Points.Clear();
+
+            //For displaying with 1% representative values
+            if (showCoilWaveform == true)
+            {
+                if (coilValArray != null)
+                {
+                    if (coilValueCounter >= DispLength)
+                    {
+                        for (disp = coilValueCounter - (DispLength); disp < coilValueCounter; disp++)//take representitive sample 1 out of 100 to ensure smooth display
+                        {
+                            this.coil_chart.Series["A3XChannel8"].Points.AddXY((disp / 10).ToString(), coilValArray[8, disp]);//coilValList[8][disp]);
+                            this.coil_chart.Series["A3YChannel9"].Points.AddXY((disp / 10).ToString(), coilValArray[9, disp]); 
+                            this.coil_chart.Series["A3ZChannel10"].Points.AddXY((disp / 10).ToString(), coilValArray[10, disp]); 
+                            this.coil_chart_A4.Series["A4XChannel11"].Points.AddXY((disp / 10).ToString(), coilValArray[11, disp]);
+                            this.coil_chart_A4.Series["A4YChannel12"].Points.AddXY((disp / 10).ToString(), coilValArray[12, disp]);
+                            this.coil_chart_A4.Series["A4ZChannel13"].Points.AddXY((disp / 10).ToString(), coilValArray[13, disp]);
+                        }
+                    }
+                    else
+                    {
+                        for (disp = 0; disp < DispLength; disp++)
+                        {
+                            this.coil_chart.Series["A3XChannel8"].Points.AddXY((disp / 10).ToString(), coilValArray[8, disp]);//coilValList[8][disp]);
+                            this.coil_chart.Series["A3YChannel9"].Points.AddXY((disp / 10).ToString(), coilValArray[9, disp]);
+                            this.coil_chart.Series["A3ZChannel10"].Points.AddXY((disp / 10).ToString(), coilValArray[10, disp]);
+                            this.coil_chart_A4.Series["A4XChannel11"].Points.AddXY((disp / 10).ToString(), coilValArray[11, disp]);
+                            this.coil_chart_A4.Series["A4YChannel12"].Points.AddXY((disp / 10).ToString(), coilValArray[12, disp]);
+                            this.coil_chart_A4.Series["A4ZChannel13"].Points.AddXY((disp / 10).ToString(), coilValArray[13, disp]);
+                        }
+                    }
+                }
+            }
+
+            ////For Displaying all values
+            //if (showCoilWaveform == true)
+            //{
+            //    if (coilValArray != null)
+            //    {
+            //        if (coilValueCounter * samplesPerChannel >= 30000)
+            //        {
+            //            for (disp = coilValueCounter * samplesPerChannel - (30000); disp < coilValueCounter * samplesPerChannel; disp += 100)//take representitive sample 1 out of 100 to ensure smooth display
+            //            {
+            //                this.coil_chart.Series["A3XChannel8"].Points.AddXY((disp / 10).ToString(), coilValArray[8, disp]);//coilValList[8][disp]);
+            //            }
+            //        }
+            //        else
+            //        {
+            //            for (disp = 0; disp < 30000; disp += 100)
+            //            {
+            //                this.coil_chart.Series["A3XChannel8"].Points.AddXY((disp / 10).ToString(), coilValArray[8, disp]);//coilValList[8][disp]);
+            //            }
+            //        }
+            //    }
+            //}
         }
 
         private string ReadParameter(string responseString, string targetParameter, TextBox targetTextBox)
@@ -720,6 +793,16 @@ namespace AcutrolVS2010
             mbSession.Write(":I:R \n");
         }
 
+        private void button_ECP4_Click(object sender, EventArgs e)
+        {
+            if (mySession == null)
+                openMySession();
+
+            //Setup ECP 4 using TOUCH commend
+            mbSession.Write("u:t 179,179,176,32,148,32,50,176,181,181,181 \n");
+            System.Threading.Thread.Sleep(5000);
+        }
+
         private void button_ECP_Click(object sender, EventArgs e)
         {
             if (mySession == null)
@@ -768,6 +851,9 @@ namespace AcutrolVS2010
             CheckZeroPosition.Enabled = true; //Once go back to zero, start sinusoidal cycles
 
             cycleCounter = 0;
+
+            //start coil signal recording
+            StartCoilSignalRecording();
         }
 
         private void WriteIntoTxt()
@@ -864,6 +950,9 @@ namespace AcutrolVS2010
                 streamWriter.Close();
                 fileStream.Close();
                 seqCount = 0;
+
+                //stop coil signal recording and write to file
+                StopCoilSignalRecording();
             }
         }
 
@@ -926,15 +1015,14 @@ namespace AcutrolVS2010
         }
 
         //start recording coil signals
-        private void button_start_Click(object sender, EventArgs e)
+        private void StartCoilSignalRecording()
         {
-            
             if (runningTask == null)
             {
                 try
                 {
-                    button_start_coil.Enabled = false;
-                    button_stop_coil.Enabled = true;
+                    button_start_coil_record.Enabled = false;
+                    button_stop_coil_record.Enabled = true;
 
                     //open a new .txt file for coil data recording
                     CreateDataFile();
@@ -954,7 +1042,7 @@ namespace AcutrolVS2010
                     //prepare file for data
                     String[] channelNames = new String[myTask.AIChannels.Count];
                     int i = 0;
-                    foreach (AIChannel a in myTask.AIChannels) 
+                    foreach (AIChannel a in myTask.AIChannels)
                     {
                         channelNames[i++] = a.PhysicalName;
                     }
@@ -980,14 +1068,12 @@ namespace AcutrolVS2010
                     analogInReader.BeginReadMultiSample(samplesPerChannel, analogCallback, myTask);
                 }
 
-                catch(DaqException exception)
+                catch (DaqException exception)
                 {
                     //display errors
                     MessageBox.Show(exception.Message);
                     runningTask = null;
                     myTask.Dispose();
-                    button_stop_coil.Enabled = false;
-                    button_start_coil.Enabled = true;
                 }
 
             }
@@ -1048,10 +1134,26 @@ namespace AcutrolVS2010
                 {
                     //Read the available data from the channels
                     data = analogInReader.EndReadMultiSample(ar);//get raw data from analogInReader
-
                     //Plot your data here
                     //Displays data in grid and writes to file
                     DisplayData(data, ref dataTable);
+
+                    //Copy and append coil data value to coilValArray for display purpose
+                    for (int i = 0; i < 16; i++)//16 channels
+                    {
+                        //save all the samples to coilValArray
+                        //for (int j = 0; j < samplesPerChannel; j++)//samplesPerChannel=100
+                        //{
+                        //    coilValArray[i, samplesPerChannel * coilValueCounter + j] = data[i, j];
+                        //}
+
+                        //take 1 representative sample out of 100 samples to be saved in coilValArray for display purpose
+                        for (int j = 0; j < samplesPerChannel; j += 100)
+                        {
+                            coilValArray[i, coilValueCounter + j] = data[i, j];
+                        }
+                    }
+                    coilValueCounter++;
 
                     LogData(data);
 
@@ -1065,8 +1167,6 @@ namespace AcutrolVS2010
                 MessageBox.Show(exception.Message);
                 runningTask = null;
                 myTask.Dispose();
-                button_stop_coil.Enabled = false;
-                button_start_coil.Enabled = true;
             }
         }
 
@@ -1078,10 +1178,10 @@ namespace AcutrolVS2010
                 int channelCount = sourceArray.GetLength(0);
                 int dataCount;
 
-                if (sourceArray.GetLength(1) < 10)
-                    dataCount = sourceArray.GetLength(1);
-                else
-                    dataCount = 10;
+                //if (sourceArray.GetLength(1) < DisplayedRowNum)
+                //    dataCount = sourceArray.GetLength(1);
+                //else
+                dataCount = DisplayedRowNum;
 
                 //write to DataTable
                 for (int i = 0; i < dataCount; i++)
@@ -1092,8 +1192,6 @@ namespace AcutrolVS2010
                         dataTable.Rows[i][j] = sourceArray.GetValue(j, i);
                     }
                 }
-                //// Plot your data here
-                //dataToDataTable(data, ref dataTable); //put raw data into DataTable
             }
 
             catch (Exception e)
@@ -1101,8 +1199,8 @@ namespace AcutrolVS2010
                 MessageBox.Show(e.ToString());
                 runningTask = null;
                 myTask.Dispose();
-                button_stop_coil.Enabled = false;
-                button_start_coil.Enabled = true;
+                button_start_coil_record.Enabled = true;
+                button_stop_coil_record.Enabled = false;
             }
         }
 
@@ -1121,7 +1219,7 @@ namespace AcutrolVS2010
             }
         }
 
-        private void button_stop_coil_Click(object sender, EventArgs e)
+        private void StopCoilSignalRecording()
         {
             if (runningTask != null)
             {
@@ -1131,8 +1229,6 @@ namespace AcutrolVS2010
                 // Dispose of the task
                 runningTask = null;
                 myTask.Dispose();
-                button_stop_coil.Enabled = false;
-                button_start_coil.Enabled = true;
             }
         }
 
@@ -1143,7 +1239,7 @@ namespace AcutrolVS2010
 
             try
             {
-                fileStreamWriter.WriteLine(dataCount.ToString());
+                fileStreamWriter.WriteLine(dataCount.ToString());//write the num of rows in txt file
 
                 for (int i = 0; i < dataCount; i++)
                 {
@@ -1164,27 +1260,10 @@ namespace AcutrolVS2010
                 MessageBox.Show(e.TargetSite.ToString());
                 runningTask = null;
                 myTask.Dispose();
-                button_stop_coil.Enabled = false;
-                button_start_coil.Enabled = true;
+                button_start_coil_record.Enabled = true;
+                button_stop_coil_record.Enabled = false;
             }
         }
-
-        //private void dataToDataTable(AnalogWaveform<double>[] sourceArray, ref DataTable dataTable)//sourceArray = data (raw)
-        //{
-        //    // Iterate over channels
-        //    int currentLineIndex = 0;//columnIndex
-        //    foreach (AnalogWaveform<double> waveform in sourceArray)
-        //    {
-        //        for (int sample = 0; sample < waveform.Samples.Count; ++sample)//sample is rowindex
-        //        {
-        //            if (sample == 10)
-        //                break;
-
-        //            dataTable.Rows[sample][currentLineIndex] = waveform.Samples[sample].Value;
-        //        }
-        //        currentLineIndex++;
-        //    }
-        //}
 
         public void InitializeDataTable(String[] channelNames, ref DataTable data)
         {
@@ -1192,7 +1271,7 @@ namespace AcutrolVS2010
             data.Rows.Clear();
             data.Columns.Clear();
             dataColumn = new DataColumn[numOfChannels];
-            int numOfRows = 10;
+            int numOfRows = DisplayedRowNum;
 
             for (int currentChannelIndex = 0; currentChannelIndex < numOfChannels; currentChannelIndex++)
             {
@@ -1208,6 +1287,142 @@ namespace AcutrolVS2010
                 object[] rowArr = new object[numOfChannels];
                 data.Rows.Add(rowArr);
             }
+        }
+
+        private void button_select_coil_file_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.InitialDirectory = coilSavingPath;
+            openFileDialog.Filter = "txt Files(*.txt)|*.txt|All Files(*.*)|*.*";
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                coilReadingPath = openFileDialog.FileName;
+            }
+            textBoxReadingCoilDirectory.Text = coilReadingPath;
+            Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
+        }
+
+        private void button_display_coil_file_Click(object sender, EventArgs e)
+        {
+            //modify UI
+            button_display_coil_file.Enabled = false;
+            this.Cursor = Cursors.WaitCursor;
+
+            //open file
+            bool opened = OpenDataFile();
+
+            //load data
+            ReadTextData();
+            fileStreamReader.Close();
+
+            this.Cursor = Cursors.Default;
+            button_display_coil_file.Enabled = true;
+        }
+
+        private bool OpenDataFile()
+        {
+            try
+            {
+                FileStream fs = new FileStream(coilReadingPath, FileMode.Open);
+
+                fileStreamReader = new StreamReader(fs);
+
+            }
+            catch (System.IO.IOException ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+            return true;
+        }
+
+        private void ReadTextData()
+        {
+            try
+            {
+                char[] tab = { '\t' };
+                String[] split = fileStreamReader.ReadLine().Replace("\n", "").Split(tab);
+                String[] channels = new String[split.GetLength(0) - 1];
+                Array.Copy(split, 0, channels, 0, split.GetLength(0) - 1);
+                int samples = Int32.Parse(fileStreamReader.ReadLine().Replace("\n", ""));
+                int channelCount = channels.GetLength(0);
+
+                if (samples > 10000)
+                    DisplayedRowNum = 10000;
+                else 
+                    DisplayedRowNum = samples;//display all the samples
+
+                double[,] array = new double[channelCount, samples];
+
+                String line;
+                for (int iSample = 0; iSample < samples; iSample++)
+                {
+                    line = fileStreamReader.ReadLine();
+                    String[] values = line.Split(tab);
+
+                    for (int iChan = 0; iChan < channelCount; iChan++)
+                    {
+                        array[iChan, iSample] = Convert.ToDouble(values[iChan]);
+                    }
+                }
+
+                InitializeDataTable(channels, ref dataTable);
+                acquisitionDataGrid.DataSource = dataTable;
+                DisplayData(array, ref dataTable);
+
+                DisplayCoilFileData(array);
+
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString());
+                runningTask = null;
+                button_display_coil_file.Enabled = true;
+            }
+        }
+
+        //display coil signals in waveform format
+        private void DisplayCoilFileData(double[,] array)
+        {
+
+            this.coil_chart.Series["A3XChannel8"].Points.Clear();
+            this.coil_chart.Series["A3YChannel9"].Points.Clear();
+            this.coil_chart.Series["A3ZChannel10"].Points.Clear();
+            this.coil_chart_A4.Series["A4XChannel11"].Points.Clear();
+            this.coil_chart_A4.Series["A4YChannel12"].Points.Clear();
+            this.coil_chart_A4.Series["A4ZChannel13"].Points.Clear();
+            int length = array.GetLength(1);
+            for (disp = 0; disp < length; disp++)
+            {
+                this.coil_chart.Series["A3XChannel8"].Points.AddXY(disp, array[8, disp]); //showing all points (1000 samples per second)
+                this.coil_chart.Series["A3YChannel9"].Points.AddXY(disp, array[9, disp]); //showing all points (1000 samples per second)
+                this.coil_chart.Series["A3ZChannel10"].Points.AddXY(disp, array[10, disp]); //showing all points (1000 samples per second)
+                this.coil_chart_A4.Series["A4XChannel11"].Points.AddXY(disp, array[11, disp]);
+                this.coil_chart_A4.Series["A4YChannel12"].Points.AddXY(disp, array[12, disp]);
+                this.coil_chart_A4.Series["A4ZChannel13"].Points.AddXY(disp, array[13, disp]);
+            }
+        }
+
+        private void button_start_coil_record_Click(object sender, EventArgs e)
+        {
+            showCoilWaveform = true;
+            StartCoilSignalRecording();
+            DisplayCoil.Enabled = true;
+        }
+
+        private void button_stop_coil_record_Click(object sender, EventArgs e)
+        {
+            showCoilWaveform = false;
+            StopCoilSignalRecording();
+            button_start_coil_record.Enabled = true;
+            button_stop_coil_record.Enabled = false;
+
+            DisplayCoil.Enabled = false;
+        }
+
+        private void DisplayCoil_Tick(object sender, EventArgs e)
+        {
+            DisplayCoilWaveform();
         }
     }
 }
