@@ -20,13 +20,13 @@ namespace AcutrolVS2010
      * 1.Channel 1 is the only channel in use. So the default channel is channel 1.
      * 
      * TODO: 
-     * 0.plot eye coil information in graph
      * 1.debug ECP87 remote touch commend: not working correctly. But when using loc mode touch screen, it's working correct
      * 2.real time graph with line header
+     * 3.display coil signals takes too long time (reduce size)
      * 
      * DEBUG LIST:
      * 1. ECP87
-     * 2. Counter
+     * 2. Counter (return real time - sometimes causing errors)
      * 
      * Additional:
      * 1.setup abs limits (1140,1141) and ROT/LIN.
@@ -47,13 +47,15 @@ namespace AcutrolVS2010
         //List<double> TargetCycleCount = new List<double>();
         //List<double> TargetMagn = new List<double>();
         //List<double> TargetFreq = new List<double>();
-        double[] TargetCycleCount = new double[3] { 0, 0, 0 };//Must be initially Set to 0!!! Otherwise may cause problem!
-        double[] TargetMagn = new double[3] { 0, 0, 0 };
-        double[] TargetFreq = new double[3] { 0, 0, 0 };
+        int totalSequencesNum = 16 ;
+        double[] TargetCycleCount = new double[16] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };//Must be initially Set to 0!!! Otherwise may cause problem!
+        double[] TargetMagn = new double[16] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+        double[] TargetFreq = new double[16] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
         System.Timers.Timer sysTimer;
         int seqCount = 0; //count the sequence to be executed
         double zeroTrigger = 0.1;//0.01;
-
+        TextBox[] textBoxSeqMag = new TextBox[16];
+        
         //Machine representation codes
         String Position = "P";
         String Rate = "R";
@@ -95,7 +97,7 @@ namespace AcutrolVS2010
         int disp = 0; //counter used for display data
         int counter = 0; //counter used to store data array
         int DispLength = 300; //30s
-        double[,] coilValArray = new double[16, 100000];
+        double[,] coilValArrayReduced = new double[16, 100000];
         bool showCoilWaveform = false;
         int coilValueCounter = 0; //counter used to store coil data list, every time there are 100 more set (16 channels) of data get stored
 
@@ -113,7 +115,7 @@ namespace AcutrolVS2010
         StreamReader fileStreamReader;
         Boolean CoilRecordCtr = false;
         ArrayList savedCoilData;
-        int DisplayedRowNum=100;
+        //int DisplayedRowNum=100;
 
         //parameters for reading signals from coil from BNC-2090
         private AnalogMultiChannelReader analogInReader;
@@ -180,8 +182,76 @@ namespace AcutrolVS2010
             //mbSession.Write(":c:o " + OvarRateModeVeloLim + " , " + RateModeVelocityLimit + " \n");
             //mbSession.Write(":c:o " + OvarRateModeAccLim + " , " + RateModeAccelLimit + " \n");
 
-            //For coil data display and recording
-            dataTable = new DataTable();
+            ////For coil data display and recording
+            //dataTable = new DataTable();
+
+
+            textBoxSeqMag[0] = (TextBox)textBoxSeqMag1;
+        }
+
+        private void ReadSinosoidalParas()
+        {
+            //The parameters of Sinusoidal Inputs
+            ////Magnitude
+            TargetMagn[0] = Convert.ToDouble(textBoxSeqMag1.Text);
+            TargetMagn[1] = Convert.ToDouble(textBoxSeqMag2.Text);
+            TargetMagn[2] = Convert.ToDouble(textBoxSeqMag3.Text);
+            TargetMagn[3] = Convert.ToDouble(textBoxSeqMag4.Text);
+            TargetMagn[4] = Convert.ToDouble(textBoxSeqMag5.Text);
+            TargetMagn[5] = Convert.ToDouble(textBoxSeqMag6.Text);
+            TargetMagn[6] = Convert.ToDouble(textBoxSeqMag7.Text);
+            TargetMagn[7] = Convert.ToDouble(textBoxSeqMag8.Text);
+            TargetMagn[8] = Convert.ToDouble(textBoxSeqMag9.Text);
+            TargetMagn[9] = Convert.ToDouble(textBoxSeqMag10.Text);
+            TargetMagn[10] = Convert.ToDouble(textBoxSeqMag11.Text);
+            TargetMagn[11] = Convert.ToDouble(textBoxSeqMag12.Text);
+            TargetMagn[12] = Convert.ToDouble(textBoxSeqMag13.Text);
+            TargetMagn[13] = Convert.ToDouble(textBoxSeqMag14.Text);
+            TargetMagn[14] = Convert.ToDouble(textBoxSeqMag15.Text);
+            TargetMagn[15] = Convert.ToDouble(textBoxSeqMag16.Text);
+
+            ////Tried to refactor but it's not working
+            //for (int i = 0; i < 16; i++)
+            //{
+            //    //textBoxSeqMag[i] = (TextBox)this.Controls.Find(string.Format("textBoxSeqMag{0}", i), false).FirstOrDefault();
+            //    //TargetMagn[i] = Convert.ToDouble(textBoxSeqMag[i].Text);
+            //}
+            //textBoxSeqMag[0] = (TextBox)textBoxSeqMag1;
+
+            //Frequency
+            TargetFreq[0] = Convert.ToDouble(textBoxSeqFreq1.Text);
+            TargetFreq[1] = Convert.ToDouble(textBoxSeqFreq2.Text);
+            TargetFreq[2] = Convert.ToDouble(textBoxSeqFreq3.Text);
+            TargetFreq[3] = Convert.ToDouble(textBoxSeqFreq4.Text);
+            TargetFreq[4] = Convert.ToDouble(textBoxSeqFreq5.Text);
+            TargetFreq[5] = Convert.ToDouble(textBoxSeqFreq6.Text);
+            TargetFreq[6] = Convert.ToDouble(textBoxSeqFreq7.Text);
+            TargetFreq[7] = Convert.ToDouble(textBoxSeqFreq8.Text);
+            TargetFreq[8] = Convert.ToDouble(textBoxSeqFreq9.Text);
+            TargetFreq[9] = Convert.ToDouble(textBoxSeqFreq10.Text);
+            TargetFreq[10] = Convert.ToDouble(textBoxSeqFreq11.Text);
+            TargetFreq[11] = Convert.ToDouble(textBoxSeqFreq12.Text);
+            TargetFreq[12] = Convert.ToDouble(textBoxSeqFreq13.Text);
+            TargetFreq[13] = Convert.ToDouble(textBoxSeqFreq14.Text);
+            TargetFreq[14] = Convert.ToDouble(textBoxSeqFreq15.Text);
+            TargetFreq[15] = Convert.ToDouble(textBoxSeqFreq16.Text);
+            //Cycle Count
+            TargetCycleCount[0] = Convert.ToDouble(textBoxSeqCycle1.Text);
+            TargetCycleCount[1] = Convert.ToDouble(textBoxSeqCycle2.Text);
+            TargetCycleCount[2] = Convert.ToDouble(textBoxSeqCycle3.Text);
+            TargetCycleCount[3] = Convert.ToDouble(textBoxSeqCycle4.Text);
+            TargetCycleCount[4] = Convert.ToDouble(textBoxSeqCycle5.Text);
+            TargetCycleCount[5] = Convert.ToDouble(textBoxSeqCycle6.Text);
+            TargetCycleCount[6] = Convert.ToDouble(textBoxSeqCycle7.Text);
+            TargetCycleCount[7] = Convert.ToDouble(textBoxSeqCycle8.Text);
+            TargetCycleCount[8] = Convert.ToDouble(textBoxSeqCycle9.Text);
+            TargetCycleCount[9] = Convert.ToDouble(textBoxSeqCycle10.Text);
+            TargetCycleCount[10] = Convert.ToDouble(textBoxSeqCycle11.Text);
+            TargetCycleCount[11] = Convert.ToDouble(textBoxSeqCycle12.Text);
+            TargetCycleCount[12] = Convert.ToDouble(textBoxSeqCycle13.Text);
+            TargetCycleCount[13] = Convert.ToDouble(textBoxSeqCycle14.Text);
+            TargetCycleCount[14] = Convert.ToDouble(textBoxSeqCycle15.Text);
+            TargetCycleCount[15] = Convert.ToDouble(textBoxSeqCycle16.Text);
         }
 
         private void initComboBoxWindows(ComboBox targetComboBox)
@@ -329,6 +399,12 @@ namespace AcutrolVS2010
                     this.pos_chart.Series["PosVal"].Points.AddXY((disp / 10).ToString(), PosValArray[disp]);
                 }
             }
+
+            if (showCoilWaveform == true)
+            {
+                DisplayCoilWaveform();
+            }
+
         }
 
         private void DisplayCoilWaveform()
@@ -341,36 +417,34 @@ namespace AcutrolVS2010
             this.coil_chart_A4.Series["A4YChannel12"].Points.Clear();
             this.coil_chart_A4.Series["A4ZChannel13"].Points.Clear();
 
-            //For displaying with 1% representative values
-            if (showCoilWaveform == true)
+            //For displaying with 1% representative values in real time
+            if (coilValArrayReduced != null)
             {
-                if (coilValArray != null)
+                if (coilValueCounter >= DispLength)
                 {
-                    if (coilValueCounter >= DispLength)
+                    for (disp = coilValueCounter - (DispLength); disp < coilValueCounter; disp++)//take representitive sample 1 out of 100 to ensure smooth display
                     {
-                        for (disp = coilValueCounter - (DispLength); disp < coilValueCounter; disp++)//take representitive sample 1 out of 100 to ensure smooth display
-                        {
-                            this.coil_chart.Series["A3XChannel8"].Points.AddXY((disp / 10).ToString(), coilValArray[8, disp]);//coilValList[8][disp]);
-                            this.coil_chart.Series["A3YChannel9"].Points.AddXY((disp / 10).ToString(), coilValArray[9, disp]); 
-                            this.coil_chart.Series["A3ZChannel10"].Points.AddXY((disp / 10).ToString(), coilValArray[10, disp]); 
-                            this.coil_chart_A4.Series["A4XChannel11"].Points.AddXY((disp / 10).ToString(), coilValArray[11, disp]);
-                            this.coil_chart_A4.Series["A4YChannel12"].Points.AddXY((disp / 10).ToString(), coilValArray[12, disp]);
-                            this.coil_chart_A4.Series["A4ZChannel13"].Points.AddXY((disp / 10).ToString(), coilValArray[13, disp]);
-                        }
-                    }
-                    else
-                    {
-                        for (disp = 0; disp < DispLength; disp++)
-                        {
-                            this.coil_chart.Series["A3XChannel8"].Points.AddXY((disp / 10).ToString(), coilValArray[8, disp]);//coilValList[8][disp]);
-                            this.coil_chart.Series["A3YChannel9"].Points.AddXY((disp / 10).ToString(), coilValArray[9, disp]);
-                            this.coil_chart.Series["A3ZChannel10"].Points.AddXY((disp / 10).ToString(), coilValArray[10, disp]);
-                            this.coil_chart_A4.Series["A4XChannel11"].Points.AddXY((disp / 10).ToString(), coilValArray[11, disp]);
-                            this.coil_chart_A4.Series["A4YChannel12"].Points.AddXY((disp / 10).ToString(), coilValArray[12, disp]);
-                            this.coil_chart_A4.Series["A4ZChannel13"].Points.AddXY((disp / 10).ToString(), coilValArray[13, disp]);
-                        }
+                        this.coil_chart.Series["A3XChannel8"].Points.AddXY((disp / 10).ToString(), coilValArrayReduced[8, disp]);//coilValList[8][disp]);
+                        this.coil_chart.Series["A3YChannel9"].Points.AddXY((disp / 10).ToString(), coilValArrayReduced[9, disp]); 
+                        this.coil_chart.Series["A3ZChannel10"].Points.AddXY((disp / 10).ToString(), coilValArrayReduced[10, disp]); 
+                        this.coil_chart_A4.Series["A4XChannel11"].Points.AddXY((disp / 10).ToString(), coilValArrayReduced[11, disp]);
+                        this.coil_chart_A4.Series["A4YChannel12"].Points.AddXY((disp / 10).ToString(), coilValArrayReduced[12, disp]);
+                        this.coil_chart_A4.Series["A4ZChannel13"].Points.AddXY((disp / 10).ToString(), coilValArrayReduced[13, disp]);
                     }
                 }
+                else
+                {
+                    for (disp = 0; disp < DispLength; disp++)
+                    {
+                        this.coil_chart.Series["A3XChannel8"].Points.AddXY((disp / 10).ToString(), coilValArrayReduced[8, disp]);//coilValList[8][disp]);
+                        this.coil_chart.Series["A3YChannel9"].Points.AddXY((disp / 10).ToString(), coilValArrayReduced[9, disp]);
+                        this.coil_chart.Series["A3ZChannel10"].Points.AddXY((disp / 10).ToString(), coilValArrayReduced[10, disp]);
+                        this.coil_chart_A4.Series["A4XChannel11"].Points.AddXY((disp / 10).ToString(), coilValArrayReduced[11, disp]);
+                        this.coil_chart_A4.Series["A4YChannel12"].Points.AddXY((disp / 10).ToString(), coilValArrayReduced[12, disp]);
+                        this.coil_chart_A4.Series["A4ZChannel13"].Points.AddXY((disp / 10).ToString(), coilValArrayReduced[13, disp]);
+                    }
+                }
+                
             }
 
             ////For Displaying all values
@@ -826,15 +900,8 @@ namespace AcutrolVS2010
 
         private void buttonSinuSeqExecute_Click(object sender, EventArgs e)
         {
-            TargetMagn[0] = Convert.ToDouble(textBoxSeqMag1.Text);
-            TargetMagn[1] = Convert.ToDouble(textBoxSeqMag2.Text);
-            TargetMagn[2] = Convert.ToDouble(textBoxSeqMag3.Text);
-            TargetFreq[0] = Convert.ToDouble(textBoxSeqFreq1.Text);
-            TargetFreq[1] = Convert.ToDouble(textBoxSeqFreq2.Text);
-            TargetFreq[2] = Convert.ToDouble(textBoxSeqFreq3.Text);
-            TargetCycleCount[0] = Convert.ToDouble(textBoxSeqCycle1.Text);
-            TargetCycleCount[1] = Convert.ToDouble(textBoxSeqCycle2.Text);
-            TargetCycleCount[2] = Convert.ToDouble(textBoxSeqCycle3.Text);
+            //update the sinosoidal parameter inputs
+            ReadSinosoidalParas();
 
             //open text writer
             WriteIntoTxt();
@@ -852,6 +919,8 @@ namespace AcutrolVS2010
 
             cycleCounter = 0;
 
+            //start displaying coil signal
+            showCoilWaveform = true;
             //start coil signal recording
             StartCoilSignalRecording();
         }
@@ -931,7 +1000,7 @@ namespace AcutrolVS2010
 
         private void ReturnZeroPosition_Tick(object sender, EventArgs e)
         {
-            if (seqCount < 3 && Math.Abs(posReadValue) < zeroTrigger)
+            if (seqCount < totalSequencesNum && Math.Abs(posReadValue) < zeroTrigger)
             {
                 seqCount++;
                 cycleCounter = 0;
@@ -939,7 +1008,7 @@ namespace AcutrolVS2010
                 ReturnZeroPosition.Enabled = false;
             }
 
-            if (seqCount == 3 && Math.Abs(posReadValue) < zeroTrigger)
+            if (seqCount == totalSequencesNum && Math.Abs(posReadValue) < zeroTrigger)
             {
                 Interlock_Open();
                 CheckZeroPosition.Enabled = false;//no need to go back
@@ -953,6 +1022,8 @@ namespace AcutrolVS2010
 
                 //stop coil signal recording and write to file
                 StopCoilSignalRecording();
+                //stop displaying coil signals
+                showCoilWaveform = false;
             }
         }
 
@@ -1047,9 +1118,9 @@ namespace AcutrolVS2010
                         channelNames[i++] = a.PhysicalName;
                     }
 
-                    //prepare the table for data
-                    InitializeDataTable(channelNames, ref dataTable);
-                    acquisitionDataGrid.DataSource = dataTable;//show dataTable on DataGridView
+                    ////prepare the table for data
+                    //InitializeDataTable(channelNames, ref dataTable);
+                    //acquisitionDataGrid.DataSource = dataTable;//show dataTable on DataGridView
 
                     //Add the channel names and any other information to the file
                     PrepareFileForData();
@@ -1134,9 +1205,9 @@ namespace AcutrolVS2010
                 {
                     //Read the available data from the channels
                     data = analogInReader.EndReadMultiSample(ar);//get raw data from analogInReader
-                    //Plot your data here
+
                     //Displays data in grid and writes to file
-                    DisplayData(data, ref dataTable);
+                    //DisplayData(data, ref dataTable);
 
                     //Copy and append coil data value to coilValArray for display purpose
                     for (int i = 0; i < 16; i++)//16 channels
@@ -1147,10 +1218,10 @@ namespace AcutrolVS2010
                         //    coilValArray[i, samplesPerChannel * coilValueCounter + j] = data[i, j];
                         //}
 
-                        //take 1 representative sample out of 100 samples to be saved in coilValArray for display purpose
+                        //take 1 representative sample out of 100 samples to be saved in coilValArray for display purpose on graph
                         for (int j = 0; j < samplesPerChannel; j += 100)
                         {
-                            coilValArray[i, coilValueCounter + j] = data[i, j];
+                            coilValArrayReduced[i, coilValueCounter + j] = data[i, j];
                         }
                     }
                     coilValueCounter++;
@@ -1170,39 +1241,39 @@ namespace AcutrolVS2010
             }
         }
 
-        private void DisplayData(double[,] sourceArray, ref DataTable dataTable)
-        {
-            //Display the first 10 points of the Read/Write in the DataGrid
-            try
-            {
-                int channelCount = sourceArray.GetLength(0);
-                int dataCount;
+        //private void DisplayData(double[,] sourceArray, ref DataTable dataTable)
+        //{
+        //    //Display data in the DataGrid
+        //    try
+        //    {
+        //        int channelCount = sourceArray.GetLength(0);
+        //        int dataCount;
 
-                //if (sourceArray.GetLength(1) < DisplayedRowNum)
-                //    dataCount = sourceArray.GetLength(1);
-                //else
-                dataCount = DisplayedRowNum;
+        //        //if (sourceArray.GetLength(1) < DisplayedRowNum)
+        //        //    dataCount = sourceArray.GetLength(1);
+        //        //else
+        //        dataCount = DisplayedRowNum;
 
-                //write to DataTable
-                for (int i = 0; i < dataCount; i++)
-                {
-                    for (int j = 0; j < channelCount; j++)
-                    {
-                        // Writes data to data table
-                        dataTable.Rows[i][j] = sourceArray.GetValue(j, i);
-                    }
-                }
-            }
+        //        //write to DataTable
+        //        for (int i = 0; i < dataCount; i++)
+        //        {
+        //            for (int j = 0; j < channelCount; j++)
+        //            {
+        //                // Writes data to data table
+        //                dataTable.Rows[i][j] = sourceArray.GetValue(j, i);
+        //            }
+        //        }
+        //    }
 
-            catch (Exception e)
-            {
-                MessageBox.Show(e.ToString());
-                runningTask = null;
-                myTask.Dispose();
-                button_start_coil_record.Enabled = true;
-                button_stop_coil_record.Enabled = false;
-            }
-        }
+        //    catch (Exception e)
+        //    {
+        //        MessageBox.Show(e.ToString());
+        //        runningTask = null;
+        //        myTask.Dispose();
+        //        button_start_coil_record.Enabled = true;
+        //        button_stop_coil_record.Enabled = false;
+        //    }
+        //}
 
         private void LogData(double[,] data)
         {
@@ -1254,6 +1325,9 @@ namespace AcutrolVS2010
                     fileStreamWriter.WriteLine(); //new line of data (start next scan)
                 }
                 fileStreamWriter.Close();
+
+                button_start_coil_record.Enabled = true;
+                button_stop_coil_record.Enabled = false;
             }
             catch (Exception e)
             {
@@ -1265,29 +1339,29 @@ namespace AcutrolVS2010
             }
         }
 
-        public void InitializeDataTable(String[] channelNames, ref DataTable data)
-        {
-            int numOfChannels = channelNames.GetLength(0);
-            data.Rows.Clear();
-            data.Columns.Clear();
-            dataColumn = new DataColumn[numOfChannels];
-            int numOfRows = DisplayedRowNum;
+        //public void InitializeDataTable(String[] channelNames, ref DataTable data)
+        //{
+        //    int numOfChannels = channelNames.GetLength(0);
+        //    data.Rows.Clear();
+        //    data.Columns.Clear();
+        //    dataColumn = new DataColumn[numOfChannels];
+        //    int numOfRows = DisplayedRowNum;
 
-            for (int currentChannelIndex = 0; currentChannelIndex < numOfChannels; currentChannelIndex++)
-            {
-                dataColumn[currentChannelIndex] = new DataColumn();
-                dataColumn[currentChannelIndex].DataType = typeof(double);
-                dataColumn[currentChannelIndex].ColumnName = channelNames[currentChannelIndex];
-            }
+        //    for (int currentChannelIndex = 0; currentChannelIndex < numOfChannels; currentChannelIndex++)
+        //    {
+        //        dataColumn[currentChannelIndex] = new DataColumn();
+        //        dataColumn[currentChannelIndex].DataType = typeof(double);
+        //        dataColumn[currentChannelIndex].ColumnName = channelNames[currentChannelIndex];
+        //    }
 
-            data.Columns.AddRange(dataColumn);
+        //    data.Columns.AddRange(dataColumn);
 
-            for (int currentDataIndex = 0; currentDataIndex < numOfRows; currentDataIndex++)
-            {
-                object[] rowArr = new object[numOfChannels];
-                data.Rows.Add(rowArr);
-            }
-        }
+        //    for (int currentDataIndex = 0; currentDataIndex < numOfRows; currentDataIndex++)
+        //    {
+        //        object[] rowArr = new object[numOfChannels];
+        //        data.Rows.Add(rowArr);
+        //    }
+        //}
 
         private void button_select_coil_file_Click(object sender, EventArgs e)
         {
@@ -1347,10 +1421,10 @@ namespace AcutrolVS2010
                 int samples = Int32.Parse(fileStreamReader.ReadLine().Replace("\n", ""));
                 int channelCount = channels.GetLength(0);
 
-                if (samples > 10000)
-                    DisplayedRowNum = 10000;
-                else 
-                    DisplayedRowNum = samples;//display all the samples
+                //if (samples > 10000)
+                //    DisplayedRowNum = 10000;
+                //else 
+                //    DisplayedRowNum = samples;//display all the samples
 
                 double[,] array = new double[channelCount, samples];
 
@@ -1366,11 +1440,12 @@ namespace AcutrolVS2010
                     }
                 }
 
-                InitializeDataTable(channels, ref dataTable);
-                acquisitionDataGrid.DataSource = dataTable;
-                DisplayData(array, ref dataTable);
+                //InitializeDataTable(channels, ref dataTable);
+                //acquisitionDataGrid.DataSource = dataTable;
 
-                DisplayCoilFileData(array);
+                //DisplayData(array, ref dataTable);//show in table
+
+                DisplayCoilFileData(array);//show in graph
 
             }
             catch (Exception e)
@@ -1407,22 +1482,48 @@ namespace AcutrolVS2010
         {
             showCoilWaveform = true;
             StartCoilSignalRecording();
-            DisplayCoil.Enabled = true;
         }
 
         private void button_stop_coil_record_Click(object sender, EventArgs e)
         {
             showCoilWaveform = false;
             StopCoilSignalRecording();
-            button_start_coil_record.Enabled = true;
-            button_stop_coil_record.Enabled = false;
-
-            DisplayCoil.Enabled = false;
         }
 
-        private void DisplayCoil_Tick(object sender, EventArgs e)
+        private void button_initialization_Click(object sender, EventArgs e)
         {
-            DisplayCoilWaveform();
+            if (mySession == null)
+                openMySession();
+            //repeat 4-87-4-87 twice to fix the ECP bug
+            //Setup ECP 4 using TOUCH commend
+            mbSession.Write("u:t 179,179,176,32,148,32,50,176,181,181,181 \n");
+            System.Threading.Thread.Sleep(5000);
+
+            //Setup ECP 87 using TOUCH commend
+            mbSession.Write("u:t 179,179,176,32,152,151,32,50,176,181,181,181 \n");
+            System.Threading.Thread.Sleep(5000);
+
+            //Setup ECP 4 using TOUCH commend
+            mbSession.Write("u:t 179,179,176,32,148,32,50,176,181,181,181 \n");
+            System.Threading.Thread.Sleep(5000);
+
+            //Setup ECP 87 using TOUCH commend
+            mbSession.Write("u:t 179,179,176,32,152,151,32,50,176,181,181,181 \n");
+            System.Threading.Thread.Sleep(5000);
+
+            //the following two steps fix the display bug
+            //return local mode
+            closeMySession();
+            System.Threading.Thread.Sleep(1000);
+            //go back to remote mode
+            openMySession();
         }
+
+        private void button_calculate_Click(object sender, EventArgs e)
+        {
+            ReadSinosoidalParas();
+            textBox_maxRate1.Text = (TargetMagn[0] * 2 * 3.14 * TargetFreq[0]).ToString();
+        }
+
     }
 }
