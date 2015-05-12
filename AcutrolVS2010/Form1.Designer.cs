@@ -236,7 +236,37 @@
             this.coil_chart_A4 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.button_initialization = new System.Windows.Forms.Button();
             this.label76 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox_maxAccel1 = new System.Windows.Forms.TextBox();
+            this.textBox_maxAccel2 = new System.Windows.Forms.TextBox();
+            this.textBox_maxRate2 = new System.Windows.Forms.TextBox();
+            this.textBox_maxAccel3 = new System.Windows.Forms.TextBox();
+            this.textBox_maxRate3 = new System.Windows.Forms.TextBox();
+            this.textBox_maxAccel4 = new System.Windows.Forms.TextBox();
+            this.textBox_maxRate4 = new System.Windows.Forms.TextBox();
+            this.textBox_maxAccel5 = new System.Windows.Forms.TextBox();
+            this.textBox_maxRate5 = new System.Windows.Forms.TextBox();
+            this.textBox_maxAccel6 = new System.Windows.Forms.TextBox();
+            this.textBox_maxRate6 = new System.Windows.Forms.TextBox();
+            this.textBox_maxAccel7 = new System.Windows.Forms.TextBox();
+            this.textBox_maxRate7 = new System.Windows.Forms.TextBox();
+            this.textBox_maxAccel8 = new System.Windows.Forms.TextBox();
+            this.textBox_maxRate8 = new System.Windows.Forms.TextBox();
+            this.textBox_maxAccel9 = new System.Windows.Forms.TextBox();
+            this.textBox_maxRate9 = new System.Windows.Forms.TextBox();
+            this.textBox_maxAccel10 = new System.Windows.Forms.TextBox();
+            this.textBox_maxRate10 = new System.Windows.Forms.TextBox();
+            this.textBox_maxAccel11 = new System.Windows.Forms.TextBox();
+            this.textBox_maxRate11 = new System.Windows.Forms.TextBox();
+            this.textBox_maxAccel12 = new System.Windows.Forms.TextBox();
+            this.textBox_maxRate12 = new System.Windows.Forms.TextBox();
+            this.textBox_maxAccel13 = new System.Windows.Forms.TextBox();
+            this.textBox_maxRate13 = new System.Windows.Forms.TextBox();
+            this.textBox_maxAccel14 = new System.Windows.Forms.TextBox();
+            this.textBox_maxRate14 = new System.Windows.Forms.TextBox();
+            this.textBox_maxAccel15 = new System.Windows.Forms.TextBox();
+            this.textBox_maxRate15 = new System.Windows.Forms.TextBox();
+            this.textBox_maxAccel16 = new System.Windows.Forms.TextBox();
+            this.textBox_maxRate16 = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -1161,7 +1191,7 @@
             // buttonSinuSeqExecute
             // 
             this.buttonSinuSeqExecute.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSinuSeqExecute.Location = new System.Drawing.Point(75, 502);
+            this.buttonSinuSeqExecute.Location = new System.Drawing.Point(22, 485);
             this.buttonSinuSeqExecute.Name = "buttonSinuSeqExecute";
             this.buttonSinuSeqExecute.Size = new System.Drawing.Size(147, 33);
             this.buttonSinuSeqExecute.TabIndex = 26;
@@ -1191,7 +1221,37 @@
             // panel7
             // 
             this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel7.Controls.Add(this.textBox1);
+            this.panel7.Controls.Add(this.textBox_maxAccel16);
+            this.panel7.Controls.Add(this.textBox_maxRate16);
+            this.panel7.Controls.Add(this.textBox_maxAccel15);
+            this.panel7.Controls.Add(this.textBox_maxRate15);
+            this.panel7.Controls.Add(this.textBox_maxAccel14);
+            this.panel7.Controls.Add(this.textBox_maxRate14);
+            this.panel7.Controls.Add(this.textBox_maxAccel13);
+            this.panel7.Controls.Add(this.textBox_maxRate13);
+            this.panel7.Controls.Add(this.textBox_maxAccel12);
+            this.panel7.Controls.Add(this.textBox_maxRate12);
+            this.panel7.Controls.Add(this.textBox_maxAccel11);
+            this.panel7.Controls.Add(this.textBox_maxRate11);
+            this.panel7.Controls.Add(this.textBox_maxAccel10);
+            this.panel7.Controls.Add(this.textBox_maxRate10);
+            this.panel7.Controls.Add(this.textBox_maxAccel9);
+            this.panel7.Controls.Add(this.textBox_maxRate9);
+            this.panel7.Controls.Add(this.textBox_maxAccel8);
+            this.panel7.Controls.Add(this.textBox_maxRate8);
+            this.panel7.Controls.Add(this.textBox_maxAccel7);
+            this.panel7.Controls.Add(this.textBox_maxRate7);
+            this.panel7.Controls.Add(this.textBox_maxAccel6);
+            this.panel7.Controls.Add(this.textBox_maxRate6);
+            this.panel7.Controls.Add(this.textBox_maxAccel5);
+            this.panel7.Controls.Add(this.textBox_maxRate5);
+            this.panel7.Controls.Add(this.textBox_maxAccel4);
+            this.panel7.Controls.Add(this.textBox_maxRate4);
+            this.panel7.Controls.Add(this.textBox_maxAccel3);
+            this.panel7.Controls.Add(this.textBox_maxRate3);
+            this.panel7.Controls.Add(this.textBox_maxAccel2);
+            this.panel7.Controls.Add(this.textBox_maxRate2);
+            this.panel7.Controls.Add(this.textBox_maxAccel1);
             this.panel7.Controls.Add(this.label76);
             this.panel7.Controls.Add(this.button_calculate);
             this.panel7.Controls.Add(this.label75);
@@ -1269,16 +1329,16 @@
             this.panel7.Controls.Add(this.buttonSinuSeqExecute);
             this.panel7.Location = new System.Drawing.Point(1057, 282);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(456, 542);
+            this.panel7.Size = new System.Drawing.Size(443, 531);
             this.panel7.TabIndex = 17;
             // 
             // button_calculate
             // 
-            this.button_calculate.Location = new System.Drawing.Point(259, 502);
+            this.button_calculate.Location = new System.Drawing.Point(283, 485);
             this.button_calculate.Name = "button_calculate";
-            this.button_calculate.Size = new System.Drawing.Size(75, 23);
+            this.button_calculate.Size = new System.Drawing.Size(99, 33);
             this.button_calculate.TabIndex = 24;
-            this.button_calculate.Text = "Calculate";
+            this.button_calculate.Text = "Calculate Max";
             this.button_calculate.UseVisualStyleBackColor = true;
             this.button_calculate.Click += new System.EventHandler(this.button_calculate_Click);
             // 
@@ -1293,7 +1353,7 @@
             // 
             // textBox_maxRate1
             // 
-            this.textBox_maxRate1.Location = new System.Drawing.Point(283, 84);
+            this.textBox_maxRate1.Location = new System.Drawing.Point(283, 83);
             this.textBox_maxRate1.Name = "textBox_maxRate1";
             this.textBox_maxRate1.Size = new System.Drawing.Size(51, 20);
             this.textBox_maxRate1.TabIndex = 97;
@@ -1302,7 +1362,7 @@
             // label74
             // 
             this.label74.AutoSize = true;
-            this.label74.Location = new System.Drawing.Point(2, 475);
+            this.label74.Location = new System.Drawing.Point(2, 462);
             this.label74.Name = "label74";
             this.label74.Size = new System.Drawing.Size(22, 13);
             this.label74.TabIndex = 96;
@@ -1310,7 +1370,7 @@
             // 
             // textBoxSeqCycle16
             // 
-            this.textBoxSeqCycle16.Location = new System.Drawing.Point(207, 471);
+            this.textBoxSeqCycle16.Location = new System.Drawing.Point(207, 458);
             this.textBoxSeqCycle16.Name = "textBoxSeqCycle16";
             this.textBoxSeqCycle16.Size = new System.Drawing.Size(51, 20);
             this.textBoxSeqCycle16.TabIndex = 95;
@@ -1318,7 +1378,7 @@
             // 
             // textBoxSeqMag16
             // 
-            this.textBoxSeqMag16.Location = new System.Drawing.Point(22, 472);
+            this.textBoxSeqMag16.Location = new System.Drawing.Point(26, 459);
             this.textBoxSeqMag16.Name = "textBoxSeqMag16";
             this.textBoxSeqMag16.Size = new System.Drawing.Size(51, 20);
             this.textBoxSeqMag16.TabIndex = 94;
@@ -1326,7 +1386,7 @@
             // 
             // textBoxSeqFreq16
             // 
-            this.textBoxSeqFreq16.Location = new System.Drawing.Point(113, 471);
+            this.textBoxSeqFreq16.Location = new System.Drawing.Point(113, 458);
             this.textBoxSeqFreq16.Name = "textBoxSeqFreq16";
             this.textBoxSeqFreq16.Size = new System.Drawing.Size(51, 20);
             this.textBoxSeqFreq16.TabIndex = 93;
@@ -1335,7 +1395,7 @@
             // label73
             // 
             this.label73.AutoSize = true;
-            this.label73.Location = new System.Drawing.Point(2, 449);
+            this.label73.Location = new System.Drawing.Point(2, 437);
             this.label73.Name = "label73";
             this.label73.Size = new System.Drawing.Size(22, 13);
             this.label73.TabIndex = 92;
@@ -1343,7 +1403,7 @@
             // 
             // textBoxSeqCycle15
             // 
-            this.textBoxSeqCycle15.Location = new System.Drawing.Point(207, 445);
+            this.textBoxSeqCycle15.Location = new System.Drawing.Point(207, 433);
             this.textBoxSeqCycle15.Name = "textBoxSeqCycle15";
             this.textBoxSeqCycle15.Size = new System.Drawing.Size(51, 20);
             this.textBoxSeqCycle15.TabIndex = 91;
@@ -1351,7 +1411,7 @@
             // 
             // textBoxSeqMag15
             // 
-            this.textBoxSeqMag15.Location = new System.Drawing.Point(22, 446);
+            this.textBoxSeqMag15.Location = new System.Drawing.Point(26, 434);
             this.textBoxSeqMag15.Name = "textBoxSeqMag15";
             this.textBoxSeqMag15.Size = new System.Drawing.Size(51, 20);
             this.textBoxSeqMag15.TabIndex = 90;
@@ -1359,7 +1419,7 @@
             // 
             // textBoxSeqFreq15
             // 
-            this.textBoxSeqFreq15.Location = new System.Drawing.Point(113, 445);
+            this.textBoxSeqFreq15.Location = new System.Drawing.Point(113, 433);
             this.textBoxSeqFreq15.Name = "textBoxSeqFreq15";
             this.textBoxSeqFreq15.Size = new System.Drawing.Size(51, 20);
             this.textBoxSeqFreq15.TabIndex = 89;
@@ -1368,7 +1428,7 @@
             // label72
             // 
             this.label72.AutoSize = true;
-            this.label72.Location = new System.Drawing.Point(2, 423);
+            this.label72.Location = new System.Drawing.Point(2, 412);
             this.label72.Name = "label72";
             this.label72.Size = new System.Drawing.Size(22, 13);
             this.label72.TabIndex = 88;
@@ -1376,7 +1436,7 @@
             // 
             // textBoxSeqCycle14
             // 
-            this.textBoxSeqCycle14.Location = new System.Drawing.Point(207, 419);
+            this.textBoxSeqCycle14.Location = new System.Drawing.Point(207, 408);
             this.textBoxSeqCycle14.Name = "textBoxSeqCycle14";
             this.textBoxSeqCycle14.Size = new System.Drawing.Size(51, 20);
             this.textBoxSeqCycle14.TabIndex = 87;
@@ -1384,7 +1444,7 @@
             // 
             // textBoxSeqMag14
             // 
-            this.textBoxSeqMag14.Location = new System.Drawing.Point(22, 420);
+            this.textBoxSeqMag14.Location = new System.Drawing.Point(26, 409);
             this.textBoxSeqMag14.Name = "textBoxSeqMag14";
             this.textBoxSeqMag14.Size = new System.Drawing.Size(51, 20);
             this.textBoxSeqMag14.TabIndex = 86;
@@ -1392,7 +1452,7 @@
             // 
             // textBoxSeqFreq14
             // 
-            this.textBoxSeqFreq14.Location = new System.Drawing.Point(113, 419);
+            this.textBoxSeqFreq14.Location = new System.Drawing.Point(113, 408);
             this.textBoxSeqFreq14.Name = "textBoxSeqFreq14";
             this.textBoxSeqFreq14.Size = new System.Drawing.Size(51, 20);
             this.textBoxSeqFreq14.TabIndex = 85;
@@ -1401,7 +1461,7 @@
             // label71
             // 
             this.label71.AutoSize = true;
-            this.label71.Location = new System.Drawing.Point(2, 397);
+            this.label71.Location = new System.Drawing.Point(2, 387);
             this.label71.Name = "label71";
             this.label71.Size = new System.Drawing.Size(22, 13);
             this.label71.TabIndex = 84;
@@ -1409,7 +1469,7 @@
             // 
             // textBoxSeqCycle13
             // 
-            this.textBoxSeqCycle13.Location = new System.Drawing.Point(207, 393);
+            this.textBoxSeqCycle13.Location = new System.Drawing.Point(207, 383);
             this.textBoxSeqCycle13.Name = "textBoxSeqCycle13";
             this.textBoxSeqCycle13.Size = new System.Drawing.Size(51, 20);
             this.textBoxSeqCycle13.TabIndex = 83;
@@ -1417,7 +1477,7 @@
             // 
             // textBoxSeqMag13
             // 
-            this.textBoxSeqMag13.Location = new System.Drawing.Point(22, 394);
+            this.textBoxSeqMag13.Location = new System.Drawing.Point(26, 384);
             this.textBoxSeqMag13.Name = "textBoxSeqMag13";
             this.textBoxSeqMag13.Size = new System.Drawing.Size(51, 20);
             this.textBoxSeqMag13.TabIndex = 82;
@@ -1425,7 +1485,7 @@
             // 
             // textBoxSeqFreq13
             // 
-            this.textBoxSeqFreq13.Location = new System.Drawing.Point(113, 393);
+            this.textBoxSeqFreq13.Location = new System.Drawing.Point(113, 383);
             this.textBoxSeqFreq13.Name = "textBoxSeqFreq13";
             this.textBoxSeqFreq13.Size = new System.Drawing.Size(51, 20);
             this.textBoxSeqFreq13.TabIndex = 81;
@@ -1434,7 +1494,7 @@
             // label70
             // 
             this.label70.AutoSize = true;
-            this.label70.Location = new System.Drawing.Point(1, 371);
+            this.label70.Location = new System.Drawing.Point(1, 362);
             this.label70.Name = "label70";
             this.label70.Size = new System.Drawing.Size(22, 13);
             this.label70.TabIndex = 80;
@@ -1442,7 +1502,7 @@
             // 
             // textBoxSeqCycle12
             // 
-            this.textBoxSeqCycle12.Location = new System.Drawing.Point(206, 367);
+            this.textBoxSeqCycle12.Location = new System.Drawing.Point(206, 358);
             this.textBoxSeqCycle12.Name = "textBoxSeqCycle12";
             this.textBoxSeqCycle12.Size = new System.Drawing.Size(51, 20);
             this.textBoxSeqCycle12.TabIndex = 79;
@@ -1450,7 +1510,7 @@
             // 
             // textBoxSeqMag12
             // 
-            this.textBoxSeqMag12.Location = new System.Drawing.Point(21, 368);
+            this.textBoxSeqMag12.Location = new System.Drawing.Point(25, 359);
             this.textBoxSeqMag12.Name = "textBoxSeqMag12";
             this.textBoxSeqMag12.Size = new System.Drawing.Size(51, 20);
             this.textBoxSeqMag12.TabIndex = 78;
@@ -1458,7 +1518,7 @@
             // 
             // textBoxSeqFreq12
             // 
-            this.textBoxSeqFreq12.Location = new System.Drawing.Point(112, 367);
+            this.textBoxSeqFreq12.Location = new System.Drawing.Point(112, 358);
             this.textBoxSeqFreq12.Name = "textBoxSeqFreq12";
             this.textBoxSeqFreq12.Size = new System.Drawing.Size(51, 20);
             this.textBoxSeqFreq12.TabIndex = 77;
@@ -1467,7 +1527,7 @@
             // label69
             // 
             this.label69.AutoSize = true;
-            this.label69.Location = new System.Drawing.Point(2, 345);
+            this.label69.Location = new System.Drawing.Point(2, 337);
             this.label69.Name = "label69";
             this.label69.Size = new System.Drawing.Size(22, 13);
             this.label69.TabIndex = 76;
@@ -1475,7 +1535,7 @@
             // 
             // textBoxSeqCycle11
             // 
-            this.textBoxSeqCycle11.Location = new System.Drawing.Point(207, 341);
+            this.textBoxSeqCycle11.Location = new System.Drawing.Point(207, 333);
             this.textBoxSeqCycle11.Name = "textBoxSeqCycle11";
             this.textBoxSeqCycle11.Size = new System.Drawing.Size(51, 20);
             this.textBoxSeqCycle11.TabIndex = 75;
@@ -1483,7 +1543,7 @@
             // 
             // textBoxSeqMag11
             // 
-            this.textBoxSeqMag11.Location = new System.Drawing.Point(22, 342);
+            this.textBoxSeqMag11.Location = new System.Drawing.Point(26, 334);
             this.textBoxSeqMag11.Name = "textBoxSeqMag11";
             this.textBoxSeqMag11.Size = new System.Drawing.Size(51, 20);
             this.textBoxSeqMag11.TabIndex = 74;
@@ -1491,7 +1551,7 @@
             // 
             // textBoxSeqFreq11
             // 
-            this.textBoxSeqFreq11.Location = new System.Drawing.Point(113, 341);
+            this.textBoxSeqFreq11.Location = new System.Drawing.Point(113, 333);
             this.textBoxSeqFreq11.Name = "textBoxSeqFreq11";
             this.textBoxSeqFreq11.Size = new System.Drawing.Size(51, 20);
             this.textBoxSeqFreq11.TabIndex = 73;
@@ -1500,7 +1560,7 @@
             // label68
             // 
             this.label68.AutoSize = true;
-            this.label68.Location = new System.Drawing.Point(2, 319);
+            this.label68.Location = new System.Drawing.Point(2, 312);
             this.label68.Name = "label68";
             this.label68.Size = new System.Drawing.Size(22, 13);
             this.label68.TabIndex = 72;
@@ -1508,7 +1568,7 @@
             // 
             // textBoxSeqCycle10
             // 
-            this.textBoxSeqCycle10.Location = new System.Drawing.Point(207, 315);
+            this.textBoxSeqCycle10.Location = new System.Drawing.Point(207, 308);
             this.textBoxSeqCycle10.Name = "textBoxSeqCycle10";
             this.textBoxSeqCycle10.Size = new System.Drawing.Size(51, 20);
             this.textBoxSeqCycle10.TabIndex = 71;
@@ -1516,7 +1576,7 @@
             // 
             // textBoxSeqMag10
             // 
-            this.textBoxSeqMag10.Location = new System.Drawing.Point(22, 316);
+            this.textBoxSeqMag10.Location = new System.Drawing.Point(26, 309);
             this.textBoxSeqMag10.Name = "textBoxSeqMag10";
             this.textBoxSeqMag10.Size = new System.Drawing.Size(51, 20);
             this.textBoxSeqMag10.TabIndex = 70;
@@ -1524,7 +1584,7 @@
             // 
             // textBoxSeqFreq10
             // 
-            this.textBoxSeqFreq10.Location = new System.Drawing.Point(113, 315);
+            this.textBoxSeqFreq10.Location = new System.Drawing.Point(113, 308);
             this.textBoxSeqFreq10.Name = "textBoxSeqFreq10";
             this.textBoxSeqFreq10.Size = new System.Drawing.Size(51, 20);
             this.textBoxSeqFreq10.TabIndex = 69;
@@ -1533,7 +1593,7 @@
             // label67
             // 
             this.label67.AutoSize = true;
-            this.label67.Location = new System.Drawing.Point(2, 293);
+            this.label67.Location = new System.Drawing.Point(2, 287);
             this.label67.Name = "label67";
             this.label67.Size = new System.Drawing.Size(16, 13);
             this.label67.TabIndex = 68;
@@ -1541,7 +1601,7 @@
             // 
             // textBoxSeqCycle9
             // 
-            this.textBoxSeqCycle9.Location = new System.Drawing.Point(207, 289);
+            this.textBoxSeqCycle9.Location = new System.Drawing.Point(207, 283);
             this.textBoxSeqCycle9.Name = "textBoxSeqCycle9";
             this.textBoxSeqCycle9.Size = new System.Drawing.Size(51, 20);
             this.textBoxSeqCycle9.TabIndex = 67;
@@ -1549,7 +1609,7 @@
             // 
             // textBoxSeqMag9
             // 
-            this.textBoxSeqMag9.Location = new System.Drawing.Point(22, 290);
+            this.textBoxSeqMag9.Location = new System.Drawing.Point(26, 284);
             this.textBoxSeqMag9.Name = "textBoxSeqMag9";
             this.textBoxSeqMag9.Size = new System.Drawing.Size(51, 20);
             this.textBoxSeqMag9.TabIndex = 66;
@@ -1557,7 +1617,7 @@
             // 
             // textBoxSeqFreq9
             // 
-            this.textBoxSeqFreq9.Location = new System.Drawing.Point(113, 289);
+            this.textBoxSeqFreq9.Location = new System.Drawing.Point(113, 283);
             this.textBoxSeqFreq9.Name = "textBoxSeqFreq9";
             this.textBoxSeqFreq9.Size = new System.Drawing.Size(51, 20);
             this.textBoxSeqFreq9.TabIndex = 65;
@@ -1566,7 +1626,7 @@
             // label66
             // 
             this.label66.AutoSize = true;
-            this.label66.Location = new System.Drawing.Point(2, 267);
+            this.label66.Location = new System.Drawing.Point(2, 262);
             this.label66.Name = "label66";
             this.label66.Size = new System.Drawing.Size(16, 13);
             this.label66.TabIndex = 64;
@@ -1574,7 +1634,7 @@
             // 
             // textBoxSeqCycle8
             // 
-            this.textBoxSeqCycle8.Location = new System.Drawing.Point(207, 263);
+            this.textBoxSeqCycle8.Location = new System.Drawing.Point(207, 258);
             this.textBoxSeqCycle8.Name = "textBoxSeqCycle8";
             this.textBoxSeqCycle8.Size = new System.Drawing.Size(51, 20);
             this.textBoxSeqCycle8.TabIndex = 63;
@@ -1582,7 +1642,7 @@
             // 
             // textBoxSeqMag8
             // 
-            this.textBoxSeqMag8.Location = new System.Drawing.Point(22, 264);
+            this.textBoxSeqMag8.Location = new System.Drawing.Point(26, 259);
             this.textBoxSeqMag8.Name = "textBoxSeqMag8";
             this.textBoxSeqMag8.Size = new System.Drawing.Size(51, 20);
             this.textBoxSeqMag8.TabIndex = 62;
@@ -1590,7 +1650,7 @@
             // 
             // textBoxSeqFreq8
             // 
-            this.textBoxSeqFreq8.Location = new System.Drawing.Point(113, 263);
+            this.textBoxSeqFreq8.Location = new System.Drawing.Point(113, 258);
             this.textBoxSeqFreq8.Name = "textBoxSeqFreq8";
             this.textBoxSeqFreq8.Size = new System.Drawing.Size(51, 20);
             this.textBoxSeqFreq8.TabIndex = 61;
@@ -1599,7 +1659,7 @@
             // label65
             // 
             this.label65.AutoSize = true;
-            this.label65.Location = new System.Drawing.Point(2, 241);
+            this.label65.Location = new System.Drawing.Point(2, 237);
             this.label65.Name = "label65";
             this.label65.Size = new System.Drawing.Size(16, 13);
             this.label65.TabIndex = 60;
@@ -1607,7 +1667,7 @@
             // 
             // textBoxSeqCycle7
             // 
-            this.textBoxSeqCycle7.Location = new System.Drawing.Point(207, 237);
+            this.textBoxSeqCycle7.Location = new System.Drawing.Point(207, 233);
             this.textBoxSeqCycle7.Name = "textBoxSeqCycle7";
             this.textBoxSeqCycle7.Size = new System.Drawing.Size(51, 20);
             this.textBoxSeqCycle7.TabIndex = 59;
@@ -1615,7 +1675,7 @@
             // 
             // textBoxSeqMag7
             // 
-            this.textBoxSeqMag7.Location = new System.Drawing.Point(22, 238);
+            this.textBoxSeqMag7.Location = new System.Drawing.Point(26, 234);
             this.textBoxSeqMag7.Name = "textBoxSeqMag7";
             this.textBoxSeqMag7.Size = new System.Drawing.Size(51, 20);
             this.textBoxSeqMag7.TabIndex = 58;
@@ -1623,7 +1683,7 @@
             // 
             // textBoxSeqFreq7
             // 
-            this.textBoxSeqFreq7.Location = new System.Drawing.Point(113, 237);
+            this.textBoxSeqFreq7.Location = new System.Drawing.Point(113, 233);
             this.textBoxSeqFreq7.Name = "textBoxSeqFreq7";
             this.textBoxSeqFreq7.Size = new System.Drawing.Size(51, 20);
             this.textBoxSeqFreq7.TabIndex = 57;
@@ -1632,7 +1692,7 @@
             // label49
             // 
             this.label49.AutoSize = true;
-            this.label49.Location = new System.Drawing.Point(2, 215);
+            this.label49.Location = new System.Drawing.Point(2, 212);
             this.label49.Name = "label49";
             this.label49.Size = new System.Drawing.Size(16, 13);
             this.label49.TabIndex = 56;
@@ -1640,7 +1700,7 @@
             // 
             // textBoxSeqCycle6
             // 
-            this.textBoxSeqCycle6.Location = new System.Drawing.Point(207, 211);
+            this.textBoxSeqCycle6.Location = new System.Drawing.Point(207, 208);
             this.textBoxSeqCycle6.Name = "textBoxSeqCycle6";
             this.textBoxSeqCycle6.Size = new System.Drawing.Size(51, 20);
             this.textBoxSeqCycle6.TabIndex = 55;
@@ -1648,7 +1708,7 @@
             // 
             // textBoxSeqMag6
             // 
-            this.textBoxSeqMag6.Location = new System.Drawing.Point(22, 212);
+            this.textBoxSeqMag6.Location = new System.Drawing.Point(26, 209);
             this.textBoxSeqMag6.Name = "textBoxSeqMag6";
             this.textBoxSeqMag6.Size = new System.Drawing.Size(51, 20);
             this.textBoxSeqMag6.TabIndex = 54;
@@ -1656,7 +1716,7 @@
             // 
             // textBoxSeqFreq6
             // 
-            this.textBoxSeqFreq6.Location = new System.Drawing.Point(113, 211);
+            this.textBoxSeqFreq6.Location = new System.Drawing.Point(113, 208);
             this.textBoxSeqFreq6.Name = "textBoxSeqFreq6";
             this.textBoxSeqFreq6.Size = new System.Drawing.Size(51, 20);
             this.textBoxSeqFreq6.TabIndex = 53;
@@ -1665,7 +1725,7 @@
             // label33
             // 
             this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(2, 189);
+            this.label33.Location = new System.Drawing.Point(2, 187);
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(16, 13);
             this.label33.TabIndex = 52;
@@ -1673,7 +1733,7 @@
             // 
             // textBoxSeqCycle5
             // 
-            this.textBoxSeqCycle5.Location = new System.Drawing.Point(207, 185);
+            this.textBoxSeqCycle5.Location = new System.Drawing.Point(207, 183);
             this.textBoxSeqCycle5.Name = "textBoxSeqCycle5";
             this.textBoxSeqCycle5.Size = new System.Drawing.Size(51, 20);
             this.textBoxSeqCycle5.TabIndex = 51;
@@ -1681,7 +1741,7 @@
             // 
             // textBoxSeqMag5
             // 
-            this.textBoxSeqMag5.Location = new System.Drawing.Point(22, 186);
+            this.textBoxSeqMag5.Location = new System.Drawing.Point(26, 184);
             this.textBoxSeqMag5.Name = "textBoxSeqMag5";
             this.textBoxSeqMag5.Size = new System.Drawing.Size(51, 20);
             this.textBoxSeqMag5.TabIndex = 50;
@@ -1689,7 +1749,7 @@
             // 
             // textBoxSeqFreq5
             // 
-            this.textBoxSeqFreq5.Location = new System.Drawing.Point(113, 185);
+            this.textBoxSeqFreq5.Location = new System.Drawing.Point(113, 183);
             this.textBoxSeqFreq5.Name = "textBoxSeqFreq5";
             this.textBoxSeqFreq5.Size = new System.Drawing.Size(51, 20);
             this.textBoxSeqFreq5.TabIndex = 49;
@@ -1698,7 +1758,7 @@
             // label32
             // 
             this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(2, 163);
+            this.label32.Location = new System.Drawing.Point(2, 162);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(16, 13);
             this.label32.TabIndex = 48;
@@ -1706,7 +1766,7 @@
             // 
             // textBoxSeqCycle4
             // 
-            this.textBoxSeqCycle4.Location = new System.Drawing.Point(207, 159);
+            this.textBoxSeqCycle4.Location = new System.Drawing.Point(207, 158);
             this.textBoxSeqCycle4.Name = "textBoxSeqCycle4";
             this.textBoxSeqCycle4.Size = new System.Drawing.Size(51, 20);
             this.textBoxSeqCycle4.TabIndex = 47;
@@ -1714,7 +1774,7 @@
             // 
             // textBoxSeqMag4
             // 
-            this.textBoxSeqMag4.Location = new System.Drawing.Point(22, 160);
+            this.textBoxSeqMag4.Location = new System.Drawing.Point(26, 159);
             this.textBoxSeqMag4.Name = "textBoxSeqMag4";
             this.textBoxSeqMag4.Size = new System.Drawing.Size(51, 20);
             this.textBoxSeqMag4.TabIndex = 46;
@@ -1722,7 +1782,7 @@
             // 
             // textBoxSeqFreq4
             // 
-            this.textBoxSeqFreq4.Location = new System.Drawing.Point(113, 159);
+            this.textBoxSeqFreq4.Location = new System.Drawing.Point(113, 158);
             this.textBoxSeqFreq4.Name = "textBoxSeqFreq4";
             this.textBoxSeqFreq4.Size = new System.Drawing.Size(51, 20);
             this.textBoxSeqFreq4.TabIndex = 45;
@@ -1731,7 +1791,7 @@
             // label64
             // 
             this.label64.AutoSize = true;
-            this.label64.Location = new System.Drawing.Point(1, 139);
+            this.label64.Location = new System.Drawing.Point(1, 137);
             this.label64.Name = "label64";
             this.label64.Size = new System.Drawing.Size(16, 13);
             this.label64.TabIndex = 44;
@@ -1739,7 +1799,7 @@
             // 
             // textBoxSeqCycle3
             // 
-            this.textBoxSeqCycle3.Location = new System.Drawing.Point(206, 135);
+            this.textBoxSeqCycle3.Location = new System.Drawing.Point(206, 133);
             this.textBoxSeqCycle3.Name = "textBoxSeqCycle3";
             this.textBoxSeqCycle3.Size = new System.Drawing.Size(51, 20);
             this.textBoxSeqCycle3.TabIndex = 43;
@@ -1747,7 +1807,7 @@
             // 
             // textBoxSeqMag3
             // 
-            this.textBoxSeqMag3.Location = new System.Drawing.Point(21, 136);
+            this.textBoxSeqMag3.Location = new System.Drawing.Point(25, 134);
             this.textBoxSeqMag3.Name = "textBoxSeqMag3";
             this.textBoxSeqMag3.Size = new System.Drawing.Size(51, 20);
             this.textBoxSeqMag3.TabIndex = 42;
@@ -1755,7 +1815,7 @@
             // 
             // textBoxSeqFreq3
             // 
-            this.textBoxSeqFreq3.Location = new System.Drawing.Point(112, 135);
+            this.textBoxSeqFreq3.Location = new System.Drawing.Point(112, 133);
             this.textBoxSeqFreq3.Name = "textBoxSeqFreq3";
             this.textBoxSeqFreq3.Size = new System.Drawing.Size(51, 20);
             this.textBoxSeqFreq3.TabIndex = 41;
@@ -1764,7 +1824,7 @@
             // label63
             // 
             this.label63.AutoSize = true;
-            this.label63.Location = new System.Drawing.Point(1, 113);
+            this.label63.Location = new System.Drawing.Point(1, 112);
             this.label63.Name = "label63";
             this.label63.Size = new System.Drawing.Size(16, 13);
             this.label63.TabIndex = 40;
@@ -1772,7 +1832,7 @@
             // 
             // textBoxSeqCycle2
             // 
-            this.textBoxSeqCycle2.Location = new System.Drawing.Point(206, 109);
+            this.textBoxSeqCycle2.Location = new System.Drawing.Point(206, 108);
             this.textBoxSeqCycle2.Name = "textBoxSeqCycle2";
             this.textBoxSeqCycle2.Size = new System.Drawing.Size(51, 20);
             this.textBoxSeqCycle2.TabIndex = 39;
@@ -1780,7 +1840,7 @@
             // 
             // textBoxSeqMag2
             // 
-            this.textBoxSeqMag2.Location = new System.Drawing.Point(21, 110);
+            this.textBoxSeqMag2.Location = new System.Drawing.Point(25, 109);
             this.textBoxSeqMag2.Name = "textBoxSeqMag2";
             this.textBoxSeqMag2.Size = new System.Drawing.Size(51, 20);
             this.textBoxSeqMag2.TabIndex = 38;
@@ -1788,7 +1848,7 @@
             // 
             // textBoxSeqFreq2
             // 
-            this.textBoxSeqFreq2.Location = new System.Drawing.Point(112, 109);
+            this.textBoxSeqFreq2.Location = new System.Drawing.Point(112, 108);
             this.textBoxSeqFreq2.Name = "textBoxSeqFreq2";
             this.textBoxSeqFreq2.Size = new System.Drawing.Size(51, 20);
             this.textBoxSeqFreq2.TabIndex = 37;
@@ -1831,7 +1891,7 @@
             // 
             // textBoxSeqMag1
             // 
-            this.textBoxSeqMag1.Location = new System.Drawing.Point(21, 84);
+            this.textBoxSeqMag1.Location = new System.Drawing.Point(25, 84);
             this.textBoxSeqMag1.Name = "textBoxSeqMag1";
             this.textBoxSeqMag1.Size = new System.Drawing.Size(51, 20);
             this.textBoxSeqMag1.TabIndex = 33;
@@ -2154,13 +2214,253 @@
             this.label76.TabIndex = 99;
             this.label76.Text = "MaxAcceleration:";
             // 
-            // textBox1
+            // textBox_maxAccel1
             // 
-            this.textBox1.Location = new System.Drawing.Point(352, 84);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(51, 20);
-            this.textBox1.TabIndex = 100;
-            this.textBox1.Text = "0";
+            this.textBox_maxAccel1.Location = new System.Drawing.Point(352, 83);
+            this.textBox_maxAccel1.Name = "textBox_maxAccel1";
+            this.textBox_maxAccel1.Size = new System.Drawing.Size(51, 20);
+            this.textBox_maxAccel1.TabIndex = 100;
+            this.textBox_maxAccel1.Text = "0";
+            // 
+            // textBox_maxAccel2
+            // 
+            this.textBox_maxAccel2.Location = new System.Drawing.Point(352, 108);
+            this.textBox_maxAccel2.Name = "textBox_maxAccel2";
+            this.textBox_maxAccel2.Size = new System.Drawing.Size(51, 20);
+            this.textBox_maxAccel2.TabIndex = 102;
+            this.textBox_maxAccel2.Text = "0";
+            // 
+            // textBox_maxRate2
+            // 
+            this.textBox_maxRate2.Location = new System.Drawing.Point(284, 108);
+            this.textBox_maxRate2.Name = "textBox_maxRate2";
+            this.textBox_maxRate2.Size = new System.Drawing.Size(51, 20);
+            this.textBox_maxRate2.TabIndex = 101;
+            this.textBox_maxRate2.Text = "0";
+            // 
+            // textBox_maxAccel3
+            // 
+            this.textBox_maxAccel3.Location = new System.Drawing.Point(352, 133);
+            this.textBox_maxAccel3.Name = "textBox_maxAccel3";
+            this.textBox_maxAccel3.Size = new System.Drawing.Size(51, 20);
+            this.textBox_maxAccel3.TabIndex = 104;
+            this.textBox_maxAccel3.Text = "0";
+            // 
+            // textBox_maxRate3
+            // 
+            this.textBox_maxRate3.Location = new System.Drawing.Point(283, 133);
+            this.textBox_maxRate3.Name = "textBox_maxRate3";
+            this.textBox_maxRate3.Size = new System.Drawing.Size(51, 20);
+            this.textBox_maxRate3.TabIndex = 103;
+            this.textBox_maxRate3.Text = "0";
+            // 
+            // textBox_maxAccel4
+            // 
+            this.textBox_maxAccel4.Location = new System.Drawing.Point(352, 158);
+            this.textBox_maxAccel4.Name = "textBox_maxAccel4";
+            this.textBox_maxAccel4.Size = new System.Drawing.Size(51, 20);
+            this.textBox_maxAccel4.TabIndex = 106;
+            this.textBox_maxAccel4.Text = "0";
+            // 
+            // textBox_maxRate4
+            // 
+            this.textBox_maxRate4.Location = new System.Drawing.Point(283, 158);
+            this.textBox_maxRate4.Name = "textBox_maxRate4";
+            this.textBox_maxRate4.Size = new System.Drawing.Size(51, 20);
+            this.textBox_maxRate4.TabIndex = 105;
+            this.textBox_maxRate4.Text = "0";
+            // 
+            // textBox_maxAccel5
+            // 
+            this.textBox_maxAccel5.Location = new System.Drawing.Point(352, 183);
+            this.textBox_maxAccel5.Name = "textBox_maxAccel5";
+            this.textBox_maxAccel5.Size = new System.Drawing.Size(51, 20);
+            this.textBox_maxAccel5.TabIndex = 108;
+            this.textBox_maxAccel5.Text = "0";
+            // 
+            // textBox_maxRate5
+            // 
+            this.textBox_maxRate5.Location = new System.Drawing.Point(283, 183);
+            this.textBox_maxRate5.Name = "textBox_maxRate5";
+            this.textBox_maxRate5.Size = new System.Drawing.Size(51, 20);
+            this.textBox_maxRate5.TabIndex = 107;
+            this.textBox_maxRate5.Text = "0";
+            // 
+            // textBox_maxAccel6
+            // 
+            this.textBox_maxAccel6.Location = new System.Drawing.Point(352, 208);
+            this.textBox_maxAccel6.Name = "textBox_maxAccel6";
+            this.textBox_maxAccel6.Size = new System.Drawing.Size(51, 20);
+            this.textBox_maxAccel6.TabIndex = 110;
+            this.textBox_maxAccel6.Text = "0";
+            // 
+            // textBox_maxRate6
+            // 
+            this.textBox_maxRate6.Location = new System.Drawing.Point(283, 208);
+            this.textBox_maxRate6.Name = "textBox_maxRate6";
+            this.textBox_maxRate6.Size = new System.Drawing.Size(51, 20);
+            this.textBox_maxRate6.TabIndex = 109;
+            this.textBox_maxRate6.Text = "0";
+            // 
+            // textBox_maxAccel7
+            // 
+            this.textBox_maxAccel7.Location = new System.Drawing.Point(352, 233);
+            this.textBox_maxAccel7.Name = "textBox_maxAccel7";
+            this.textBox_maxAccel7.Size = new System.Drawing.Size(51, 20);
+            this.textBox_maxAccel7.TabIndex = 112;
+            this.textBox_maxAccel7.Text = "0";
+            // 
+            // textBox_maxRate7
+            // 
+            this.textBox_maxRate7.Location = new System.Drawing.Point(283, 233);
+            this.textBox_maxRate7.Name = "textBox_maxRate7";
+            this.textBox_maxRate7.Size = new System.Drawing.Size(51, 20);
+            this.textBox_maxRate7.TabIndex = 111;
+            this.textBox_maxRate7.Text = "0";
+            // 
+            // textBox_maxAccel8
+            // 
+            this.textBox_maxAccel8.Location = new System.Drawing.Point(352, 258);
+            this.textBox_maxAccel8.Name = "textBox_maxAccel8";
+            this.textBox_maxAccel8.Size = new System.Drawing.Size(51, 20);
+            this.textBox_maxAccel8.TabIndex = 114;
+            this.textBox_maxAccel8.Text = "0";
+            // 
+            // textBox_maxRate8
+            // 
+            this.textBox_maxRate8.Location = new System.Drawing.Point(283, 258);
+            this.textBox_maxRate8.Name = "textBox_maxRate8";
+            this.textBox_maxRate8.Size = new System.Drawing.Size(51, 20);
+            this.textBox_maxRate8.TabIndex = 113;
+            this.textBox_maxRate8.Text = "0";
+            // 
+            // textBox_maxAccel9
+            // 
+            this.textBox_maxAccel9.Location = new System.Drawing.Point(352, 283);
+            this.textBox_maxAccel9.Name = "textBox_maxAccel9";
+            this.textBox_maxAccel9.Size = new System.Drawing.Size(51, 20);
+            this.textBox_maxAccel9.TabIndex = 116;
+            this.textBox_maxAccel9.Text = "0";
+            // 
+            // textBox_maxRate9
+            // 
+            this.textBox_maxRate9.Location = new System.Drawing.Point(283, 283);
+            this.textBox_maxRate9.Name = "textBox_maxRate9";
+            this.textBox_maxRate9.Size = new System.Drawing.Size(51, 20);
+            this.textBox_maxRate9.TabIndex = 115;
+            this.textBox_maxRate9.Text = "0";
+            // 
+            // textBox_maxAccel10
+            // 
+            this.textBox_maxAccel10.Location = new System.Drawing.Point(352, 308);
+            this.textBox_maxAccel10.Name = "textBox_maxAccel10";
+            this.textBox_maxAccel10.Size = new System.Drawing.Size(51, 20);
+            this.textBox_maxAccel10.TabIndex = 118;
+            this.textBox_maxAccel10.Text = "0";
+            // 
+            // textBox_maxRate10
+            // 
+            this.textBox_maxRate10.Location = new System.Drawing.Point(283, 308);
+            this.textBox_maxRate10.Name = "textBox_maxRate10";
+            this.textBox_maxRate10.Size = new System.Drawing.Size(51, 20);
+            this.textBox_maxRate10.TabIndex = 117;
+            this.textBox_maxRate10.Text = "0";
+            // 
+            // textBox_maxAccel11
+            // 
+            this.textBox_maxAccel11.Location = new System.Drawing.Point(352, 333);
+            this.textBox_maxAccel11.Name = "textBox_maxAccel11";
+            this.textBox_maxAccel11.Size = new System.Drawing.Size(51, 20);
+            this.textBox_maxAccel11.TabIndex = 120;
+            this.textBox_maxAccel11.Text = "0";
+            // 
+            // textBox_maxRate11
+            // 
+            this.textBox_maxRate11.Location = new System.Drawing.Point(283, 333);
+            this.textBox_maxRate11.Name = "textBox_maxRate11";
+            this.textBox_maxRate11.Size = new System.Drawing.Size(51, 20);
+            this.textBox_maxRate11.TabIndex = 119;
+            this.textBox_maxRate11.Text = "0";
+            // 
+            // textBox_maxAccel12
+            // 
+            this.textBox_maxAccel12.Location = new System.Drawing.Point(352, 358);
+            this.textBox_maxAccel12.Name = "textBox_maxAccel12";
+            this.textBox_maxAccel12.Size = new System.Drawing.Size(51, 20);
+            this.textBox_maxAccel12.TabIndex = 122;
+            this.textBox_maxAccel12.Text = "0";
+            // 
+            // textBox_maxRate12
+            // 
+            this.textBox_maxRate12.Location = new System.Drawing.Point(283, 358);
+            this.textBox_maxRate12.Name = "textBox_maxRate12";
+            this.textBox_maxRate12.Size = new System.Drawing.Size(51, 20);
+            this.textBox_maxRate12.TabIndex = 121;
+            this.textBox_maxRate12.Text = "0";
+            // 
+            // textBox_maxAccel13
+            // 
+            this.textBox_maxAccel13.Location = new System.Drawing.Point(352, 383);
+            this.textBox_maxAccel13.Name = "textBox_maxAccel13";
+            this.textBox_maxAccel13.Size = new System.Drawing.Size(51, 20);
+            this.textBox_maxAccel13.TabIndex = 124;
+            this.textBox_maxAccel13.Text = "0";
+            // 
+            // textBox_maxRate13
+            // 
+            this.textBox_maxRate13.Location = new System.Drawing.Point(283, 383);
+            this.textBox_maxRate13.Name = "textBox_maxRate13";
+            this.textBox_maxRate13.Size = new System.Drawing.Size(51, 20);
+            this.textBox_maxRate13.TabIndex = 123;
+            this.textBox_maxRate13.Text = "0";
+            // 
+            // textBox_maxAccel14
+            // 
+            this.textBox_maxAccel14.Location = new System.Drawing.Point(352, 408);
+            this.textBox_maxAccel14.Name = "textBox_maxAccel14";
+            this.textBox_maxAccel14.Size = new System.Drawing.Size(51, 20);
+            this.textBox_maxAccel14.TabIndex = 126;
+            this.textBox_maxAccel14.Text = "0";
+            // 
+            // textBox_maxRate14
+            // 
+            this.textBox_maxRate14.Location = new System.Drawing.Point(283, 408);
+            this.textBox_maxRate14.Name = "textBox_maxRate14";
+            this.textBox_maxRate14.Size = new System.Drawing.Size(51, 20);
+            this.textBox_maxRate14.TabIndex = 125;
+            this.textBox_maxRate14.Text = "0";
+            // 
+            // textBox_maxAccel15
+            // 
+            this.textBox_maxAccel15.Location = new System.Drawing.Point(352, 433);
+            this.textBox_maxAccel15.Name = "textBox_maxAccel15";
+            this.textBox_maxAccel15.Size = new System.Drawing.Size(51, 20);
+            this.textBox_maxAccel15.TabIndex = 128;
+            this.textBox_maxAccel15.Text = "0";
+            // 
+            // textBox_maxRate15
+            // 
+            this.textBox_maxRate15.Location = new System.Drawing.Point(283, 433);
+            this.textBox_maxRate15.Name = "textBox_maxRate15";
+            this.textBox_maxRate15.Size = new System.Drawing.Size(51, 20);
+            this.textBox_maxRate15.TabIndex = 127;
+            this.textBox_maxRate15.Text = "0";
+            // 
+            // textBox_maxAccel16
+            // 
+            this.textBox_maxAccel16.Location = new System.Drawing.Point(352, 458);
+            this.textBox_maxAccel16.Name = "textBox_maxAccel16";
+            this.textBox_maxAccel16.Size = new System.Drawing.Size(51, 20);
+            this.textBox_maxAccel16.TabIndex = 130;
+            this.textBox_maxAccel16.Text = "0";
+            // 
+            // textBox_maxRate16
+            // 
+            this.textBox_maxRate16.Location = new System.Drawing.Point(283, 458);
+            this.textBox_maxRate16.Name = "textBox_maxRate16";
+            this.textBox_maxRate16.Size = new System.Drawing.Size(51, 20);
+            this.textBox_maxRate16.TabIndex = 129;
+            this.textBox_maxRate16.Text = "0";
             // 
             // Form1
             // 
@@ -2411,8 +2711,38 @@
         private System.Windows.Forms.Label label75;
         private System.Windows.Forms.TextBox textBox_maxRate1;
         private System.Windows.Forms.Button button_calculate;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBox_maxAccel1;
         private System.Windows.Forms.Label label76;
+        private System.Windows.Forms.TextBox textBox_maxAccel16;
+        private System.Windows.Forms.TextBox textBox_maxRate16;
+        private System.Windows.Forms.TextBox textBox_maxAccel15;
+        private System.Windows.Forms.TextBox textBox_maxRate15;
+        private System.Windows.Forms.TextBox textBox_maxAccel14;
+        private System.Windows.Forms.TextBox textBox_maxRate14;
+        private System.Windows.Forms.TextBox textBox_maxAccel13;
+        private System.Windows.Forms.TextBox textBox_maxRate13;
+        private System.Windows.Forms.TextBox textBox_maxAccel12;
+        private System.Windows.Forms.TextBox textBox_maxRate12;
+        private System.Windows.Forms.TextBox textBox_maxAccel11;
+        private System.Windows.Forms.TextBox textBox_maxRate11;
+        private System.Windows.Forms.TextBox textBox_maxAccel10;
+        private System.Windows.Forms.TextBox textBox_maxRate10;
+        private System.Windows.Forms.TextBox textBox_maxAccel9;
+        private System.Windows.Forms.TextBox textBox_maxRate9;
+        private System.Windows.Forms.TextBox textBox_maxAccel8;
+        private System.Windows.Forms.TextBox textBox_maxRate8;
+        private System.Windows.Forms.TextBox textBox_maxAccel7;
+        private System.Windows.Forms.TextBox textBox_maxRate7;
+        private System.Windows.Forms.TextBox textBox_maxAccel6;
+        private System.Windows.Forms.TextBox textBox_maxRate6;
+        private System.Windows.Forms.TextBox textBox_maxAccel5;
+        private System.Windows.Forms.TextBox textBox_maxRate5;
+        private System.Windows.Forms.TextBox textBox_maxAccel4;
+        private System.Windows.Forms.TextBox textBox_maxRate4;
+        private System.Windows.Forms.TextBox textBox_maxAccel3;
+        private System.Windows.Forms.TextBox textBox_maxRate3;
+        private System.Windows.Forms.TextBox textBox_maxAccel2;
+        private System.Windows.Forms.TextBox textBox_maxRate2;
     }
 }
 

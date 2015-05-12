@@ -55,7 +55,11 @@ namespace AcutrolVS2010
         int seqCount = 0; //count the sequence to be executed
         double zeroTrigger = 0.1;//0.01;
         TextBox[] textBoxSeqMag = new TextBox[16];
-        
+        TextBox[] textBoxSeqFreq = new TextBox[16];
+        TextBox[] textBoxSeqCycle = new TextBox[16];
+        TextBox[] textBox_maxRate = new TextBox[16];
+        TextBox[] textBox_maxAccel = new TextBox[16];
+
         //Machine representation codes
         String Position = "P";
         String Rate = "R";
@@ -186,72 +190,111 @@ namespace AcutrolVS2010
             //dataTable = new DataTable();
 
 
+            InitTextBoxControls();
+        }
+
+        private void InitTextBoxControls()
+        {
+            //The parameters of Sinusoidal Inputs
+            ////Magnitude
             textBoxSeqMag[0] = (TextBox)textBoxSeqMag1;
+            textBoxSeqMag[1] = (TextBox)textBoxSeqMag2;
+            textBoxSeqMag[2] = (TextBox)textBoxSeqMag3;
+            textBoxSeqMag[3] = (TextBox)textBoxSeqMag4;
+            textBoxSeqMag[4] = (TextBox)textBoxSeqMag5;
+            textBoxSeqMag[5] = (TextBox)textBoxSeqMag6;
+            textBoxSeqMag[6] = (TextBox)textBoxSeqMag7;
+            textBoxSeqMag[7] = (TextBox)textBoxSeqMag8;
+            textBoxSeqMag[8] = (TextBox)textBoxSeqMag9;
+            textBoxSeqMag[9] = (TextBox)textBoxSeqMag10;
+            textBoxSeqMag[10] = (TextBox)textBoxSeqMag11;
+            textBoxSeqMag[11] = (TextBox)textBoxSeqMag12;
+            textBoxSeqMag[12] = (TextBox)textBoxSeqMag13;
+            textBoxSeqMag[13] = (TextBox)textBoxSeqMag14;
+            textBoxSeqMag[14] = (TextBox)textBoxSeqMag15;
+            textBoxSeqMag[15] = (TextBox)textBoxSeqMag16;
+            //Frequency
+            textBoxSeqFreq[0] = (TextBox)textBoxSeqFreq1;
+            textBoxSeqFreq[1] = (TextBox)textBoxSeqFreq2;
+            textBoxSeqFreq[2] = (TextBox)textBoxSeqFreq3;
+            textBoxSeqFreq[3] = (TextBox)textBoxSeqFreq4;
+            textBoxSeqFreq[4] = (TextBox)textBoxSeqFreq5;
+            textBoxSeqFreq[5] = (TextBox)textBoxSeqFreq6;
+            textBoxSeqFreq[6] = (TextBox)textBoxSeqFreq7;
+            textBoxSeqFreq[7] = (TextBox)textBoxSeqFreq8;
+            textBoxSeqFreq[8] = (TextBox)textBoxSeqFreq9;
+            textBoxSeqFreq[9] = (TextBox)textBoxSeqFreq10;
+            textBoxSeqFreq[10] = (TextBox)textBoxSeqFreq11;
+            textBoxSeqFreq[11] = (TextBox)textBoxSeqFreq12;
+            textBoxSeqFreq[12] = (TextBox)textBoxSeqFreq13;
+            textBoxSeqFreq[13] = (TextBox)textBoxSeqFreq14;
+            textBoxSeqFreq[14] = (TextBox)textBoxSeqFreq15;
+            textBoxSeqFreq[15] = (TextBox)textBoxSeqFreq16;
+            //Cycle Count
+            textBoxSeqCycle[0] = (TextBox)textBoxSeqCycle1;
+            textBoxSeqCycle[1] = (TextBox)textBoxSeqCycle2;
+            textBoxSeqCycle[2] = (TextBox)textBoxSeqCycle3;
+            textBoxSeqCycle[3] = (TextBox)textBoxSeqCycle4;
+            textBoxSeqCycle[4] = (TextBox)textBoxSeqCycle5;
+            textBoxSeqCycle[5] = (TextBox)textBoxSeqCycle6;
+            textBoxSeqCycle[6] = (TextBox)textBoxSeqCycle7;
+            textBoxSeqCycle[7] = (TextBox)textBoxSeqCycle8;
+            textBoxSeqCycle[8] = (TextBox)textBoxSeqCycle9;
+            textBoxSeqCycle[9] = (TextBox)textBoxSeqCycle10;
+            textBoxSeqCycle[10] = (TextBox)textBoxSeqCycle11;
+            textBoxSeqCycle[11] = (TextBox)textBoxSeqCycle12;
+            textBoxSeqCycle[12] = (TextBox)textBoxSeqCycle13;
+            textBoxSeqCycle[13] = (TextBox)textBoxSeqCycle14;
+            textBoxSeqCycle[14] = (TextBox)textBoxSeqCycle15;
+            textBoxSeqCycle[15] = (TextBox)textBoxSeqCycle16;
+
+            //Tried to refactor but not working
+            //textBoxSeqMag[i] = (TextBox)this.Controls.Find(string.Format("textBoxSeqMag{0}", i), false).FirstOrDefault();
+
+            //Max Rate
+            textBox_maxRate[0] = (TextBox) textBox_maxRate1;
+            textBox_maxRate[1] = (TextBox) textBox_maxRate2;
+            textBox_maxRate[2] = (TextBox) textBox_maxRate3;
+            textBox_maxRate[3] = (TextBox) textBox_maxRate4;
+            textBox_maxRate[4] = (TextBox) textBox_maxRate5;
+            textBox_maxRate[5] = (TextBox) textBox_maxRate6;
+            textBox_maxRate[6] = (TextBox) textBox_maxRate7;
+            textBox_maxRate[7] = (TextBox) textBox_maxRate8;
+            textBox_maxRate[8] = (TextBox) textBox_maxRate9;
+            textBox_maxRate[9] = (TextBox) textBox_maxRate10;
+            textBox_maxRate[10] = (TextBox) textBox_maxRate11;
+            textBox_maxRate[11] = (TextBox) textBox_maxRate12;
+            textBox_maxRate[12] = (TextBox) textBox_maxRate13;
+            textBox_maxRate[13] = (TextBox) textBox_maxRate14;
+            textBox_maxRate[14] = (TextBox) textBox_maxRate15;
+            textBox_maxRate[15] = (TextBox) textBox_maxRate16;
+            //Max Acceleration
+            textBox_maxAccel[0] = (TextBox) textBox_maxAccel1;
+            textBox_maxAccel[1] = (TextBox) textBox_maxAccel2;
+            textBox_maxAccel[2] = (TextBox) textBox_maxAccel3;
+            textBox_maxAccel[3] = (TextBox) textBox_maxAccel4;
+            textBox_maxAccel[4] = (TextBox) textBox_maxAccel5;
+            textBox_maxAccel[5] = (TextBox) textBox_maxAccel6;
+            textBox_maxAccel[6] = (TextBox) textBox_maxAccel7;
+            textBox_maxAccel[7] = (TextBox) textBox_maxAccel8;
+            textBox_maxAccel[8] = (TextBox) textBox_maxAccel9;
+            textBox_maxAccel[9] = (TextBox) textBox_maxAccel10;
+            textBox_maxAccel[10] = (TextBox) textBox_maxAccel11;
+            textBox_maxAccel[11] = (TextBox) textBox_maxAccel12;
+            textBox_maxAccel[12] = (TextBox) textBox_maxAccel13;
+            textBox_maxAccel[13] = (TextBox) textBox_maxAccel14;
+            textBox_maxAccel[14] = (TextBox) textBox_maxAccel15;
+            textBox_maxAccel[15] = (TextBox) textBox_maxAccel16;
         }
 
         private void ReadSinosoidalParas()
         {
-            //The parameters of Sinusoidal Inputs
-            ////Magnitude
-            TargetMagn[0] = Convert.ToDouble(textBoxSeqMag1.Text);
-            TargetMagn[1] = Convert.ToDouble(textBoxSeqMag2.Text);
-            TargetMagn[2] = Convert.ToDouble(textBoxSeqMag3.Text);
-            TargetMagn[3] = Convert.ToDouble(textBoxSeqMag4.Text);
-            TargetMagn[4] = Convert.ToDouble(textBoxSeqMag5.Text);
-            TargetMagn[5] = Convert.ToDouble(textBoxSeqMag6.Text);
-            TargetMagn[6] = Convert.ToDouble(textBoxSeqMag7.Text);
-            TargetMagn[7] = Convert.ToDouble(textBoxSeqMag8.Text);
-            TargetMagn[8] = Convert.ToDouble(textBoxSeqMag9.Text);
-            TargetMagn[9] = Convert.ToDouble(textBoxSeqMag10.Text);
-            TargetMagn[10] = Convert.ToDouble(textBoxSeqMag11.Text);
-            TargetMagn[11] = Convert.ToDouble(textBoxSeqMag12.Text);
-            TargetMagn[12] = Convert.ToDouble(textBoxSeqMag13.Text);
-            TargetMagn[13] = Convert.ToDouble(textBoxSeqMag14.Text);
-            TargetMagn[14] = Convert.ToDouble(textBoxSeqMag15.Text);
-            TargetMagn[15] = Convert.ToDouble(textBoxSeqMag16.Text);
-
-            ////Tried to refactor but it's not working
-            //for (int i = 0; i < 16; i++)
-            //{
-            //    //textBoxSeqMag[i] = (TextBox)this.Controls.Find(string.Format("textBoxSeqMag{0}", i), false).FirstOrDefault();
-            //    //TargetMagn[i] = Convert.ToDouble(textBoxSeqMag[i].Text);
-            //}
-            //textBoxSeqMag[0] = (TextBox)textBoxSeqMag1;
-
-            //Frequency
-            TargetFreq[0] = Convert.ToDouble(textBoxSeqFreq1.Text);
-            TargetFreq[1] = Convert.ToDouble(textBoxSeqFreq2.Text);
-            TargetFreq[2] = Convert.ToDouble(textBoxSeqFreq3.Text);
-            TargetFreq[3] = Convert.ToDouble(textBoxSeqFreq4.Text);
-            TargetFreq[4] = Convert.ToDouble(textBoxSeqFreq5.Text);
-            TargetFreq[5] = Convert.ToDouble(textBoxSeqFreq6.Text);
-            TargetFreq[6] = Convert.ToDouble(textBoxSeqFreq7.Text);
-            TargetFreq[7] = Convert.ToDouble(textBoxSeqFreq8.Text);
-            TargetFreq[8] = Convert.ToDouble(textBoxSeqFreq9.Text);
-            TargetFreq[9] = Convert.ToDouble(textBoxSeqFreq10.Text);
-            TargetFreq[10] = Convert.ToDouble(textBoxSeqFreq11.Text);
-            TargetFreq[11] = Convert.ToDouble(textBoxSeqFreq12.Text);
-            TargetFreq[12] = Convert.ToDouble(textBoxSeqFreq13.Text);
-            TargetFreq[13] = Convert.ToDouble(textBoxSeqFreq14.Text);
-            TargetFreq[14] = Convert.ToDouble(textBoxSeqFreq15.Text);
-            TargetFreq[15] = Convert.ToDouble(textBoxSeqFreq16.Text);
-            //Cycle Count
-            TargetCycleCount[0] = Convert.ToDouble(textBoxSeqCycle1.Text);
-            TargetCycleCount[1] = Convert.ToDouble(textBoxSeqCycle2.Text);
-            TargetCycleCount[2] = Convert.ToDouble(textBoxSeqCycle3.Text);
-            TargetCycleCount[3] = Convert.ToDouble(textBoxSeqCycle4.Text);
-            TargetCycleCount[4] = Convert.ToDouble(textBoxSeqCycle5.Text);
-            TargetCycleCount[5] = Convert.ToDouble(textBoxSeqCycle6.Text);
-            TargetCycleCount[6] = Convert.ToDouble(textBoxSeqCycle7.Text);
-            TargetCycleCount[7] = Convert.ToDouble(textBoxSeqCycle8.Text);
-            TargetCycleCount[8] = Convert.ToDouble(textBoxSeqCycle9.Text);
-            TargetCycleCount[9] = Convert.ToDouble(textBoxSeqCycle10.Text);
-            TargetCycleCount[10] = Convert.ToDouble(textBoxSeqCycle11.Text);
-            TargetCycleCount[11] = Convert.ToDouble(textBoxSeqCycle12.Text);
-            TargetCycleCount[12] = Convert.ToDouble(textBoxSeqCycle13.Text);
-            TargetCycleCount[13] = Convert.ToDouble(textBoxSeqCycle14.Text);
-            TargetCycleCount[14] = Convert.ToDouble(textBoxSeqCycle15.Text);
-            TargetCycleCount[15] = Convert.ToDouble(textBoxSeqCycle16.Text);
+            for (int i = 0; i < 16; i++)
+            {
+                TargetMagn[i] = Convert.ToDouble(textBoxSeqMag[i].Text);
+                TargetFreq[i] = Convert.ToDouble(textBoxSeqFreq[i].Text);
+                TargetCycleCount[i] = Convert.ToDouble(textBoxSeqCycle[i].Text);
+            }
         }
 
         private void initComboBoxWindows(ComboBox targetComboBox)
@@ -1522,7 +1565,12 @@ namespace AcutrolVS2010
         private void button_calculate_Click(object sender, EventArgs e)
         {
             ReadSinosoidalParas();
-            textBox_maxRate1.Text = (TargetMagn[0] * 2 * 3.14 * TargetFreq[0]).ToString();
+            for (int i = 0; i < 16; i++)
+            {
+                textBox_maxRate[i].Text = Math.Round((TargetMagn[i] * 2 * 3.14 * TargetFreq[i]),2).ToString();
+                textBox_maxAccel[i].Text = Math.Round((TargetMagn[i] * Math.Pow(2 * 3.14 * TargetFreq[i], 2)),2).ToString();
+            }
+            
         }
 
     }
