@@ -280,6 +280,27 @@
             this.coil_chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.coil_chart_A4 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.button_initialization = new System.Windows.Forms.Button();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.label84 = new System.Windows.Forms.Label();
+            this.button_pulse_Execute = new System.Windows.Forms.Button();
+            this.label85 = new System.Windows.Forms.Label();
+            this.label86 = new System.Windows.Forms.Label();
+            this.label87 = new System.Windows.Forms.Label();
+            this.textBox_pulse_accelLimit = new System.Windows.Forms.TextBox();
+            this.label88 = new System.Windows.Forms.Label();
+            this.label89 = new System.Windows.Forms.Label();
+            this.textBox_pulse_rateLimit = new System.Windows.Forms.TextBox();
+            this.label90 = new System.Windows.Forms.Label();
+            this.textBox_pulse_travelDist = new System.Windows.Forms.TextBox();
+            this.label91 = new System.Windows.Forms.Label();
+            this.textBox_cycle_num = new System.Windows.Forms.TextBox();
+            this.CheckPulseZeroPosition = new System.Windows.Forms.Timer(this.components);
+            this.CheckPulseTargetPosition = new System.Windows.Forms.Timer(this.components);
+            this.label92 = new System.Windows.Forms.Label();
+            this.textBox_currentCycleCounter = new System.Windows.Forms.TextBox();
+            this.textBox_pulse_delay = new System.Windows.Forms.TextBox();
+            this.label93 = new System.Windows.Forms.Label();
+            this.label94 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -291,6 +312,7 @@
             this.panel8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.coil_chart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.coil_chart_A4)).BeginInit();
+            this.panel9.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -2606,11 +2628,203 @@
             this.button_initialization.UseVisualStyleBackColor = true;
             this.button_initialization.Click += new System.EventHandler(this.button_initialization_Click);
             // 
+            // panel9
+            // 
+            this.panel9.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel9.Controls.Add(this.label94);
+            this.panel9.Controls.Add(this.textBox_pulse_delay);
+            this.panel9.Controls.Add(this.label93);
+            this.panel9.Controls.Add(this.label92);
+            this.panel9.Controls.Add(this.textBox_currentCycleCounter);
+            this.panel9.Controls.Add(this.label91);
+            this.panel9.Controls.Add(this.textBox_cycle_num);
+            this.panel9.Controls.Add(this.label84);
+            this.panel9.Controls.Add(this.button_pulse_Execute);
+            this.panel9.Controls.Add(this.label85);
+            this.panel9.Controls.Add(this.label86);
+            this.panel9.Controls.Add(this.label87);
+            this.panel9.Controls.Add(this.textBox_pulse_accelLimit);
+            this.panel9.Controls.Add(this.label88);
+            this.panel9.Controls.Add(this.label89);
+            this.panel9.Controls.Add(this.textBox_pulse_rateLimit);
+            this.panel9.Controls.Add(this.label90);
+            this.panel9.Controls.Add(this.textBox_pulse_travelDist);
+            this.panel9.Location = new System.Drawing.Point(716, 750);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(322, 138);
+            this.panel9.TabIndex = 28;
+            // 
+            // label84
+            // 
+            this.label84.AutoSize = true;
+            this.label84.Location = new System.Drawing.Point(266, 50);
+            this.label84.Name = "label84";
+            this.label84.Size = new System.Drawing.Size(49, 13);
+            this.label84.TabIndex = 22;
+            this.label84.Text = "Deg/s^2";
+            // 
+            // button_pulse_Execute
+            // 
+            this.button_pulse_Execute.Location = new System.Drawing.Point(227, 103);
+            this.button_pulse_Execute.Name = "button_pulse_Execute";
+            this.button_pulse_Execute.Size = new System.Drawing.Size(75, 23);
+            this.button_pulse_Execute.TabIndex = 10;
+            this.button_pulse_Execute.Text = "Execute";
+            this.button_pulse_Execute.UseVisualStyleBackColor = true;
+            this.button_pulse_Execute.Click += new System.EventHandler(this.button_pulse_Execute_Click);
+            // 
+            // label85
+            // 
+            this.label85.AutoSize = true;
+            this.label85.Location = new System.Drawing.Point(147, 52);
+            this.label85.Name = "label85";
+            this.label85.Size = new System.Drawing.Size(37, 13);
+            this.label85.TabIndex = 21;
+            this.label85.Text = "Deg/s";
+            // 
+            // label86
+            // 
+            this.label86.AutoSize = true;
+            this.label86.Location = new System.Drawing.Point(68, 52);
+            this.label86.Name = "label86";
+            this.label86.Size = new System.Drawing.Size(27, 13);
+            this.label86.TabIndex = 20;
+            this.label86.Text = "Deg";
+            // 
+            // label87
+            // 
+            this.label87.AutoSize = true;
+            this.label87.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label87.Location = new System.Drawing.Point(3, 10);
+            this.label87.Name = "label87";
+            this.label87.Size = new System.Drawing.Size(106, 13);
+            this.label87.TabIndex = 9;
+            this.label87.Text = "Pulse Commends:";
+            // 
+            // textBox_pulse_accelLimit
+            // 
+            this.textBox_pulse_accelLimit.Location = new System.Drawing.Point(204, 49);
+            this.textBox_pulse_accelLimit.Name = "textBox_pulse_accelLimit";
+            this.textBox_pulse_accelLimit.Size = new System.Drawing.Size(56, 20);
+            this.textBox_pulse_accelLimit.TabIndex = 5;
+            this.textBox_pulse_accelLimit.Text = "1000";
+            // 
+            // label88
+            // 
+            this.label88.AutoSize = true;
+            this.label88.Location = new System.Drawing.Point(101, 29);
+            this.label88.Name = "label88";
+            this.label88.Size = new System.Drawing.Size(57, 13);
+            this.label88.TabIndex = 2;
+            this.label88.Text = "Rate Limit:";
+            // 
+            // label89
+            // 
+            this.label89.AutoSize = true;
+            this.label89.Location = new System.Drawing.Point(10, 29);
+            this.label89.Name = "label89";
+            this.label89.Size = new System.Drawing.Size(85, 13);
+            this.label89.TabIndex = 8;
+            this.label89.Text = "Travel Distance:";
+            // 
+            // textBox_pulse_rateLimit
+            // 
+            this.textBox_pulse_rateLimit.Location = new System.Drawing.Point(104, 49);
+            this.textBox_pulse_rateLimit.Name = "textBox_pulse_rateLimit";
+            this.textBox_pulse_rateLimit.Size = new System.Drawing.Size(42, 20);
+            this.textBox_pulse_rateLimit.TabIndex = 3;
+            this.textBox_pulse_rateLimit.Text = "150";
+            // 
+            // label90
+            // 
+            this.label90.AutoSize = true;
+            this.label90.Location = new System.Drawing.Point(199, 29);
+            this.label90.Name = "label90";
+            this.label90.Size = new System.Drawing.Size(61, 13);
+            this.label90.TabIndex = 7;
+            this.label90.Text = "Accel Limit:";
+            // 
+            // textBox_pulse_travelDist
+            // 
+            this.textBox_pulse_travelDist.Location = new System.Drawing.Point(12, 49);
+            this.textBox_pulse_travelDist.Name = "textBox_pulse_travelDist";
+            this.textBox_pulse_travelDist.Size = new System.Drawing.Size(55, 20);
+            this.textBox_pulse_travelDist.TabIndex = 4;
+            this.textBox_pulse_travelDist.Text = "90";
+            // 
+            // label91
+            // 
+            this.label91.AutoSize = true;
+            this.label91.Location = new System.Drawing.Point(9, 84);
+            this.label91.Name = "label91";
+            this.label91.Size = new System.Drawing.Size(76, 13);
+            this.label91.TabIndex = 24;
+            this.label91.Text = "Cycle Number:";
+            // 
+            // textBox_cycle_num
+            // 
+            this.textBox_cycle_num.Location = new System.Drawing.Point(13, 103);
+            this.textBox_cycle_num.Name = "textBox_cycle_num";
+            this.textBox_cycle_num.Size = new System.Drawing.Size(55, 20);
+            this.textBox_cycle_num.TabIndex = 23;
+            this.textBox_cycle_num.Text = "5";
+            // 
+            // CheckPulseZeroPosition
+            // 
+            this.CheckPulseZeroPosition.Tick += new System.EventHandler(this.CheckPulseZeroPosition_Tick);
+            // 
+            // CheckPulseTargetPosition
+            // 
+            this.CheckPulseTargetPosition.Tick += new System.EventHandler(this.CheckPulseTargetPosition_Tick);
+            // 
+            // label92
+            // 
+            this.label92.AutoSize = true;
+            this.label92.Location = new System.Drawing.Point(100, 84);
+            this.label92.Name = "label92";
+            this.label92.Size = new System.Drawing.Size(113, 13);
+            this.label92.TabIndex = 26;
+            this.label92.Text = "Current Cycle Counter:";
+            // 
+            // textBox_currentCycleCounter
+            // 
+            this.textBox_currentCycleCounter.Location = new System.Drawing.Point(104, 103);
+            this.textBox_currentCycleCounter.Name = "textBox_currentCycleCounter";
+            this.textBox_currentCycleCounter.Size = new System.Drawing.Size(55, 20);
+            this.textBox_currentCycleCounter.TabIndex = 25;
+            // 
+            // textBox_pulse_delay
+            // 
+            this.textBox_pulse_delay.Location = new System.Drawing.Point(206, 6);
+            this.textBox_pulse_delay.Name = "textBox_pulse_delay";
+            this.textBox_pulse_delay.Size = new System.Drawing.Size(56, 20);
+            this.textBox_pulse_delay.TabIndex = 27;
+            this.textBox_pulse_delay.Text = "1";
+            // 
+            // label93
+            // 
+            this.label93.AutoSize = true;
+            this.label93.Location = new System.Drawing.Point(157, 8);
+            this.label93.Name = "label93";
+            this.label93.Size = new System.Drawing.Size(37, 13);
+            this.label93.TabIndex = 28;
+            this.label93.Text = "Delay:";
+            // 
+            // label94
+            // 
+            this.label94.AutoSize = true;
+            this.label94.Location = new System.Drawing.Point(268, 8);
+            this.label94.Name = "label94";
+            this.label94.Size = new System.Drawing.Size(26, 13);
+            this.label94.TabIndex = 29;
+            this.label94.Text = "Sec";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1573, 1065);
+            this.Controls.Add(this.panel9);
             this.Controls.Add(this.button_initialization);
             this.Controls.Add(this.coil_chart_A4);
             this.Controls.Add(this.coil_chart);
@@ -2656,6 +2870,8 @@
             this.panel8.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.coil_chart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.coil_chart_A4)).EndInit();
+            this.panel9.ResumeLayout(false);
+            this.panel9.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2900,6 +3116,27 @@
         private System.Windows.Forms.Label label82;
         private System.Windows.Forms.Button button_sinusoidal_stop;
         private System.Windows.Forms.Button button_simpleCommend_stop;
+        private System.Windows.Forms.Panel panel9;
+        private System.Windows.Forms.Label label84;
+        private System.Windows.Forms.Button button_pulse_Execute;
+        private System.Windows.Forms.Label label85;
+        private System.Windows.Forms.Label label86;
+        private System.Windows.Forms.Label label87;
+        private System.Windows.Forms.TextBox textBox_pulse_accelLimit;
+        private System.Windows.Forms.Label label88;
+        private System.Windows.Forms.Label label89;
+        private System.Windows.Forms.TextBox textBox_pulse_rateLimit;
+        private System.Windows.Forms.Label label90;
+        private System.Windows.Forms.TextBox textBox_pulse_travelDist;
+        private System.Windows.Forms.Label label91;
+        private System.Windows.Forms.TextBox textBox_cycle_num;
+        private System.Windows.Forms.Timer CheckPulseZeroPosition;
+        private System.Windows.Forms.Timer CheckPulseTargetPosition;
+        private System.Windows.Forms.Label label92;
+        private System.Windows.Forms.TextBox textBox_currentCycleCounter;
+        private System.Windows.Forms.TextBox textBox_pulse_delay;
+        private System.Windows.Forms.Label label93;
+        private System.Windows.Forms.Label label94;
     }
 }
 

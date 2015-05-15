@@ -25,11 +25,112 @@ namespace AcutrolVS2010
      * 3.display coil signals takes too long time (reduce size)
      * 
      * DEBUG LIST:
-     * 1. ECP87
-     * 2. Counter (return real time - sometimes causing errors)
+     * 1. Counter (return real time - sometimes causing errors)
      * 
      * Additional:
-     * 1.setup abs limits (1140,1141) and ROT/LIN.
+     * 1.setup abs limits (1140,1141) and ROT/LIN?
+     * 
+     * 
+     * 
+Author: Hai Tang
+Email: william.sea@jhu.edu
+Phone: 937-238-3359
+
+----------------- Where to Find my C# software -----------------
+For Windows 7 Computer: c:\users\vnel\documents\visual studio 2013\Projects
+
+For Windows XP Computer: C:\Documents and Settings\Administrator\Desktop\Acutrol_VS2010
+Shortcut for Visual Studio 2010 on Desktop named: Hai Tang Acutrol Control START HERE THEN LOAD AcutrolVS2010
+
+
+----------------- How to Use my C# software -----------------
+0. For the Windows XP computer;
+1. Turn on Acutrol, in the meanwhile make sure the coil frame is fixed (IMPORTANT);
+2. Click the Visual Studio 2010 icon on Desktop, open project named AcutrolVS2010;
+3. After the Acutrol is totally turned on, run the program (click the green triangle icon);
+4. You can now see the real time chair movement waveform (Chair Position Chart) and it’s position/rate/acceleration values in text boxes (Parameter Reading Section);
+5. Click Initialization (bold) button to set up the ECP environment (default ECP 87);
+	5.1. Note: Do NOT manually rotate the chair or touch the Acutrol touch-screen during the initialization process, otherwise it might not work.
+	5.2. You will hear 4 beeps which takes about 20 seconds in total.
+6. Cut Analog Input by clicking the button named Cut Analog Input if necessary;
+7. The default mode is Position mode. You can switch modes through the drop-down list under "Select Mode";
+8. For executing a sequence of sinusoidal input
+	8.1. Fill the sequence list (magnitude, frequency and number of cycles desired) in the right side of GUI (Sinusoidal Sequences Section).
+	8.2. Fill the Desired Limits for rate and acceleration. The default values are 150 deg/s and 1200 deg/s^2 respectively.
+	8.3. The max rate and max acceleration values can be calculated by clicking Calculation Max button. You can use it to check if any input exceed the limits. If some sequences exceed, a pop up window will show and indicate which sequences exceed.045
+	8.4. For those sequence numbers (1 to 16) not in use, just put 0 in the Number of Cycles text box. Once the program detects one zero in Number of Cycles, all the rest sequences will not be considered, assuming all the rest are zeros as well.
+	8.5. DO NOT put 0 in any frequency text box, instead use a very small number to ensure security (like 0.001 Hz). 
+	8.6. Click Execute button to execute all the sequences with non-zero number of cycles. 
+	8.7. Executability will be checked every time you click Execute button, i.e. if one of the sequence exceeds desired limits, the whole sequences will not be executed and a pop up window is shown to indicate what is wrong;
+	8.8. You can save sequences data by clicking Save to File button after putting a File Name. The default saving path is Deskop/Saved_Sequences
+	8.9. You can read saved sequences by clicking Load Sequences File, after choosing a file, all sequences information will be automatically filled.
+9. The saved chair movement and eye coil data are in folder named Chair_Results and Coil_Results respectively, in Desktop;
+	9.1. Once you start executing a sinusoidal sequence, the chair movements and eye coild signals will automatically start recording, and after all the sequences are executed, the recording automatically stops.
+	9.2. You can manually Start and Stop eye coil recording by clicking corresponding buttons
+10. Display. 
+	10.1.For saved chair movement data and eye coil data, You can Select File to Display by clicking corresponding buttons.
+	10.2.You can Return Real Time to stop displaying saved data to display real time waveform.
+	10.3.You can click on the chart and select certain area to zoom in and see the details.
+11. The Parameter Limitations Settings section is used to set and show all the limits. Fill the text boxes and click Execute to set limits, click Reset to put all values to zero.
+12. The Simple Commends section is used to send simple position/rate/acceleration commends, make sure to select the correct Mode before you click Execute.
+	12.0. Auto Interlock Close is turned off for this section for safety purpose. 
+	12.1. Manual operation after initialization:
+	12.2. Set limits: type in the limits you desire in the Parameter Limitation Settings section, and click Execute. The default values are 20 Deg/s for rate and 50 Deg/s^2 for acceleration.
+	12.3. Check limits (IMPORTANT): click Show Limits in Windows Settings section, and check the values in the displaying windows of Acutrol to make sure they've been correctly set. Or you can choose each window to dispay any limit value you want by selecting from the drop-down lists.501100
+	12.4. Interlock close: click the Interlock Close button to close interlock. It will slowly return the 0 position (under the default position mode).
+	12.5. Select Mode: select the desired mode (position, relative/absolute rate).
+	12.6. Type in a number in the textbox corresponding to your selected mode. For position and rate mode, type values in Position Commend and Rate Commend under Simple Commends section. 
+	12.7. Click Execute. The chair starts moving according to your limits settings and commends. (Position commends: go to certain position. Rate commends: rotate in positive direction, i.e. Clickwisely, with certain rate).
+	12.8. When you switching between position and rate modes, it will remember your last commend. For example, your last position commend is 0 Deg, and then you switch to rate mode with rate commend 20 Deg/s, then you directly switch mode back to position mode, it will go back to 0 position, then you switch back to rate mode, it starts rotating with 20 Deg/s again.
+	12.9. Stop: click the Stop button, which will reset the default limits and go back to 0 position under position mode. Or you can manually go to 0 position under position mode, or set rate value to 0 under rate mode.
+ 	12.10. When you finish, click Interlock Open button.
+13. The Sinusoidal Input section is used to execute sinusoidal input. 
+	13.0. Auto Interlock Close is turned off for this section for safety purpose. 
+	13.1. manual operations after initialization:
+	13.2. Set limits for default 20 Deg/s for rate and 50 Deg/s^2 for acceleration, check the limits on Acutrol screen by clicking Show Limits.
+	13.3. Click Interlock Close. You must apply lower limits to perform Interlock Close, otherwise it will cause a bumping sound.
+	13.4. Go back to zero position using position mode if it is not in zero position.
+	13.5. Increase Limits (IMPORTANT). The suggested higher value are 150 Deg/s and 1200 Deg/s^2.
+	13.6. Go to Synthesis Mode.
+	13.7. Type in commend for Magnitude, Frequency and Phase under Sinusoidal Input section.
+	13.8. Click Execute, the legality of input will be checked automatically. If the calculated max rate and acceleratio exceed the limit, a pop up window will show and indicate the calculated max values.
+	13.9. Click Stop to slowly stop the chair.
+	13.10. Click Interlock Open.
+14. The Windows Settings section is used to select what to show in the 6 windows on Acutrol. 
+	14.1.The Default shows Estimated Position/Vecocity, FilteredAccelEstimate, ProfilerPosition/Velocity/AccelCommend
+	14.2.The Show Limits shows some representative limits, which are MinimunPositionLimit, RateTripLimit, SynthesisModeVelocity/AccelLimit, VelocityAbsoluteLimit and AbortModeAccelLimit. You can change them to what you want in the code.
+15. Buttons: function for Return Local Mode, Remote Mode, Interlock Close, Interlock Open, Interlock Reset are indicated in button names.
+16. Pulse Inputs:
+	16.1. Currently it is able to rotate the motor with correct pulse inputs using Thread.Sleep(delayTime) to make the delays between pulses, but is will pause all the threads and the recording for chair and coil are also paused.
+	16.2. Need to use System.Timer to do the job for delays. 
+	16.3. I've built the GUI and written all the codes needed. The only thing left is to debug the sysTimer to make the program running correctly.
+	16.4. The related codes are at the end part of the whole codes.
+
+
+----------------- How to Access my Git Repository -----------------
+Visual Studio 2010 Version: https://github.com/williamsea/Acutrol_VS2010
+Visual Studio 2013 Version: https://github.com/williamsea/Acutrol
+
+You can Clone the project or just download the .zip package from website.
+You can follow my updates/changes by checking my commits (https://github.com/williamsea/Acutrol_VS2010/commits/master).
+
+
+----------------- Common Questions and Solutions -----------------
+1. Chair movement waveform jumping zig-zagly without any meanings:
+	Solution: Switch between ECP 4 and ECP 87, repeat several times if it is not solved. If the numerical values are meaningful but the waveform is not responding, do local mode and then back to remote mode.
+2. Buffle overflow
+	Solution: restart the program (click the stop icon on visual studio tool bar to close the form, and then click then start icon).
+
+
+----------------- Additional Related Documents in Server under Hai Tang -----------------
+1. C# Acutrol.docx 
+	-Including information to set up environment for a new computer, like how to install libraries
+	-Including common useful commends
+2. Notebook.docx
+	-Including the daily log
+     * 
+     * 
+     * 
      */
 
     public partial class Form1 : Form
@@ -42,7 +143,7 @@ namespace AcutrolVS2010
         Session mySession = null;
 
         //parameters for sinusoidal input
-        double posReadValue = 1000;//used to check if position has been set back to zero position
+        double posReadValue = 1000;//an arbitray non-zero number used to check if position has been set back to zero position
         double cycleCounter = 0;//used for synthesis mode counting cycles
         //List<double> TargetCycleCount = new List<double>();
         //List<double> TargetMagn = new List<double>();
@@ -138,6 +239,13 @@ namespace AcutrolVS2010
         private DataTable dataTable = null;
         int samplesPerChannel = 100;//reduced to 100 to make the display more smooth (1000); finish 100 samples then callback
         int timingRate = 1000;//otherwise too fast, ADC conversion attempts before previous conversion was completed (10000); actual sampling rate
+
+
+        //parameters for pulse inputs
+        int targetCycleNum = 0;
+        int currentCycleCount = 0;
+        double pulseDelay = 0;
+        string DepartOrReturn;
 
         public Form1()
         {
@@ -431,7 +539,7 @@ namespace AcutrolVS2010
             //responseString = ReadOvarParameter(responseString, OvarRateModeAccLim, textBoxRateModeAccLim); 
         }
 
-        //display position in waveform format
+        //display position in waveform format in real time
         private void DisplayData()
         {
             //Displaying Chair Movement Data
@@ -452,6 +560,7 @@ namespace AcutrolVS2010
                 }
             }
 
+            //Displaying Eye Coil Data
             if (showCoilWaveform == true)
             {
                 DisplayCoilWaveform();
@@ -476,6 +585,7 @@ namespace AcutrolVS2010
                 {
                     for (disp = coilValueCounter - (DispLength); disp < coilValueCounter; disp++)//take representitive sample 1 out of 100 to ensure smooth display
                     {
+                        //use disp/10 so that the unit shown in chart is 1 sec. (Since 1% representative, which is 10 samples per second)
                         this.coil_chart.Series["A3XChannel8"].Points.AddXY((disp / 10).ToString(), coilValArrayReduced[8, disp]);//coilValList[8][disp]);
                         this.coil_chart.Series["A3YChannel9"].Points.AddXY((disp / 10).ToString(), coilValArrayReduced[9, disp]); 
                         this.coil_chart.Series["A3ZChannel10"].Points.AddXY((disp / 10).ToString(), coilValArrayReduced[10, disp]); 
@@ -1130,7 +1240,6 @@ namespace AcutrolVS2010
                 if (TargetCycleCount[seqCount] == 0)//not need to check all the rest sequences with 0 desired cycle numbers
                 {
                     seqCount = totalSequencesNum;// go to the last sequency directly
-                    seqCount = totalSequencesNum;// go to the last sequency directly
                 }
             }
         }
@@ -1752,8 +1861,104 @@ namespace AcutrolVS2010
 
         }
 
+        private void button_pulse_Execute_Click(object sender, EventArgs e)
+        {
+            targetCycleNum = Convert.ToInt16(textBox_cycle_num.Text);
+            currentCycleCount = 0;
+            pulseDelay = Convert.ToDouble(textBox_pulse_delay.Text);
 
+            //open text writer for chair position
+            WriteIntoTxt();
 
+            //start coil recording
+            showCoilWaveform = true;
+            StartCoilSignalRecording();
+
+            //set up the timer used for delay between pulses
+            sysTimer = new System.Timers.Timer(1000 * pulseDelay); //so that the time interval = pulseDelay
+            sysTimer.Elapsed += new System.Timers.ElapsedEventHandler(NextPulseAction);
+            sysTimer.AutoReset = false;//true; // false:execute only once. true: keep execute
+
+            Interlock_Close();
+            //Go back to zero position
+            textBoxSetPos.Text = "0";//set 0 commend
+            SelectMode(Position);//go to position mode 
+            comboBoxSelectMode.Text = "Position Mode";
+            updateLimits("20", "50");//set default limits
+            CommendParameter(Position, textBoxSetPos);//execute commend
+
+            CheckPulseZeroPosition.Enabled = true;
+        }
+
+        private void NextPulseAction(object source, System.Timers.ElapsedEventArgs e)
+        {
+            if (DepartOrReturn == "Depart")
+            {
+                //Go to Target Position
+                textBoxSetPos.Text = textBox_pulse_travelDist.Text;
+                currentCycleCount++;
+                textBox_currentCycleCounter.Text = currentCycleCount.ToString();
+                updateLimits(textBox_pulse_rateLimit.Text, textBox_pulse_accelLimit.Text);//update limits
+
+                //System.Threading.Thread.Sleep(50);//wait for calculation and write
+                CommendParameter(Position, textBoxSetPos);//execute commend
+                //CheckPulseZeroPosition.Enabled = false;
+                CheckPulseTargetPosition.Enabled = true;
+                //System.Threading.Thread.Sleep(1000);//wait for 1s
+                sysTimer.Enabled = false;
+            }
+            else if (DepartOrReturn == "Return")
+            {
+                //Go back to Zero Position
+                textBoxSetPos.Text = "0";
+                //System.Threading.Thread.Sleep(50);//wait for calculation and write
+                CommendParameter(Position, textBoxSetPos);//execute commend
+                CheckPulseZeroPosition.Enabled = true;
+                //CheckPulseTargetPosition.Enabled = false;
+                //System.Threading.Thread.Sleep(1000);//wait for 1s
+
+                //Stop Criteria (meet the number of total cycles)
+                if (currentCycleCount == targetCycleNum)
+                {
+                    CheckPulseZeroPosition.Enabled = false;
+
+                    Interlock_Open();
+
+                    //stop position recording and dispose
+                    RecordCtr = false;
+                    streamWriter.Close();
+                    fileStream.Close();
+                    seqCount = 0;
+
+                    //stop coil recording
+                    showCoilWaveform = false;
+                    StopCoilSignalRecording();
+                }
+
+                sysTimer.Enabled = false;
+            }
+        }
+
+        private void CheckPulseZeroPosition_Tick(object sender, EventArgs e)
+        {
+            if (Math.Abs(posReadValue) < zeroTrigger)
+            {
+                DepartOrReturn = "Depart";
+                sysTimer.Enabled = true;
+                CheckPulseZeroPosition.Enabled = false;
+            }
+        }
+
+        private void CheckPulseTargetPosition_Tick(object sender, EventArgs e)
+        {
+            double targetPosVal = Convert.ToDouble(textBox_pulse_travelDist.Text);
+            if (Math.Abs(posReadValue-targetPosVal) < zeroTrigger)
+            {
+                DepartOrReturn = "Return";
+                sysTimer.Enabled = true;
+                CheckPulseTargetPosition.Enabled = false;
+            }
+        }
 
     }
 }
