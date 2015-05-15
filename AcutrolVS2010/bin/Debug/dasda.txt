@@ -1,0 +1,9 @@
+System.Windows.Forms.TextBox, Text: 15.9	System.Windows.Forms.TextBox, Text: 1	System.Windows.Forms.TextBox, Text: 20
+System.Windows.Forms.TextBox, Text: 30	System.Windows.Forms.TextBox, Text: 0.5	System.Windows.Forms.TextBox, Text: 20
+System.Windows.Forms.TextBox, Text: 4	System.Windows.Forms.TextBox, Text: 2	System.Windows.Forms.TextBox, Text: 20
+System.Windows.Forms.TextBox, Text: 10	System.Windows.Forms.TextBox, Text: 1	System.Windows.Forms.TextBox, Text: 20
+System.Windows.Forms.TextBox, Text: 0	System.Windows.Forms.TextBox, Text: 0.001	System.Windows.Forms.TextBox, Text: 0
+System.Windows.Forms.TextBox, Text: 0	System.Windows.Forms.TextBox, Text: 0.001	System.Windows.Forms.TextBox, Text: 0
+System.Windows.Forms.TextBox, Text: 0	System.Windows.Forms.TextBox, Text: 0.001	System.Windows.Forms.TextBox, Text: 0
+System.Windows.Forms.TextBox, Text: 0	System.Windows.Forms.TextBox, Text: 0.001	System.Windows.Forms.TextBox, Text: 0
+System.Windows.Forms.TextBox, Text: 0	System.Windows.Forms.TextBox, Text: 0.001	Syste

@@ -59,6 +59,12 @@ namespace AcutrolVS2010
         TextBox[] textBoxSeqCycle = new TextBox[16];
         TextBox[] textBox_maxRate = new TextBox[16];
         TextBox[] textBox_maxAccel = new TextBox[16];
+        Boolean isExecutable = false;
+        string sequencesSavingPath = "C:\\Documents and Settings\\Administrator\\Desktop\\Saved_Sequences";
+        string sequenceReadingPath;
+        FileStream sequenceFileStream;
+        StreamWriter sequenceFileStreamWriter;
+        StreamReader sequenceFileStreamReader; 
 
         //Machine representation codes
         String Position = "P";
@@ -193,6 +199,7 @@ namespace AcutrolVS2010
             InitTextBoxControls();
         }
 
+        #region InitTextBoxControls
         private void InitTextBoxControls()
         {
             //The parameters of Sinusoidal Inputs
@@ -286,6 +293,7 @@ namespace AcutrolVS2010
             textBox_maxAccel[14] = (TextBox) textBox_maxAccel15;
             textBox_maxAccel[15] = (TextBox) textBox_maxAccel16;
         }
+        #endregion
 
         private void ReadSinosoidalParas()
         {
@@ -297,6 +305,7 @@ namespace AcutrolVS2010
             }
         }
 
+        #region initComboBoxWindows
         private void initComboBoxWindows(ComboBox targetComboBox)
         {
             targetComboBox.Text = "---Please Assign Parameters---";
@@ -323,8 +332,8 @@ namespace AcutrolVS2010
             targetComboBox.Items.Add("Velocity Absolute Limit");
             targetComboBox.Items.Add("Accel Absolute Limit");
             targetComboBox.Items.Add("Rate Trip Limit");
-
         }
+        #endregion
 
         private void comboBoxSelectMode_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -587,10 +596,56 @@ namespace AcutrolVS2010
 
         private void ExecuteCommendButton_Click(object sender, EventArgs e)
         {
-            SetAxisParameters();
+            //make variables for legality checking
+            double rateLimit, PosLimitLow, PosLimitHigh, accLimit;
+            double inputPos, inputRate, inputAcc;
+            rateLimit = Convert.ToDouble(textBoxLimitRate.Text);
+            PosLimitLow = Convert.ToDouble(textBoxLimitPosL.Text);
+            PosLimitHigh = Convert.ToDouble(textBoxLimitPosH.Text);
+            accLimit = Convert.ToDouble(textBoxLimitAcc.Text);
+            if (textBoxSetPos.Text == "")
+            {
+                inputPos = 0;
+            }
+            else
+            {
+                inputPos = Convert.ToDouble(textBoxSetPos.Text);
+            }
+            if (textBoxSetRate.Text == "")
+            {
+                inputRate = 0;
+            }
+            else
+            {
+                inputRate = Convert.ToDouble(textBoxSetRate.Text);
+            }
+            if (textBoxSetAcc.Text == "")
+            {
+                inputAcc = 0;
+            }
+            else
+            {
+                inputAcc = Convert.ToDouble(textBoxSetAcc.Text);
+            }
+            //check legality of input
+            if (inputPos > PosLimitHigh || PosLimitHigh < PosLimitLow || inputRate > rateLimit || inputAcc > accLimit)
+            {
+                MessageBox.Show("Exceed Limits!");
+            }
+            else
+            {
+                SetAxisParameters();
+            }  
         }
 
-        
+        private void button_simpleCommend_stop_Click(object sender, EventArgs e)
+        {
+            textBoxSetPos.Text = "0";//set 0 commend
+            SelectMode(Position);//go to position mode 
+            comboBoxSelectMode.Text = "Position Mode";
+            updateLimits("20", "50");//set default limits
+            CommendParameter(Position, textBoxSetPos);//execute commend
+        }
 
         private void ReturnLocalButton_Click(object sender, EventArgs e)
         {
@@ -613,7 +668,33 @@ namespace AcutrolVS2010
 
         private void SinInputButton_Click(object sender, EventArgs e)
         {
-             CommendSinusoidal();
+            //check executability (legal input)
+            double maxRate, maxAccel, rateLimit, AccLimit, inputMag, inputFreq;
+            rateLimit = Convert.ToDouble(textBoxLimitRate.Text);
+            AccLimit = Convert.ToDouble(textBoxLimitAcc.Text);
+            inputMag = Convert.ToDouble(textBoxSetMagn.Text);
+            inputFreq = Convert.ToDouble(textBoxSetFreq.Text);
+
+            maxRate = Math.Round((inputMag * 2 * 3.14 * inputFreq), 2);
+            maxAccel = Math.Round((inputMag * Math.Pow(2 * 3.14 * inputFreq, 2)), 2);
+
+            if (maxRate > rateLimit || maxAccel > AccLimit)
+            {
+                MessageBox.Show("Limit exceeded! maxRate: " + maxRate.ToString() + " maxAccel: " + maxAccel.ToString());
+            }
+            else
+            {
+                CommendSinusoidal();
+            }
+             
+        }
+
+        private void button_sinusoidal_stop_Click(object sender, EventArgs e)
+        {
+            textBoxSetMagn.Text = "0";
+            textBoxSetFreq.Text = "0";
+            textBoxSetPhase.Text = "0";
+            CommendSinusoidal();
         }
 
         private void CommendSinusoidal()
@@ -943,29 +1024,35 @@ namespace AcutrolVS2010
 
         private void buttonSinuSeqExecute_Click(object sender, EventArgs e)
         {
-            //update the sinosoidal parameter inputs
-            ReadSinosoidalParas();
+            ////update the sinosoidal parameter inputs
+            //ReadSinosoidalParas();
 
-            //open text writer
-            WriteIntoTxt();
+            //calculate the max rate and accel values, and check if the sequences can be executed or not
+            CalculateMax();
 
-            //Set all limitations
-            SetAllLimits();
+            if (isExecutable == true)
+            {
+                //open text writer
+                WriteIntoTxt();
 
-            //Go back to zero position under position mode
-            textBoxSetPos.Text = "0"; //need to set earlier before commend, it takes some time to write
-            SelectMode(PositionMode);
-            CommendParameter(Position, textBoxSetPos);
-            Interlock_Close();
+                //Set all limitations
+                SetAllLimits();
 
-            CheckZeroPosition.Enabled = true; //Once go back to zero, start sinusoidal cycles
+                //Go back to zero position under position mode
+                textBoxSetPos.Text = "0"; //need to set earlier before commend, it takes some time to write
+                SelectMode(PositionMode);
+                CommendParameter(Position, textBoxSetPos);
+                Interlock_Close();
 
-            cycleCounter = 0;
+                CheckZeroPosition.Enabled = true; //Once go back to zero, start sinusoidal cycles
 
-            //start displaying coil signal
-            showCoilWaveform = true;
-            //start coil signal recording
-            StartCoilSignalRecording();
+                cycleCounter = 0;
+
+                //start displaying coil signal
+                showCoilWaveform = true;
+                //start coil signal recording
+                StartCoilSignalRecording();
+            }
         }
 
         private void WriteIntoTxt()
@@ -983,7 +1070,7 @@ namespace AcutrolVS2010
         private void updateLimits(String newRateLimit, String newAccLimit){
             textBoxLimitRate.Text = newRateLimit;
             textBoxLimitAcc.Text = newAccLimit;
-            SetAllLimits();
+            SetAllLimits(); 
         }
 
         private void CheckZeroPosition_Tick(object sender, EventArgs e)
@@ -1004,7 +1091,8 @@ namespace AcutrolVS2010
                 sysTimer.Elapsed += new System.Timers.ElapsedEventHandler(theCount);
                 sysTimer.AutoReset = true; // false:execute only once. true: keep execute
 
-                updateLimits("150", "1200");
+                //updateLimits("150", "1200");
+                updateLimits(textBox_desiredRateLimit.Text, textBox_desiredAccLimit.Text);
                 System.Threading.Thread.Sleep(50);//wait for calculation and write
                 CommendSinusoidal();
 
@@ -1038,6 +1126,12 @@ namespace AcutrolVS2010
                 CommendParameter(Position, textBoxSetPos);
 
                 ReturnZeroPosition.Enabled = true;
+
+                if (TargetCycleCount[seqCount] == 0)//not need to check all the rest sequences with 0 desired cycle numbers
+                {
+                    seqCount = totalSequencesNum;// go to the last sequency directly
+                    seqCount = totalSequencesNum;// go to the last sequency directly
+                }
             }
         }
 
@@ -1362,7 +1456,7 @@ namespace AcutrolVS2010
                         // Writes data to file
                         ArrayList l = savedCoilData[j] as ArrayList;
                         double dataValue = (double)l[i];
-                        fileStreamWriter.Write(dataValue.ToString("e2"));
+                        fileStreamWriter.Write(dataValue.ToString("e2"));//round to 0.01
                         fileStreamWriter.Write("\t"); //seperate the data for each channel
                     }
                     fileStreamWriter.WriteLine(); //new line of data (start next scan)
@@ -1564,14 +1658,105 @@ namespace AcutrolVS2010
 
         private void button_calculate_Click(object sender, EventArgs e)
         {
+            CalculateMax();
+        }
+
+        private void CalculateMax()
+        {
             ReadSinosoidalParas();
+            double maxRate, maxAccel;
+            isExecutable = true;
             for (int i = 0; i < 16; i++)
             {
-                textBox_maxRate[i].Text = Math.Round((TargetMagn[i] * 2 * 3.14 * TargetFreq[i]),2).ToString();
-                textBox_maxAccel[i].Text = Math.Round((TargetMagn[i] * Math.Pow(2 * 3.14 * TargetFreq[i], 2)),2).ToString();
+                maxRate = Math.Round((TargetMagn[i] * 2 * 3.14 * TargetFreq[i]), 2);
+                maxAccel = Math.Round((TargetMagn[i] * Math.Pow(2 * 3.14 * TargetFreq[i], 2)), 2);
+                textBox_maxRate[i].Text = maxRate.ToString();
+                textBox_maxAccel[i].Text = maxAccel.ToString();
+
+                if (maxRate > Convert.ToDouble(textBox_desiredRateLimit.Text) || maxAccel > Convert.ToDouble(textBox_desiredAccLimit.Text))
+                {
+                    MessageBox.Show("Limit exceeded for the No. " + (i + 1) + " sequence!");
+                    isExecutable = false;
+                }
             }
-            
         }
+
+        private void button_saveSequenceFile_Click(object sender, EventArgs e)
+        {
+            // Create/Open file
+            if (textBox_sequenceFileName.Text == "")
+            {
+                MessageBox.Show("Please Input File Name");
+            }
+            else
+            {
+                try
+                {
+                    if (!Directory.Exists(sequencesSavingPath))
+                    {
+                        Directory.CreateDirectory(sequencesSavingPath);
+                    }
+                    string sequenceFileName = sequencesSavingPath + "\\" + textBox_sequenceFileName.Text + ".txt";
+                    sequenceFileStream = new FileStream(sequenceFileName, System.IO.FileMode.Create);
+                    sequenceFileStreamWriter = new StreamWriter(sequenceFileStream);
+                }
+                catch (System.IO.IOException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+
+                //write to file
+                for (int i = 0; i < totalSequencesNum; i++)
+                {
+                    sequenceFileStreamWriter.Write(textBoxSeqMag[i].Text + "\t");
+                    sequenceFileStreamWriter.Write(textBoxSeqFreq[i].Text + "\t");
+                    sequenceFileStreamWriter.Write(textBoxSeqCycle[i].Text + "\n");
+                }
+                sequenceFileStreamWriter.WriteLine();
+
+                sequenceFileStreamWriter.Close();
+                sequenceFileStream.Close();
+
+                MessageBox.Show("Sequences File Saved");
+            }      
+        }
+
+        private void button_loadSequenceFile_Click(object sender, EventArgs e)
+        {
+            // open file dialog
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.InitialDirectory = sequencesSavingPath;
+            openFileDialog.Filter = "txt Files(*.txt)|*.txt|All Files(*.*)|*.*";
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                sequenceReadingPath = openFileDialog.FileName;
+            }
+
+            Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
+
+            //read the .txt file and put into array
+            sequenceFileStreamReader = new StreamReader(sequenceReadingPath, Encoding.Default);
+            string wholeString;
+            string[] ValArray;
+            wholeString = sequenceFileStreamReader.ReadToEnd();//generate a string containing all the info in the file
+            ValArray = wholeString.Split(default(string[]), StringSplitOptions.RemoveEmptyEntries);//split the whole string into a string array
+            sequenceFileStreamReader.Close();
+
+            //update the text boxes of all sequences
+            for (int i = 0; i < totalSequencesNum; i++)
+            {
+                textBoxSeqMag[i].Text = ValArray[3*i];
+                textBoxSeqFreq[i].Text = ValArray[3 * i + 1];
+                textBoxSeqCycle[i].Text = ValArray[3 * i + 2];
+            }
+
+        }
+
+
+
 
     }
 }
+
+
+
